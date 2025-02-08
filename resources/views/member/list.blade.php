@@ -28,6 +28,21 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Search Member</h3>
+                        </div>
+                        <form mehod="get">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-1">
+                                        <label>ID</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
                     @include('_message')
                     <div class="card mb-4">
                         <div class="card-header">
@@ -64,8 +79,14 @@
                                         <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
                                         <td>{{date('d-m-Y', strtotime($value->updated_at))}}</td>
                                         <td>
-                                            <a href="{{url('admin/member/edit/' . $value->id)}}" class="btn btn-sm btn-primary">Edit</a>
+                                            <div class="d-flex">
+                                                <a href="{{ url('admin/member/edit/' . $value->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                <a href="{{ url('admin/member/delete/' . $value->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                                            </div>
                                         </td>
+
+
+
 
                                     </tr>
                                     @empty

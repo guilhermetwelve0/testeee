@@ -35,6 +35,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/member/add', [MemberController::class, 'store']);
     Route::get('admin/member/edit/{id}', [MemberController::class, 'edit']);
     Route::post('admin/member/edit/{id}', [MemberController::class, 'update']);
+    Route::get('admin/member/delete/{id}', [MemberController::class, 'delete']);
 });
 
 // Rotas protegidas para usuários comuns

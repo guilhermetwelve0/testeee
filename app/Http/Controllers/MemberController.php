@@ -47,4 +47,10 @@ class MemberController extends Controller
         $save->save();
         return redirect('admin/member')->with('success', 'Member successfully update');
     }
+    public function delete($id)
+    {
+        $delete = MemberModel::find($id);
+        $delete->delete();
+        return redirect('admin/member')->with('error', 'Record successfully Delete');
+    }
 }
