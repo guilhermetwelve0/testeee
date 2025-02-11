@@ -10,7 +10,33 @@ class MemberController extends Controller
     public function index(Request $request)
     {
         // $data['getRecord'] = MemberModel::get();
-        $data['getRecord'] = MemberModel::orderBy('id', 'asc')->paginate(5);
+        // $data['getRecord'] = MemberModel::orderBy('id', 'asc')->paginate(5);
+        $getRecord = MemberModel::orderBy('id', 'asc');
+        if($request->id)
+        {
+            $getRecord = $getRecord->where('id', '=', $request->id);
+        }
+        if($request->code_member){
+            $getRecord = $getRecord->where('code_member', '=', $request->code_member);
+        }
+        if($request->name_member){
+            $getRecord = $getRecord->where('name_member', 'like', '%'.$request->name_member.'%');
+        }
+        if($request->address){
+            $getRecord = $getRecord->where('address', 'like', '%'.$request->address.'%');
+        }
+        if($request->telefone){
+            $getRecord = $getRecord->where('telefone', 'like', '%'.$request->telefone.'%');
+        }
+        if($request->created_at){
+            $getRecord = $getRecord->where('created_at', 'like', '%'.$request->created_at.'%');
+        }
+        if($request->updated_at){
+            $getRecord = $getRecord->where('updated_at', 'like', '%'.$request->updated_at.'%');
+        }
+        $getRecord = $getRecord->paginate(10);
+        $data['getRecord'] = $getRecord;
+
         return view('member.list', $data);
     }
     public function add()

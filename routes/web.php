@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\SupplierController;
 
 
 Route::get('/refresh-csrf', function () {
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/member/edit/{id}', [MemberController::class, 'edit']);
     Route::post('admin/member/edit/{id}', [MemberController::class, 'update']);
     Route::get('admin/member/delete/{id}', [MemberController::class, 'delete']);
+    Route::get('admin/supplier', [SupplierController::class, 'index']);
 });
 
 // Rotas protegidas para usuários comuns
