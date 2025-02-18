@@ -73,7 +73,7 @@
                     </a>
                     <ul class="collapse nav flex-column ms-1" id="submenuTransaction" data-bs-parent=".sidebar-menu">
                         <li class="w-100">
-                            <a href="{{ url('admin/expenses') }}" class="nav-link @if(Request::segment(2) == 'expenses') active @endif">
+                            <a href="{{ url('admin/expense') }}" class="nav-link @if(Request::segment(2) == 'expense') active @endif">
                                 <i class="fa fa-adjust"></i>
                                 <p>Expenses</p>
                             </a>

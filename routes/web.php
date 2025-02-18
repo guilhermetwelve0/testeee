@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ExpenseController;
 
 
 Route::get('/refresh-csrf', function () {
@@ -38,6 +39,17 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/member/edit/{id}', [MemberController::class, 'update']);
     Route::get('admin/member/delete/{id}', [MemberController::class, 'delete']);
     Route::get('admin/supplier', [SupplierController::class, 'index']);
+    Route::get('admin/supplier/delete/{id}', [SupplierController::class, 'delete']);
+    Route::get('admin/supplier/add', [SupplierController::class, 'add']);
+    Route::post('admin/supplier/add', [SupplierController::class, 'store']);
+    Route::get('admin/supplier/edit/{id}', [SupplierController::class, 'edit']);
+    Route::post('admin/supplier/edit/{id}',[SupplierController::class, 'update']);
+    Route::get('admin/expense',[ExpenseController::class, 'list']);
+    Route::get('admin/expense/add',[ExpenseController::class, 'add']);
+    Route::post('admin/expense/add', [ExpenseController::class, 'store']);
+    Route::get('admin/expense/edit/{id}', [ExpenseController::class, 'edit']);
+    Route::post('admin/expense/edit/{id}', [ExpenseController::class, 'update']);
+    Route::get('admin/expense/delete/{id}', [ExpenseController::class, 'delete']);
 });
 
 // Rotas protegidas para usuários comuns
