@@ -40,7 +40,7 @@
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Amount
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="amount"
-                                            value="{{$getRecord->amount}}"placeholder="Enter Name Amount" required></div>
+                                            value="{{$getRecord->amount}}"placeholder="Enter Name Amount" required step="any"></div>
                                 </div>
 
                             </div>

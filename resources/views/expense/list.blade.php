@@ -112,11 +112,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @php
+                                    $totalAmount = 0;
+                                @endphp
                                 @forelse( $getRecord as $value)
+
+                                @php
+                                 $totalAmount = $totalAmount + $value->amount;
+                                @endphp
                                 <tr>
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->description}}</td>
-                                <td>{{$value->amount}}</td>
+                                <td>{{number_format($value->amount, 2)}}</td>
                                 <td>{{date('d-m-Y', strtotime($value->created_at))}}</td>
                                 <td>{{date('d-m-Y', strtotime($value->updated_at))}}</td>
                                 <td>
@@ -135,6 +142,13 @@
                                  </tr>
 
                                 @endforelse
+                                @if(!empty($totalAmount))
+                                <tr>
+                                 <th colspan="2">Total Amount</th>
+                                 <td>{{number_format($totalAmount, 2)}}</td>
+                                 <th colspan="3 "></th>
+                                </tr>
+                                @endif
                                     
                                 </tbody>
                             </table>
