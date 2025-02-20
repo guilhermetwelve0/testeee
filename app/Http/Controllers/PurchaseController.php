@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SupplierModel;
-use  App\Models\PurchaseModel;
+use App\Models\PurchaseModel;
 use Carbon\Carbon;
 
 class PurchaseController extends Controller
 {
     public function purchase()
     {
-        return view('purchase.list');
+        $data['getRecord'] = PurchaseModel::getRecord();
+        return view('purchase.list',$data);
     }
 
     public function purchase_add()
@@ -28,6 +29,6 @@ class PurchaseController extends Controller
         $save-> created_at = Carbon::now('America/Sao_Paulo');
         $save-> updated_at = Carbon::now('America/Sao_Paulo');
         $save->save();
-        return redirect('admin/purchase');
+        return redirect('admin/purchase')->with('success', 'Record successfully create');
     }
 }

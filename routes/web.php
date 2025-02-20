@@ -53,7 +53,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/expense/delete/{id}', [ExpenseController::class, 'delete']);
     Route::get('admin/purchase', [PurchaseController::class, 'purchase']);
     Route::get('admin/purchase/add', [PurchaseController::class, 'purchase_add']);
-    Route::post('admin/purchase/add', [PurchaseController::class, 'purchase_store'])
+    Route::post('admin/purchase/add', [PurchaseController::class, 'purchase_store']);
 });
 
 // Rotas protegidas para usuários comuns

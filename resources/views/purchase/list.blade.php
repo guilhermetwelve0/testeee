@@ -55,11 +55,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @forelse($getRecord as $value)
+                                <tr>
+                                <td>{{$value->id}}</td>
+                                <td>{{$value->supplier_name}}</td>
+                                <td>{{$value->total_item}}</td>
+                                <td>{{$value->total_price}}</td>
+                                <td>{{$value->discount}}</td>
+                                <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
+                                <td>{{date('d-m-Y H:i A', strtotime($value->updated_at))}}</td>
+
+                                </tr>
+  
+                                
+
+                                @empty
+                                 <tr>
+                                <td colspan="100%">No Recound Found</td>
+                                </tr>
+
+                                @endforelse
                                     
                                 </tbody>
                             </table>
                             <div style="padding: 10px; float: right;">
-                               
+                                 {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                             </div>
 
                         </div>
