@@ -31,4 +31,28 @@ class PurchaseController extends Controller
         $save->save();
         return redirect('admin/purchase')->with('success', 'Record successfully create');
     }
+    public function purchase_edit($id)
+    {
+        $data['getRecord'] = SupplierModel::get();
+        $data['getRecordValue'] = PurchaseModel::find($id);
+        return view('purchase.edit', $data);
+    }
+    public function purchase_update(Request $request, $id)
+    {
+        $update = PurchaseModel::find($id);
+        $update->supplier_id = trim($request->supplier_id);
+        $update->total_item = trim($request->total_item);
+        $update->total_price = trim($request->total_price);
+        $update->discount = trim($request->discount);
+        $update-> updated_at = Carbon::now('America/Sao_Paulo');
+        $update->save();
+        return redirect('admin/purchase')->with('success', 'Record successfully updated');
+    }
+
+    public function purchase_delete($id)
+    {
+        $delete = PurchaseModel::find($id);
+        $delete->delete();
+        return redirect('admin/purchase')->with('error', 'Record successfully Delete');
+    }
 }

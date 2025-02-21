@@ -9,6 +9,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SalesController;
 
 
 Route::get('/refresh-csrf', function () {
@@ -54,6 +55,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/purchase', [PurchaseController::class, 'purchase']);
     Route::get('admin/purchase/add', [PurchaseController::class, 'purchase_add']);
     Route::post('admin/purchase/add', [PurchaseController::class, 'purchase_store']);
+    Route::get('admin/purchase/edit/{id}', [PurchaseController::class, 'purchase_edit']);
+    Route::post('admin/purchase/edit/{id}', [PurchaseController::class, 'purchase_update']);
+    Route::get('admin/purchase/delete/{id}', [PurchaseController::class, 'purchase_delete']);
+    Route::get('admin/sales', [SalesController::class, 'sales_index']);
+    Route::get('admin/sales/add', [SalesController::class, 'sales_add']);
+    Route::post('admin/sales/add', [SalesController::class, 'sales_post']);
+    Route::get('admin/sales/edit/{id}', [SalesController::class, 'sales_edit']);
+
 });
 
 // Rotas protegidas para usuários comuns
