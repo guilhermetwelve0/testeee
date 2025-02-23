@@ -8,6 +8,7 @@ use Carbon\Carbon;
 
 class PurchaseController extends Controller
 {
+    
     public function purchase()
     {
         $data['getRecord'] = PurchaseModel::getRecord();

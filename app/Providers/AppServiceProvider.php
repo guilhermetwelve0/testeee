@@ -15,6 +15,16 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
+    protected $listen = [
+        \Illuminate\Auth\Events\Login::class => [
+            \App\Listeners\LogSuccessfulLogin::class,
+        ],
+        \Illuminate\Auth\Events\Logout::class => [
+            \App\Listeners\LogSuccessfulLogout::class,
+        ],
+    ];
+    
+
     /**
      * Bootstrap any application services.
      */

@@ -19,6 +19,7 @@ Route::get('/refresh-csrf', function () {
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('login_post', [AuthController::class, 'login_post']);
 
+
 // Rotas protegidas para admin
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
@@ -62,6 +63,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/sales/add', [SalesController::class, 'sales_add']);
     Route::post('admin/sales/add', [SalesController::class, 'sales_post']);
     Route::get('admin/sales/edit/{id}', [SalesController::class, 'sales_edit']);
+    Route::post('admin/sales/edit/{id}', [SalesController::class, 'sales_edit_update']);
+    Route::get('admin/sales/delete/{id}', [SalesController::class, 'sales_delete']);
+    Route::get('admin/sales/all_delete', [SalesController::class, 'all_delete']);
 
 });
 

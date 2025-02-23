@@ -28,50 +28,48 @@
                 <div class="col-md-12">
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add Sales</div>
+                            <div class="card-title">Edi Sales</div>
                         </div>
-                        <form method="post" action="{{url('admin/sales/add')}}">
+                        <form method="post" action="">
                             {{csrf_field()}}
                             <div class="card-body">
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Member Name</label>
                                     <div class="col-sm-10">
-                                        <div class="form-group">
                                             <select class="form-control" name="member_id" id="memberSelect" required>
-                                                <option value="">Selecione um nome</option>
+                                                <option value="">Select Member Name</option>
                                                 @foreach($getMember as $value)
-                                                    <option value="{{$value->id}}">{{$value->name_member}}</option>
+                                                    <option {{($getEdit->member_id == $value->id) ? 'selected' : ''}} value="{{$value->id}}">{{$value->name_member}}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Total Item
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="total_item"
-                                            placeholder="Enter Total Item" required>
+                                            placeholder="Enter Total Item" value="{{$getEdit->total_item}}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Total Price
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="total_price"
-                                            placeholder="Enter Total Price" required>
+                                            placeholder="Enter Total Price" value="{{$getEdit->total_price}}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Discount
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="discount"
-                                            placeholder="Enter Discount" required>
+                                            placeholder="Enter Discount" value="{{$getEdit->discount}}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Accepted
                                     </label>
                                     <div class="col-sm-10">
                                     <select class="form-control" name="accepted" required>
-                                    <option value="Yes">
+                                    <option {{$getEdit->accepted == 'Yes' ? 'selected' : ''}} value="Yes">
                                     Yes
                                     </option>
-                                    <option value="No">
+                                    <option {{$getEdit->accepted == 'No' ? 'selected' : ''}} value="No">
                                     No
                                     </option>
                                    
@@ -87,7 +85,7 @@
                                     Select Username
                                     </option>
                                    @foreach($getUser as $value)
-                                      <option value="{{$value->id}}">
+                                      <option {{($getEdit->user_id == $value->id) ? 'selected': ''}} value="{{$value->id}}">
                                           {{$value->name}}
                                           </option>
                                           @endforeach

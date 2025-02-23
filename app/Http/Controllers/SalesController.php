@@ -7,15 +7,42 @@ use App\Models\MemberModel;
 use Carbon\Carbon;
 use App\Models\User;
 use Auth;
+use DB;
 
 class SalesController extends Controller
 { 
+    public function all_delete()
+    {
+        DB::table('sales')->truncate();
+        return redirect()->back()->with('success', 'All Record Successfully Delete');
+    }
+
+
+
     public function sales_index(Request $request)
     {
-        $data['getRecord'] = SalesModel::select('sales.*','member.name_member', 'users.name')
+        $getRecord = SalesModel::select('sales.*','member.name_member', 'users.name')
         ->join('member', 'member.id', '=', 'sales.member_id')
-        ->join('users', 'users.id', '=', 'sales.user_id')
-        ->get();
+        ->join('users', 'users.id', '=', 'sales.user_id');
+        if($request->id)
+        {
+            $getRecord = $getRecord->where('sales.id', '=', $request->id);
+        }
+        if($request->member_id){
+            $getRecord = $getRecord->where('member.name_member', 'like', '%'.$request->member_id.'%');
+        }
+        if($request->user_id){
+            $getRecord = $getRecord->where('users.name', 'like', '%'.$request->user_id.'%');
+        }
+        if($request->total_item){
+            $getRecord = $getRecord->where('sales.total_item', 'like', '%'.$request->total_item.'%');
+        }
+        if($request->accepted){
+            $getRecord = $getRecord->where('sales.accepted', '=', $request->accepted);
+        }
+        
+        $getRecord = $getRecord->paginate(5);
+        $data['getRecord'] = $getRecord;
         return view('sales.list', $data);
     }
 
@@ -46,6 +73,25 @@ class SalesController extends Controller
         $data['getUser'] = User::where('is_role', '=', 2)->get();
         $data['getEdit'] = SalesModel::find($id);
         return view('sales.edit', $data);
+    }
+    public function sales_edit_update($id, Request $request)
+    {
+        $save = SalesModel::find($id);
+        $save->member_id = trim($request->member_id);
+        $save->total_item = trim($request->total_item);
+        $save->total_price = trim($request->total_price);
+        $save->discount = trim($request->discount);
+        $save->accepted = trim($request->accepted);
+        $save->user_id = trim($request->user_id);
+        $save->updated_at = Carbon::now('America/Sao_Paulo');
+        $save->save();
+        return redirect('admin/sales')->with('success', 'Record successfully updated');
+    }
+
+    public function sales_delete($id)
+    {
+        SalesModel::find($id)->delete();
+        return redirect('admin/sales')->with('success', 'Record successfully deleted');
     }
 
 }

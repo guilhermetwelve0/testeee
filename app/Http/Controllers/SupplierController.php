@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SupplierModel;
 use App\Models\PurchaseModel;
+use Auth;
 
 
 class SupplierController extends Controller
 {
+    
     public function index()
     {
         // $data['getRecord'] = SupplierModel::get();
