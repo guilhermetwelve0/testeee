@@ -106,6 +106,8 @@
                             <h3 class="card-title">Purchase List</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
+                                <a href="{{url('admin/purchase/purchase_all_delete')}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this option item?')">All Delete</a>
+                                    &nbsp;&nbsp;&nbsp;
                                     <a href="{{ url('admin/purchase/add') }}" class="btn btn-sm btn-primary">Add
                                         Purchase</a>
                                 </ul>

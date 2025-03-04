@@ -68,6 +68,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/sales/all_delete', [SalesController::class, 'all_delete']);
     Route::get('admin/purchase/purchase_details/{id}', [PurchaseController::class, 'purchase_details']);
     Route::get('admin/purchase/purchase_details_add/{id}', [PurchaseController::class, 'purchase_details_add']);
+    Route::post('admin/purchase/purchase_details_add/{id}', [PurchaseController::class, 'purchase_details_add_store']);
+    Route::get('admin/purchase/purchase_details_edit/{id}', [PurchaseController::class, 'purchase_details_edit']);
+    Route::post('admin/purchase/purchase_details_edit/{id}', [PurchaseController::class, 'purchase_details_edit_update']);
+    Route::get('admin/purchase/purchase_details_delete/{id}', [PurchaseController::class, 'purchase_details_delete']);
+    Route::get('admin/purchase/purchase_all_delete', [PurchaseController::class, 'purchase_all_delete']);
+
+    
 });
 
 // Rotas protegidas para usuários comuns

@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Purchase Details</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Purchase Details</li>
                 </ol>
                 </div>
             </div>
@@ -24,12 +24,13 @@
                 <div class="col-md-12">
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add Purchase Details</div>
+                            <div class="card-title">Edit Purchase Details</div>
                         </div>
                         <form method="post" action="">
                             {{csrf_field()}}
                             <div class="card-body">
-                            <input type="hidden" name="purchase_id" value="{{$purchase_id}}">
+                            <input type="hidden" name="purchase_id" value="{{$getRecord->purchase_id}}">
+                            
                                 
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Product Name
                                     </label>
@@ -37,7 +38,7 @@
                                     <select class="form-control" name="product_id" required>
                                         <option value="">Select Product</option>
                                         @foreach($getProduct as $value)
-                                        <option value="{{$value->id}}">{{$value->name_product}}</option>
+                                        <option {{($value->id == $getRecord->product_id) ? 'selected' : ''}} value="{{$value->id}}">{{$value->name_product}}</option>
                                         @endforeach
                                     </select>
                                     </div>
@@ -45,24 +46,24 @@
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Purchase Price
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="purchase_price"
-                                            placeholder="Enter Purchase Price" required>
+                                            placeholder="Enter Purchase Price" required value="{{$getRecord->purchase_price}}">
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Amount
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="amount"
-                                            placeholder="Enter Amount" required>
+                                            placeholder="Enter Amount" required value="{{$getRecord->amount}}">
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Subtotal
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="subtotal"
-                                            placeholder="Enter Subtotal" required>
+                                            placeholder="Enter Subtotal" required value="{{$getRecord->subtotal}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Submit</button>
+                                <button type="submit" class="btn btn-warning">Update</button>
                                 <a href="{{url('admin/purchase')}}" class="btn btn-danger float-end">Cancel</a>
                             </div>
                         </form>
