@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\SalesModel;
 use App\Models\MemberModel;
 use Carbon\Carbon;
+use App\Models\SalesDetailsModel;
 use App\Models\User;
 use Auth;
 use DB;
@@ -92,6 +93,32 @@ class SalesController extends Controller
     {
         SalesModel::find($id)->delete();
         return redirect('admin/sales')->with('success', 'Record successfully deleted');
+    }
+    public function sales_details_list($id, Request $request)
+    {
+        // $data['getRecord'] = SalesDetailsModel::select('sales_details.*', 'product.name_product')
+        // ->join('product', 'product.id', '=', 'sales_details.product_id')
+        // ->where('sales_details.sales_id', '=', $id)->paginate(5);
+
+        $data['sales_id'] = $id;
+        $getRecord = SalesDetailsModel::select('sales_details.*', 'product.name_product');
+        $getRecord = $getRecord->join('product', 'product.id', '=', 'sales_details.product_id');
+        if($request->product_id){
+            $getRecord = $getRecord->where('product.name_product', 'like', '%'.$request->product_id.'%');
+        }
+        if($request->selling_price){
+            $getRecord = $getRecord->where('sales_details.selling_price', 'like', '%'.$request->sales_price.'%');
+        }
+        if($request->amount){
+            $getRecord = $getRecord->where('sales_details.amount', 'like', '%'.$request->amount.'%');
+        }
+        if($request->discount){
+            $getRecord = $getRecord->where('sales_details.discount', 'like', '%'.$request->discount.'%');
+        }
+        $getRecord = $getRecord->where('sales_details.sales_id', '=', $id)->paginate(5);
+        $data['getRecord'] = $getRecord; 
+
+        return view('sales.sales_details_list', $data);
     }
 
 }

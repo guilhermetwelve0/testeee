@@ -98,7 +98,7 @@
             <div class="col-md-12">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <h3 class="card-title">Purchase List</h3>
+                        <h3 class="card-title">Sales List</h3>
                         <div class="card-tools">
                             <a href="{{url('admin/sales/all_delete') }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this option item?')">Truncate</a>
                             &nbsp;&nbsp;&nbsp;
@@ -133,11 +133,10 @@
                                         <td>{{ $value->name }}</td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($value->updated_at)) }}</td>
-                                        <td>
-                                            <div class="d-flex">
+                                        <td style="width: 23%;">
+                                                <a href="{{url('admin/sales/sales_details_list/'.$value->id)}}" class="btn btn-sm btn-warning">Sales Details</a>
                                                 <a href="{{ url('admin/sales/edit/' . $value->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                                 <a href="{{ url('admin/sales/delete/' . $value->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
-                                            </div>
                                         </td>
                                     </tr>
                                 @empty

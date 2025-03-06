@@ -73,6 +73,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/purchase/purchase_details_edit/{id}', [PurchaseController::class, 'purchase_details_edit_update']);
     Route::get('admin/purchase/purchase_details_delete/{id}', [PurchaseController::class, 'purchase_details_delete']);
     Route::get('admin/purchase/purchase_all_delete', [PurchaseController::class, 'purchase_all_delete']);
+    Route::get('admin/sales/sales_details_list/{id}', [SalesController::class, 'sales_details_list']);
 
     
 });
