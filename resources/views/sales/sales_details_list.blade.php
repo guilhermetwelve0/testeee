@@ -83,7 +83,7 @@
                             <h3 class="card-title">Sales Details List</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
-                                    
+                                     <a href="{{url('admin/sales/sales_details_add/'.$sales_id)}}" class="btn btn-sm btn-primary">Add Sales Details</a>
                                 </ul>
                             </div>
                         </div>

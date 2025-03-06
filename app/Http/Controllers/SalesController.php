@@ -7,6 +7,7 @@ use App\Models\MemberModel;
 use Carbon\Carbon;
 use App\Models\SalesDetailsModel;
 use App\Models\User;
+use App\Models\ProductModel;
 use Auth;
 use DB;
 
@@ -119,6 +120,12 @@ class SalesController extends Controller
         $data['getRecord'] = $getRecord; 
 
         return view('sales.sales_details_list', $data);
+    }
+
+    public function sales_details_add($id)
+    {
+        $data['getProduct'] = ProductModel::get();
+        return view('sales.sales_details_add', $data);
     }
 
 }
