@@ -106,6 +106,7 @@
                         </div>
                     </div>
                     <div class="card-body">
+                    <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -114,6 +115,8 @@
                                     <th>Total Item</th>
                                     <th>Total Price</th>
                                     <th>Discount</th>
+                                    <th>D.Per..</th>
+                                    <th>Net Total</th>
                                     <th>Accepted</th>
                                     <th>Username</th>
                                     <th>Created At</th>
@@ -122,13 +125,32 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @php
+                            $TotalItem = 0;
+                            $TotalPrice = 0;
+                            $TotalDiscount = 0;
+                            $TotalNet = 0;
+                            $NetTotal = 0;
+                            $taotaPrice = 0;
+                            @endphp
                                 @forelse($getRecord as $value)
+                                @php
+                                $TotalItem = $TotalItem + $value->total_item;
+                                $TotalPrice = $TotalPrice + $value->total_price;
+                                $TotalDiscount = $TotalDiscount + $value->discount;
+                                $NetDiscount = $value->total_price * $value->discount / 100;
+                                $TotalNet = $TotalNet + $NetDiscount;
+                                $NetTotal = $value->total_price - $NetDiscount;
+                                $taotaPrice = $taotaPrice + $NetTotal;
+                                @endphp
                                     <tr>
                                         <td>{{ $value->id }}</td>
                                         <td>{{ $value->name_member }}</td>
-                                        <td>{{ $value->total_item }}</td>
-                                        <td>{{ $value->total_price }}</td>
-                                        <td>{{ $value->discount }}</td>
+                                        <td>{{ number_format($value->total_item, 2) }} </td>
+                                        <td>{{ number_format($value->total_price, 2) }}</td>
+                                        <td>{{ $value->discount }} %</td>
+                                        <td>{{$NetDiscount}}</td>
+                                        <td>{{$NetTotal}}</td>
                                         <td>{{ $value->accepted }}</td>
                                         <td>{{ $value->name }}</td>
                                         <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
@@ -144,8 +166,19 @@
                                         <td colspan="100%">No Record Found</td>
                                     </tr>
                                 @endforelse
+
+                                <tr>
+                                <th colspan="2">All Total</th>
+                                <td>{{number_format($TotalItem, 2)}}</td>
+                                <td>{{number_format($TotalPrice, 2)}}</td>
+                                <td>{{number_format($TotalDiscount, 2)}}</td>
+                                <td>{{number_format($TotalNet, 2)}}</td>
+                                <td>{{number_format($taotaPrice, 2)}}
+                                <th colspan="2"></th>
+                                </tr>
                             </tbody>
                         </table>
+                    </div>
                         <div class="float-end" style="padding: 10px;">
                             {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
                         </div>

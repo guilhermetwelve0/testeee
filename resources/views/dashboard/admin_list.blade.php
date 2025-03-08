@@ -156,7 +156,7 @@
               <!-- Start col -->
               <div class="col-lg-7 connectedSortable">
                 <div class="card mb-4">
-                  <div class="card-header"><h3 class="card-title">Sales Value</h3></div>
+                  <div class="card-header"><h3 class="card-title">Product Selling Value</h3></div>
                   <div class="card-body"><div id="revenue-chart"></div></div>
                 </div>
                 <!-- /.card -->
@@ -447,4 +447,57 @@
       <!--begin::Footer-->
 
 @endsection
+@section('script')
+<script
+      src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
+      integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8="
+      crossorigin="anonymous"
+    ></script>
+    <!-- ChartJS -->
+    <script>
+      // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
+      // IT'S ALL JUST JUNK FOR DEMO
+      // ++++++++++++++++++++++++++++++++++++++++++
+
+      const chartData = @json($chartData);
+      const sales_chart_options = {
+        series: [
+          {
+            name: 'Selling prices',
+            data: chartData.data,
+          },
+        ],
+        chart: {
+          height: 300,
+          type: 'bar',
+          toolbar: {
+            show: false,
+          },
+        },
+        colors: ['#0d6efd'],
+        dataLabels: {
+          enabled: true,
+        },
+        stroke: {
+          curve: 'smooth',
+        },
+        xaxis: {
+          categories: chartData.categories,
+        },
+        tooltip: {
+          y: {
+            formatter: function (value) {
+              return  `$${value}`;
+            },
+          },
+        },
+      };
+
+      const sales_chart = new ApexCharts(
+        document.querySelector('#revenue-chart'),
+        sales_chart_options,
+      );
+      sales_chart.render();
+    </script>
     
+    @endsection
