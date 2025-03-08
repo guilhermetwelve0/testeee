@@ -115,7 +115,12 @@
                                   <td>{{$value->subtotal}}</td>
                                   <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                                   <td>{{ date('d-m-Y H:i A', strtotime($value->updated_at)) }}</td>
+                                <td>
+                                    <a href="{{ url('admin/sales/sales_details_edit/' . $value->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{{ url('admin/sales/sales_details_delete/' . $value->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                                </td>
                                 </tr>
+                                
 
                                 @empty
                                 <tr>

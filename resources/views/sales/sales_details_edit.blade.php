@@ -12,7 +12,7 @@
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Sales Details</li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Sales Details</li>
                 </ol>
                 </div>
             </div>
@@ -24,12 +24,12 @@
                 <div class="col-md-12">
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add Sales Details</div>
+                            <div class="card-title">Edit Sales Details</div>
                         </div>
                         <form method="post" action="">
                             {{csrf_field()}}
                             <div class="card-body">
-                            <input type="hidden" name="sales_id" value="{{$sales_id}}">
+                            <input type="hidden" name="sales_id" value="{{$getRecord->sales_id}}">
                                 
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Product Name
                                     </label>
@@ -37,7 +37,7 @@
                                     <select class="form-control" name="product_id" required>
                                         <option value="">Select Product</option>
                                         @foreach($getProduct as $value)
-                                        <option value="{{$value->id}}">{{$value->name_product}}</option>
+                                        <option {{($getRecord->product_id == $value->id) ? 'selected' : ''}} value="{{$value->id}}">{{$value->name_product}}</option>
                                         @endforeach
                                         
                                     </select>
@@ -46,31 +46,31 @@
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Selling Price</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="selling_price" class="form-control" placeholder="Enter Selling Price" required>
+                                    <input type="text" name="selling_price" class="form-control" placeholder="Enter Selling Price" value="{{$getRecord->selling_price}}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Amount</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount" required>
+                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount" value="{{$getRecord->amount}}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Discount</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="discount" class="form-control" placeholder="Enter Discount" required>
+                                    <input type="text" name="discount" class="form-control" placeholder="Enter Discount" value="{{$getRecord->discount}}" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Subtotal</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="subtotal" class="form-control" placeholder="Enter Subtotal" required>
+                                    <input type="text" name="subtotal" class="form-control" placeholder="Enter Subtotal" value="{{$getRecord->subtotal}}" required>
                                     </div>
                                 </div>
                                 
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Submit</button>
+                                <button type="submit" class="btn btn-warning">Update</button>
                                 <a href="{{url('admin/sales')}}" class="btn btn-danger float-end">Cancel</a>
                             </div>
                         </form>

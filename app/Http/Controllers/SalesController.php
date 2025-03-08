@@ -93,6 +93,7 @@ class SalesController extends Controller
     public function sales_delete($id)
     {
         SalesModel::find($id)->delete();
+        SalesDetailsModel::where('sales_details.sales_id', '=', $id)->delete();
         return redirect('admin/sales')->with('success', 'Record successfully deleted');
     }
     public function sales_details_list($id, Request $request)
@@ -124,8 +125,45 @@ class SalesController extends Controller
 
     public function sales_details_add($id)
     {
+        $data['sales_id'] = $id;
         $data['getProduct'] = ProductModel::get();
         return view('sales.sales_details_add', $data);
     }
+
+    public function sales_details_add_store(Request $request)
+    {
+        $request-> validate([
+            'product_id' => 'required',
+        ]);
+        SalesDetailsModel::recordInsert($request);
+        return redirect('admin/sales/sales_details_list/'.$request->sales_id)->with('success', 'Record successfully created');
+    }
+
+    public function sales_details_edit($id)
+    {
+        $data['getRecord'] = SalesDetailsModel::findOrFail($id);
+        $data['getProduct'] = ProductModel::get();
+        return view('sales.sales_details_edit', $data);
+    }
+
+    public function sales_details_update($id, Request $request)
+    {
+        $save = SalesDetailsModel::findorFail($id);
+        $save->product_id = trim($request->product_id);
+        $save->selling_price = trim($request->selling_price);
+        $save->amount = trim($request->amount);
+        $save->discount = trim($request->discount);
+        $save->subtotal = trim($request->subtotal);
+        $save->updated_at = Carbon::now('America/Sao_Paulo');
+        $save->save();
+        return redirect('admin/sales/sales_details_list/'.$request->sales_id)->with('success', 'Record successfully update');
+    }
+
+    public function sales_details_delete($id)
+    {
+        SalesDetailsModel::find($id)->delete();
+        return redirect()->back()->with('success', 'Record successfully delete');
+    }
+    
 
 }
