@@ -131,9 +131,9 @@
                     </a>
                     <ul class="collapse nav flex-column ms-1" id="submenuSystem" data-bs-parent=".sidebar-menu">
                         <li class="w-100">
-                            <a href="{{ url('admin/user') }}" class="nav-link @if(Request::segment(2) == 'user') active @endif">
+                            <a href="{{ url('admin/users') }}" class="nav-link @if(Request::segment(2) == 'users') active @endif">
                                 <i class="fa fa-users"></i>
-                                <p>User</p>
+                                <p>Users</p>
                             </a>
                         </li>
                         <li>

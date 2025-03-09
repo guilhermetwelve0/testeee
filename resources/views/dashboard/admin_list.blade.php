@@ -34,8 +34,8 @@
                 <!--begin::Small Box Widget 1-->
                 <div class="small-box text-bg-primary">
                   <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                    <h3>{{ !empty($TotalProduct) ? $TotalProduct : '0' }}</h3>
+                    <p>Total Product</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -49,7 +49,7 @@
                     ></path>
                   </svg>
                   <a
-                    href="#"
+                    href="{{url('admin/product')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
                     More info <i class="bi bi-link-45deg"></i>
@@ -62,8 +62,8 @@
                 <!--begin::Small Box Widget 2-->
                 <div class="small-box text-bg-success">
                   <div class="inner">
-                    <h3>53<sup class="fs-5">%</sup></h3>
-                    <p>Bounce Rate</p>
+                    <h3>{{ !empty($TotalSales) ? $TotalSales : '0' }}</h3>
+                    <p>Total Sales</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -77,7 +77,7 @@
                     ></path>
                   </svg>
                   <a
-                    href="#"
+                    href="{{url('admin/sales')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
                     More info <i class="bi bi-link-45deg"></i>
@@ -90,8 +90,8 @@
                 <!--begin::Small Box Widget 3-->
                 <div class="small-box text-bg-warning">
                   <div class="inner">
-                    <h3>44</h3>
-                    <p>User Registrations</p>
+                    <h3>{{ !empty($TotalPurchase) ? $TotalPurchase : '0' }}</h3>
+                    <p>Total Purchase</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -105,7 +105,7 @@
                     ></path>
                   </svg>
                   <a
-                    href="#"
+                    href="{{url('admin/purchase')}}"
                     class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
                     More info <i class="bi bi-link-45deg"></i>
@@ -118,8 +118,8 @@
                 <!--begin::Small Box Widget 4-->
                 <div class="small-box text-bg-danger">
                   <div class="inner">
-                    <h3>65</h3>
-                    <p>Unique Visitors</p>
+                    <h3>{{ !empty($TotalSupplier) ? $TotalSupplier : '0' }}</h3>
+                    <p>Total Supplier</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -140,7 +140,7 @@
                     ></path>
                   </svg>
                   <a
-                    href="#"
+                    href="{{url('admin/supplier')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
                     More info <i class="bi bi-link-45deg"></i>
@@ -414,7 +414,8 @@
                       </button>
                     </div>
                   </div>
-                  <div class="card-body"><div id="world-map" style="height: 220px"></div></div>
+                  <div class="card-body">
+                  <div id="world-map" style="height: 220px"></div></div>
                   <div class="card-footer border-0">
                     <!--begin::Row-->
                     <div class="row">
@@ -454,6 +455,16 @@
       crossorigin="anonymous"
     ></script>
     <!-- ChartJS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
+      integrity="sha256-/t1nN2956BT869E6H4V1dnt0X5pAQHPytli+1nTZm2Y="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js"
+      integrity="sha256-XPpPaZlU8S/HWf7FZLAncLg2SAkP8ScUTII89x9D3lY="
+      crossorigin="anonymous"
+    ></script>
     <script>
       // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
       // IT'S ALL JUST JUNK FOR DEMO
@@ -498,6 +509,32 @@
         sales_chart_options,
       );
       sales_chart.render();
+    </script>
+
+    <script type="text/javascript">
+    const salesData = @json($salesData);
+
+    let visitorsData = {};
+
+    salesData.forEach(item => {
+      visitorsData[item.code_member] = item.total_sales;
+    });
+
+
+
+      // World map by jsVectorMap
+      const map = new jsVectorMap({
+        selector: '#world-map',
+        map: 'world',
+        series: {
+          regions: [{
+          
+          values: visitorsData,
+          scale: ["#C8E6C9", "#388E3C"],
+          normalizeFunction: "polynomial"
+          }]
+        }
+      });
     </script>
     
     @endsection

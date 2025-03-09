@@ -49,6 +49,11 @@ class SupplierModel extends Model
     {
         return self::find($id);
     }
+
+    static public function TotalSupplierCount()
+    {
+        return self::count();
+    }
     static public function recordInsert($request)
     {
         try {

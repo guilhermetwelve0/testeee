@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesController;
@@ -78,6 +79,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/sales/sales_details_add/{id}', [SalesController::class, 'sales_details_add_store']);
     Route::get('admin/sales/sales_details_edit/{id}', [SalesController::class, 'sales_details_edit']);
     Route::get('admin/sales/sales_details_delete/{id}', [SalesController::class, 'sales_details_delete']);
+    Route::get('admin/users', [UsersController::class, 'users_list']);
 });
 
 // Rotas protegidas para usuários comuns

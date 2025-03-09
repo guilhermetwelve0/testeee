@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductModel;
+use App\Models\SalesModel;
+use App\Models\PurchaseModel;
+use App\Models\SupplierModel;
 use Auth;
 
 class DashboardController extends Controller
@@ -12,12 +15,20 @@ class DashboardController extends Controller
     {
             if(Auth::user()->is_role == 1)
             {
+              $TotalProduct = ProductModel::count();
+              $TotalSales = SalesModel::TotalSalescount();
+              $TotalPurchase = PurchaseModel::count();
+              $TotalSupplier =SupplierModel::TotalSupplierCount();
               $products = ProductModel::select('name_product', 'selling_price')->get();
               $chartData = [
                 'categories' => $products->pluck('name_product')->toArray(),
                 'data' => $products->pluck('selling_price')->toArray(),
               ];
-              return view('dashboard.admin_list', ['chartData' => $chartData]);
+              $data['salesData'] = SalesModel::selectRaw('member.code_member, SUM(sales.total_item) as total_sales')
+              ->join('member', 'member.id', '=', 'sales.member_id')
+              ->groupBy('member.code_member')->get();
+              return view('dashboard.admin_list', ['chartData' => $chartData, 'TotalProduct' => $TotalProduct, 'TotalSales' => $TotalSales, 'TotalPurchase' => $TotalPurchase,
+               'TotalSupplier' => $TotalSupplier, 'salesData' => $data['salesData']]);  
             }
             else if(Auth::user()->is_role == 2)
             {

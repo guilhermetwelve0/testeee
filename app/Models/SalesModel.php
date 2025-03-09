@@ -11,5 +11,9 @@ class SalesModel extends Model
 {
     use HasFactory;
     protected $table = 'sales';
+    static public function TotalSalescount()
+    {
+        return self::count();
+    }
 
 }
