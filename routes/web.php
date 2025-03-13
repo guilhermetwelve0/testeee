@@ -89,6 +89,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('user/new_transaction', [NewTransactionController::class, 'new_transaction']);
+    Route::get('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets']);
+    Route::post('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets_update']);
 
 });
 

@@ -10,12 +10,12 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Member</h3>
+                    <h3 class="mb-0">User</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Member</li>
+                        <li class="breadcrumb-item active" aria-current="page">User</li>
                     </ol>
                 </div>
             </div>
@@ -32,11 +32,10 @@
                     @include('_message')
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">Member List</h3>
+                            <h3 class="card-title">User List</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
-                                    <a href="{{ url('admin/member/add') }}" class="btn btn-sm btn-primary">Add
-                                        Member</a>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -45,16 +44,26 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Code Member</th>
-                                        <th>Name Member</th>
-                                        <th>Address</th>
-                                        <th>Telefone</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Wallets</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <tr>
+                                <td>{{$getRecord->id}}</td>
+                                <td>{{$getRecord->name}}</td>
+                                <td>{{$getRecord->email}}</td>
+                                <td>{{$getRecord->wallets}}</td>
+                                <td>{{date('d-m-Y H:i:s', strtotime($getRecord->created_at))}}</td>
+                                <td>{{date('d-m-Y H:i:s', strtotime($getRecord->updated_at))}}</td>
+                                <td>
+                                <a href="{{url('user/new_transaction/add_wallets/'.$getRecord->id)}}" class="btn btn-sm btn-warning">Wallets</a>
+                                </td>
+                                </tr>
                                     
                                 </tbody>
                             </table>

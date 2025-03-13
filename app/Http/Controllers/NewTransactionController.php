@@ -2,12 +2,30 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Auth;
 
 
 class NewTransactionController extends Controller
 {
  public function new_transaction()
  {
-    return view('new_transaction.list');
- }   
+    $use_id =Auth::user()->id;
+    $data['getRecord'] = User::find($use_id);
+    return view('new_transaction.list', $data);
+ }
+
+ public function add_wallets($id)
+ {
+  $data['getRecord'] = User::find($id);
+   return view('new_transaction.update', $data);
+ }
+ public function add_wallets_update($id, Request $request)
+ {
+  $update = User::find($id);
+  $Add = $request->wallets + $update->wallets;
+  $update->wallets = trim($Add);
+  $update->save();
+  return redirect('user/new_transaction')->with('success', "Record Update successfully");
+ }
 }
