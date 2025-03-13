@@ -169,7 +169,7 @@
                                 </a>
                                 <ul class="collapse nav flex-column ms-1" id="submenuTransaction" data-bs-parent=".sidebar-menu">
                                     <li class="w-100">
-                                        <a href="{{ url('user/new-transaction') }}" class="nav-link @if(Request::segment(2) == 'new-transaction') active @endif">
+                                        <a href="{{ url('user/new_transaction') }}" class="nav-link @if(Request::segment(2) == 'new_transaction') active @endif">
                                             <i class="fa fa-cart-plus"></i>
                                             <p>New Transaction</p>
                                         </a>

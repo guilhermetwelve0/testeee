@@ -9,6 +9,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\NewTransactionController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesController;
 
@@ -80,11 +81,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/sales/sales_details_edit/{id}', [SalesController::class, 'sales_details_edit']);
     Route::get('admin/sales/sales_details_delete/{id}', [SalesController::class, 'sales_details_delete']);
     Route::get('admin/users', [UsersController::class, 'users_list']);
+    Route::get('admin/users/delete/{id}', [UsersController::class, 'users_delete']);
+    
 });
 
 // Rotas protegidas para usuários comuns
 Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('user/new_transaction', [NewTransactionController::class, 'new_transaction']);
+
 });
 
 // Logout

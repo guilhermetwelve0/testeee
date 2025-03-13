@@ -9,7 +9,14 @@ class UsersController extends Controller
 {
     public function users_list()
     {
-        $data['getRecord'] = User::where('is_role', '=', 2)->paginate(10);
+        $data['getRecord'] = User::getRecord();
         return view('users.list', $data);
+    }
+    public function users_delete($id)
+    {
+        $delete = User::find($id);
+        $delete->is_delete = 1;
+        $delete->save();
+        return redirect()->back()->with('success', "Record successfully soft delete");
     }
 }
