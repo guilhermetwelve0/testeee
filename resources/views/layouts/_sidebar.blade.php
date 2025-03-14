@@ -91,7 +91,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('admin/new-transaction') }}" class="nav-link @if(Request::segment(2) == 'new-transaction') active @endif">
+                            <a href="{{ url('admin/transaction') }}" class="nav-link @if(Request::segment(2) == 'transaction') active @endif">
                                 <i class="fa fa-cart-plus"></i>
                                 <p>New Transaction</p>
                             </a>
@@ -172,6 +172,12 @@
                                         <a href="{{ url('user/new_transaction') }}" class="nav-link @if(Request::segment(2) == 'new_transaction') active @endif">
                                             <i class="fa fa-cart-plus"></i>
                                             <p>New Transaction</p>
+                                        </a>
+                                    </li>
+                                    <li class="w-100">
+                                        <a href="{{ url('user/transaction_list') }}" class="nav-link @if(Request::segment(2) == 'transaction_list') active @endif">
+                                            <i class="fa fa-dollar"></i>
+                                            <p>Transaction List</p>
                                         </a>
                                     </li>
                                     <li>

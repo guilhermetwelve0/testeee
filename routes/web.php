@@ -10,6 +10,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\NewTransactionController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SalesController;
 
@@ -82,6 +83,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/sales/sales_details_delete/{id}', [SalesController::class, 'sales_details_delete']);
     Route::get('admin/users', [UsersController::class, 'users_list']);
     Route::get('admin/users/delete/{id}', [UsersController::class, 'users_delete']);
+    Route::get('admin/transaction', [TransactionController::class, 'admin_transaction']);
     
 });
 
@@ -91,6 +93,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user/new_transaction', [NewTransactionController::class, 'new_transaction']);
     Route::get('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets']);
     Route::post('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets_update']);
+    Route::get('user/transaction_list', [NewTransactionController::class, 'user_transaction_list']);
 
 });
 

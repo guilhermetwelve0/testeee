@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\TransactionsModel;
 use Auth;
 
 
@@ -28,4 +29,12 @@ class NewTransactionController extends Controller
   $update->save();
   return redirect('user/new_transaction')->with('success', "Record Update successfully");
  }
+
+ public function user_transaction_list(Request $request)
+ {
+  TransactionsModel
+   return view('transaction.user_transaction_list');
+ }
+
+
 }

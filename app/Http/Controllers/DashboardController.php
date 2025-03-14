@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductModel;
 use App\Models\SalesModel;
+use App\Models\User;
 use App\Models\PurchaseModel;
 use App\Models\SupplierModel;
 use Auth;
@@ -19,6 +20,7 @@ class DashboardController extends Controller
               $TotalSales = SalesModel::TotalSalescount();
               $TotalPurchase = PurchaseModel::count();
               $TotalSupplier =SupplierModel::TotalSupplierCount();
+              $TotalWallets = User::sum('wallets');
               $products = ProductModel::select('name_product', 'selling_price')->get();
               $chartData = [
                 'categories' => $products->pluck('name_product')->toArray(),
@@ -28,11 +30,13 @@ class DashboardController extends Controller
               ->join('member', 'member.id', '=', 'sales.member_id')
               ->groupBy('member.code_member')->get();
               return view('dashboard.admin_list', ['chartData' => $chartData, 'TotalProduct' => $TotalProduct, 'TotalSales' => $TotalSales, 'TotalPurchase' => $TotalPurchase,
-               'TotalSupplier' => $TotalSupplier, 'salesData' => $data['salesData']]);  
+               'TotalSupplier' => $TotalSupplier, 'salesData' => $data['salesData'], 'TotalWallets' => $TotalWallets]);  
             }
             else if(Auth::user()->is_role == 2)
             {
-                return view('dashboard.user_list');
+                $user_id = Auth::user()->id;
+                $data['getWallets'] = User::find($user_id);
+                return view('dashboard.user_list', $data);
             }
         }
 }
