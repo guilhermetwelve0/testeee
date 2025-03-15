@@ -32,8 +32,27 @@ class NewTransactionController extends Controller
 
  public function user_transaction_list(Request $request)
  {
-  TransactionsModel
-   return view('transaction.user_transaction_list');
+  $user_id = Auth::user()->id;
+   $getRecord = TransactionsModel::select('transactions.*');
+   if(!empty($request->id))
+   {
+    $getRecord = $getRecord->where('transactions.id', '=', $request->id);
+   }
+   if(!empty($request->amount))
+   {
+    $getRecord = $getRecord->where('transactions.amount', 'like', '%'.$request->amount.'%');
+   }
+   if(!empty($request->created_at))
+   {
+    $getRecord = $getRecord->where('transactions.created_at', 'like', '%'.$request->created_at.'%');
+   }
+   if(!empty($request->updated_at))
+   {
+    $getRecord = $getRecord->where('transactions.updated_at', 'like', '%'.$request->updated_at.'%');
+   }
+   $getRecord = $getRecord->where('user_id', '=', $user_id)->get();
+   $data['getRecord'] = $getRecord;
+   return view('transaction.user_transaction_list', $data);
  }
 
 
