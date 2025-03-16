@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UsersController;
@@ -84,6 +85,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/users', [UsersController::class, 'users_list']);
     Route::get('admin/users/delete/{id}', [UsersController::class, 'users_delete']);
     Route::get('admin/transaction', [TransactionController::class, 'admin_transaction']);
+    Route::get('admin/transaction_status_update', [TransactionController::class, 'transaction_status_update']);
     
 });
 
@@ -94,6 +96,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets']);
     Route::post('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets_update']);
     Route::get('user/transaction_list', [NewTransactionController::class, 'user_transaction_list']);
+    Route::get('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add']);
+    Route::post('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add_store']);
+    Route::get('user/my_account', [MyAccountController::class, 'my_account']);
+
 
 });
 

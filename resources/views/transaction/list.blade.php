@@ -90,7 +90,9 @@
                                         <th>ID</th>
                                         <th>Username</th>
                                         <th>Amount</th>
+                                        <th>Payment Status</th>
                                         <th>Created At</th>
+                                        <th>Updated At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -99,7 +101,14 @@
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->amount}}</td>
-                                <td>{{date('d-m-Y', strtotime($value->created_at))}}</td>
+                                <td>
+                                <select class="form-control changeStatus" style="width: 170px;" id="{{$value->id}}">
+                                <option {{($value->payment_type == '0') ? 'selected': ''}} value="0">Pending</option>
+                                <option {{($value->payment_type == '1') ? 'selected': ''}} value="1">Completed</option>
+                                </select>
+                                </td>
+                                <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
+                                <td>{{ date('d-m-Y H:i A', strtotime($value->updated_at)) }}</td>
                                 
                                 </tr>
 
@@ -119,5 +128,27 @@
     </div>
 </main>
 
+
+@endsection
+
+@section('script')
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+    $('.changeStatus').change(function(){
+       var status_id = $(this).val();
+       var order_id = $(this).attr('id');
+       $.ajax({
+        type: 'GET',
+        url: "{{url('admin/transaction_status_update')}}",
+        data: {status_id: status_id, order_id: order_id},
+        dataType: 'JSON',
+        success:function(data){
+            alert('Status successfully Changed');
+            window.location.href = "";
+        }
+       });
+    });
+  </script>
 
 @endsection

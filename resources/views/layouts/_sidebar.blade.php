@@ -181,9 +181,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('user/active-transaction') }}" class="nav-link @if(Request::segment(2) == 'active-transaction') active @endif">
-                                            <i class="fa fa-bullhorn"></i>
-                                            <p>Active Transaction</p>
+                                        <a href="{{ url('user/my_account') }}" class="nav-link @if(Request::segment(2) == 'my_account') active @endif">
+                                            <i class="fa fa-user"></i>
+                                            <p>My Account</p>
                                         </a>
                                     </li>
                                 </ul>

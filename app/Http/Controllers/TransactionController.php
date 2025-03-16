@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TransactionModel;
+use Carbon\Carbon;
+use App\Models\TransactionsModel;
 class TransactionController extends Controller
 {
     public function admin_transaction(Request $request)
     {
-        $getRecord = TransactionModel::select('transactions.*', 'users.name')->join('users', 'users.id', '=', 'transactions.user_id');
+        $getRecord = TransactionsModel::select('transactions.*', 'users.name')->join('users', 'users.id', '=', 'transactions.user_id');
         if($request->id){
             $getRecord = $getRecord->where('transactions.id', 'like', '%'.$request->id.'%');
          }
@@ -25,6 +26,16 @@ class TransactionController extends Controller
         $getRecord = $getRecord->get();
         $data['getRecord'] = $getRecord;
         return view('transaction.list', $data);
+    }
+    public function transaction_status_update(Request $request)
+    {
+      $order = TransactionsModel::find($request->order_id);
+      $order->payment_type = $request->status_id;
+      $order->updated_at = Carbon::now('America/Sao_Paulo');
+      $order->created_at = Carbon::now('America/Sao_Paulo');
+      $order->save();
+      $json['sucess'] = true;
+      echo json_encode($json);
     }
     
 }

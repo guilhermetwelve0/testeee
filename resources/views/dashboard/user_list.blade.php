@@ -58,10 +58,10 @@
               <!--end::Col-->
               <div class="col-lg-3 col-6">
                 <!--begin::Small Box Widget 2-->
-                <div class="small-box text-bg-success">
+                <div class="small-box text-bg-warning">
                   <div class="inner">
-                    <h3>53<sup class="fs-5">%</sup></h3>
-                    <p>Bounce Rate</p>
+                    <h3>{{$TotalPending}}</h3>
+                    <p>Pending</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -75,7 +75,7 @@
                     ></path>
                   </svg>
                   <a
-                    href="#"
+                    href="{{url('user/transaction_list')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
                     More info <i class="bi bi-link-45deg"></i>
@@ -86,10 +86,10 @@
               <!--end::Col-->
               <div class="col-lg-3 col-6">
                 <!--begin::Small Box Widget 3-->
-                <div class="small-box text-bg-warning">
+                <div class="small-box text-bg-success">
                   <div class="inner">
-                    <h3>44</h3>
-                    <p>User Registrations</p>
+                    <h3>{{$TotalCompleted}}</h3>
+                    <p>Completed</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -103,7 +103,7 @@
                     ></path>
                   </svg>
                   <a
-                    href="#"
+                    href="{{url('user/transaction_list')}}"
                     class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
                     More info <i class="bi bi-link-45deg"></i>

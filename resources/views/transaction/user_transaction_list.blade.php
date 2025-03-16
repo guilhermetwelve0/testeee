@@ -78,7 +78,8 @@
                             <h3 class="card-title">Transaction List</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
-                                   
+                                    <a href="{{ url('user/transaction_list/add') }}" class="btn btn-sm btn-primary">Add
+                                   Transaction</a>
                                 </ul>
                             </div>
                         </div>
@@ -89,6 +90,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Amount</th>
+                                        <th>Payment Type</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                     </tr>
@@ -98,8 +100,15 @@
                                 <tr>
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->amount}}</td>
-                                <td>{{date('d-m-Y', strtotime($value->created_at))}}</td>
-                                <td>{{date('d-m-Y', strtotime($value->updated_at))}}</td>
+                                <td>
+                                @if($value->payment_type == 1)
+                                Completed
+                                @else
+                                Pending
+                                @endif
+                                </td>
+                                <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
+                                <td>{{ date('d-m-Y H:i A', strtotime($value->updated_at)) }}</td>
                                 
                                 </tr>
                                @empty

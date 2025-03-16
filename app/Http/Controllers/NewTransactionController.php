@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\TransactionsModel;
 use Auth;
+use Carbon\Carbon;
 
 
 class NewTransactionController extends Controller
@@ -26,6 +27,7 @@ class NewTransactionController extends Controller
   $update = User::find($id);
   $Add = $request->wallets + $update->wallets;
   $update->wallets = trim($Add);
+  $update->updated_at = Carbon::now('America/Sao_Paulo');
   $update->save();
   return redirect('user/new_transaction')->with('success', "Record Update successfully");
  }
@@ -53,6 +55,32 @@ class NewTransactionController extends Controller
    $getRecord = $getRecord->where('user_id', '=', $user_id)->get();
    $data['getRecord'] = $getRecord;
    return view('transaction.user_transaction_list', $data);
+ }
+ public function transaction_list_add()
+ {
+  return view('transaction.user_transaction_list_add');
+ }
+ public function transaction_list_add_store(Request $request)
+ {
+  $user_id = Auth::user()->id;
+  $getWallet = User::where('id', '=', $user_id)->first();
+  if($getWallet->wallets >= $request->amount)
+  {
+    User::where('id', $user_id)->update([
+      'wallets' => $getWallet->wallets - $request->amount
+    ]);
+    $save = new TransactionsModel;
+    $save->user_id = $user_id;
+    $save->amount = $request->amount;
+    $save->updated_at = Carbon::now('America/Sao_Paulo');
+    $save->created_at = Carbon::now('America/Sao_Paulo');
+    $save->save();
+    return redirect('user/transaction_list')->with('success', 'Transaction successfully done..!');
+  }else{
+    return redirect()->back()->with('error', 'There is not enough balance in your wallet
+    .Check your wallet first.');
+  }
+
  }
 
 

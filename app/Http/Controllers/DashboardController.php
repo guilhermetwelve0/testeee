@@ -8,6 +8,7 @@ use App\Models\SalesModel;
 use App\Models\User;
 use App\Models\PurchaseModel;
 use App\Models\SupplierModel;
+use App\Models\TransactionsModel;
 use Auth;
 
 class DashboardController extends Controller
@@ -36,6 +37,10 @@ class DashboardController extends Controller
             {
                 $user_id = Auth::user()->id;
                 $data['getWallets'] = User::find($user_id);
+                $data['TotalPending'] = TransactionsModel::where('user_id', '=', $user_id)
+                ->where('payment_type', '=', 0)->sum('amount');
+                $data['TotalCompleted'] = TransactionsModel::where('user_id', '=', $user_id)
+                ->where('payment_type', '=', 1)->sum('amount');
                 return view('dashboard.user_list', $data);
             }
         }
