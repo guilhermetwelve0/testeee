@@ -137,9 +137,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('admin/settings') }}" class="nav-link @if(Request::segment(2) == 'settings') active @endif">
+                            <a href="{{ url('admin/my_account') }}" class="nav-link @if(Request::segment(2) == 'my_account') active @endif">
                                 <i class="fa fa-cogs"></i>
-                                <p>Settings</p>
+                                <p>My Account</p>
                             </a>
                         </li>
                     </ul>

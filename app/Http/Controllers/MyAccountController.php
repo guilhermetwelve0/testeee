@@ -59,4 +59,13 @@ class MyAccountController extends Controller
             return redirect()->back()->with('error', "Confirm password does not updated.");
         }
     }
+        public function admin_my_account()
+        {
+           return view('user_account.admin_my_account');
+        }
+        public function admin_my_account_update(Request $request)
+        {
+           
+        }
+    
 }

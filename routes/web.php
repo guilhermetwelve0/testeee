@@ -86,7 +86,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/users/delete/{id}', [UsersController::class, 'users_delete']);
     Route::get('admin/transaction', [TransactionController::class, 'admin_transaction']);
     Route::get('admin/transaction_status_update', [TransactionController::class, 'transaction_status_update']);
-    
+    Route::get('admin/my_account', [MyAccountController::class, 'admin_my_account']);
+    Route::post('admin/my_account_update', [MyAccountController::class, 'admin_my_account_update']);
 });
 
 // Rotas protegidas para usuários comuns
