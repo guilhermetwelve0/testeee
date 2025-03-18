@@ -55,11 +55,12 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
+
                   <!--begin::Message-->
                   <div class="d-flex">
                     <div class="flex-shrink-0">
                       <img
-                        src="{{ asset('dist/assets/img/user8-128x128.jpg') }}"
+                        src="{{url('upload/'.Auth::user()->profile_image)}}"
                         alt="User Avatar"
                         class="img-size-50 rounded-circle me-3"
                       />
@@ -149,24 +150,24 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img
-                  src="{{ asset('dist/assets/img/user2-160x160.jpg') }}"
-                  class="user-image rounded-circle shadow"
-                  alt="User Image"
-                />
+              @if(!empty(Auth::user()->profile_image))
+              @if(file_exists('upload/'.Auth::user()->profile_image))
+              <img src="{{url('upload/'.Auth::user()->profile_image)}}" class="user-image rounded-circle shadow" alt="User Image">
+              @endif
+              @endif
                 <span class="d-none d-md-inline">{{Auth::user()->name}}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary">
-                  <img
-                    src="{{ asset('dist/assets/img/user2-160x160.jpg') }}"
-                    class="rounded-circle shadow"
-                    alt="User Image"
-                  />
+                @if(!empty(Auth::user()->profile_image))
+              @if(file_exists('upload/'.Auth::user()->profile_image))
+              <img src="{{url('upload/'.Auth::user()->profile_image)}}" class="user-image rounded-circle shadow" alt="User Image">
+              @endif
+              @endif
                   <p>
                     {{Auth::user()->email}}
-                    <small>Member since Nov. 2023</small>
+                    <small>Member since {{date('d-m-Y', strtotime(Auth::user()->created_at))}}</small>
                   </p>
                 </li>
                 <!--end::User Image-->

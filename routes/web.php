@@ -99,6 +99,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add']);
     Route::post('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add_store']);
     Route::get('user/my_account', [MyAccountController::class, 'my_account']);
+    Route::post('user/my_account_update', [MyAccountController::class, 'my_account_update']);
+    Route::get('user/change_password', [MyAccountController::class, 'change_password']);
+    Route::post('user/change_password_update', [MyAccountController::class, 'change_password_update']);
+
 
 
 });

@@ -186,6 +186,12 @@
                                             <p>My Account</p>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="{{ url('user/change_password') }}" class="nav-link @if(Request::segment(2) == 'change_password') active @endif">
+                                            <i class="fa fa-key"></i>
+                                            <p>Change Password</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
