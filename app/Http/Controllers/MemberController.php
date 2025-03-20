@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MemberModel;
 use Carbon\Carbon;
+use PDF;
 
 class MemberController extends Controller
 {
@@ -80,4 +81,18 @@ class MemberController extends Controller
         $delete->delete();
         return redirect('admin/member')->with('error', 'Record successfully Delete');
     }
+    public function member_pdf()
+    {
+        $data = [
+        'title' => 'Welcome to Errorsolutioncode.com',
+        'date' => date('d/m/Y')
+        ];
+        $pdf = PDF::loadView('member.member_pdf', $data);
+        return $pdf->download('member_pdf.pdf');
+    }
+    public function member_pdf_row($id) {
+        $pdf = PDF::loadView('member.member_pdf_row', ['id' => $id]); // Passa o ID para a view, se necessário
+        return $pdf->download('member_pdf_row_'.$id.'.pdf');
+    }
+    
 }

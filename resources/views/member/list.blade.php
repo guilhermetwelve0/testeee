@@ -104,6 +104,9 @@
                             <h3 class="card-title">Member List</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
+                                    <a href="{{ url('admin/member/member_pdf') }}" class="btn btn-sm btn-success">
+                                        Member PDF</a>
+                                        &nbsp;&nbsp;&nbsp;
                                     <a href="{{ url('admin/member/add') }}" class="btn btn-sm btn-primary">Add
                                         Member</a>
                                 </ul>
@@ -135,8 +138,9 @@
                                         <td>{{date('d-m-Y', strtotime($value->updated_at))}}</td>
                                         <td>
                                             <div class="d-flex">
+                                            <a href="{{ route('member.pdf_row', ['id' => $value->id]) }}" class="btn btn-sm btn-primary">PDF</a>
                                                 <a href="{{ url('admin/member/edit/' . $value->id) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                    class="btn btn-sm btn-success">Edit</a>
                                                 <a href="{{ url('admin/member/delete/' . $value->id) }}"
                                                     class="btn btn-sm btn-danger"
                                                     onclick="return confirm('Are you sure you want to delete?')">Delete</a>

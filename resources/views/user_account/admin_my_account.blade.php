@@ -33,25 +33,31 @@
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Name
                                     </label>
                                     <div class="col-sm-10"><input type="text" class="form-control" name="name"
-                                    placeholder="Enter Name" value="" required>
+                                    placeholder="Enter Name" value="{{$getRecord->name}}" required>
                                     <span style="color: red;">{{$errors->first('name')}}</span></div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Email ID
                                     </label>
                                     <div class="col-sm-10"><input type="email" class="form-control" name="email"
-                                    placeholder="Enter Email" value="" required>
+                                    placeholder="Enter Email" value="{{$getRecord->email}}" required>
                                      <span style="color: red;">{{$errors->first('email')}}</span></div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Password
                                     </label>
                                     <div class="col-sm-10"><input type="password" class="form-control" name="password"
                                     placeholder="Enter Password">
+                                    (Leave blank if you are not changing the password)
                                      <span style="color: red;">{{$errors->first('password')}}</span></div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Profile Image
                                     </label>
                                     <div class="col-sm-10">
                                     <input type="file" class="form-control" name="profile_image">
+                                    @if(!empty($getRecord->profile_image))
+                                    @if(file_exists('upload/'.$getRecord->profile_image))
+                                    <img src="{{url('upload/'.$getRecord->profile_image)}}" style="width: 100px; height: 100px;">
+                                    @endif
+                                    @endif
                                     
                                     </div>
                                 </div>
