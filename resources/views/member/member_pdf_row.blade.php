@@ -85,17 +85,37 @@
         <div class="list-item">
             <div class="line">
                 <h2>ID</h2>
-                <p>1</p>
+                <p>{{$getRecord->id}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Name</h2>
-                <p>Error </p>
+                <h2>Code Member</h2>
+                <p>{{$getRecord->code_member}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Date</h2>
-                <p>20-02-2025</p>
+                <h2>Name Member</h2>
+                <p>{{$getRecord->name_member}}</p>
+            </div>
+            <hr>
+            <div class="line">
+                <h2>Address</h2>
+                <p>{{$getRecord->address}}</p>
+            </div>
+            <hr>
+            <div class="line">
+                <h2>Telefone</h2>
+                <p>{{$getRecord->telefone}}</p>
+            </div>
+            <hr>
+            <div class="line">
+                <h2>Created At</h2>
+               <p>{{date('d-m-Y H:i A', strtotime($getRecord->created_at))}}</p>
+            </div>
+            <hr>
+            <div class="line">
+                <h2>Updated At</h2>
+               <p>{{date('d-m-Y H:i A', strtotime($getRecord->updated_at))}}</p>
             </div>
         </div>
     </div>

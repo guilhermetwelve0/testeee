@@ -83,16 +83,15 @@ class MemberController extends Controller
     }
     public function member_pdf()
     {
-        $data = [
-        'title' => 'Welcome to Errorsolutioncode.com',
-        'date' => date('d/m/Y')
-        ];
-        $pdf = PDF::loadView('member.member_pdf', $data);
+        
+        $pdf = PDF::loadView('member.member_pdf');
         return $pdf->download('member_pdf.pdf');
     }
     public function member_pdf_row($id) {
-        $pdf = PDF::loadView('member.member_pdf_row', ['id' => $id]); // Passa o ID para a view, se necessário
-        return $pdf->download('member_pdf_row_'.$id.'.pdf');
+        $getRecord = MemberModel::find($id);
+        $data = ['getRecord' => $getRecord, 'id' => $id];
+        $pdf = PDF::loadView('member.member_pdf_row', $data);
+        return $pdf->download('member_pdf_row_' . $id . '.pdf');
     }
     
 }

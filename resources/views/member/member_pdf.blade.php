@@ -6,8 +6,6 @@
     <title>Error Solution Code | Member PDF</title>
 </head>
 <body>
-    <h1>{{$title}}</h1>
-    <p>{{$date}}</p>
-    <p>Welcome PDF working Good</p>
+    
 </body>
 </html>
