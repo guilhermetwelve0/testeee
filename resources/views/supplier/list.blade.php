@@ -86,6 +86,7 @@
                             <h3 class="card-title">Supplier List</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
+                                <a href="{{url('admin/supplier/supplier_pdf')}}" class="btn btn-sm btn-success">Supplier PDF</a> &nbsp;&nbsp;&nbsp;
                                     <a href="{{ url('admin/supplier/add') }}" class="btn btn-sm btn-primary">Add
                                     New Supplier</a>
                                 </ul>
@@ -115,6 +116,8 @@
                                     <td>{{date('d-m-Y',strtotime($value->updated_at))}}</td>
                                    <td>
                                             <div class="d-flex">
+                                                <a href="{{ url('admin/supplier/supplier_pdf_row/' . $value->id) }}"
+                                                    class="btn btn-sm btn-success">PDF</a>
                                                 <a href="{{ url('admin/supplier/edit/' . $value->id) }}"
                                                     class="btn btn-sm btn-primary">Edit</a>
                                                 <a href="{{ url('admin/supplier/delete/' . $value->id) }}"

@@ -4,11 +4,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SupplierModel;
 use App\Models\PurchaseModel;
+use PDF;
 use Auth;
 
 
 class SupplierController extends Controller
 {
+    public function supplier_pdf()
+    {
+        $data['getRecord'] = SupplierModel::get();
+        $pdf = PDF::loadView('supplier.supplier_pdf', $data);
+        return $pdf->download('supplier_pdf.pdf');
+    }
+
+    public function supplier_pdf_row($id)
+    {
+        $data['getRecord'] = SupplierModel::find($id);
+        $pdf = PDF::loadView('supplier.supplier_pdf_row', $data);
+        return $pdf->download('supplier_pdf_row.pdf');
+    }
     
     public function index()
     {

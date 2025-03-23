@@ -30,7 +30,7 @@
                         <div class="card-title">Add Transaction</div>
 
                         </div>
-                        <form method="post" action="{{url('user/transaction_list/add')}}">
+                        <form method="post" action="{{ route('transaction.list_add_store') }}">
                         {{csrf_field()}}
                         <div class="card-body">
                         <div class="row mb-3">

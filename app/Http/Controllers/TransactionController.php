@@ -7,6 +7,37 @@ use Carbon\Carbon;
 use App\Models\TransactionsModel;
 class TransactionController extends Controller
 {
+   public function transaction_description($id)
+   {
+      $data['getRecord'] = TransactionsModel::find($id);
+      return view('transaction.transaction_description', $data);
+   }
+   public function transaction_description_update($id, Request $request)
+   {
+      $update = TransactionsModel::find($id);
+      $update->description = trim($request->description);
+      $update->updated_at = Carbon::now('America/Sao_Paulo');
+      $update->created_at = Carbon::now('America/Sao_Paulo');
+      $update->save();
+      return redirect('admin/transaction')->with('success', 'Description Update successfully');
+   }
+   public function delete_transaction_multi(Request $request)
+   {
+      if (!empty($request->id)) {
+         $option = explode(',', $request->id);
+         foreach ($option as $id) {
+               if (!empty($id)) {
+                  $getrecord = TransactionsModel::find($id);
+                  if ($getrecord) {
+                     $getrecord->delete();
+                  }
+               }
+         }
+      }
+      
+      return redirect('admin/transaction')->with('success', 'Record successfully deleted');
+   }
+
     public function admin_transaction(Request $request)
     {
         $getRecord = TransactionsModel::select('transactions.*', 'users.name')->join('users', 'users.id', '=', 'transactions.user_id');

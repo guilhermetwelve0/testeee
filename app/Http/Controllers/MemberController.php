@@ -84,14 +84,18 @@ class MemberController extends Controller
     public function member_pdf()
     {
         
-        $pdf = PDF::loadView('member.member_pdf');
+        // return view('member.member_pdf');
+        $data['getRecord'] = MemberModel::get();
+        $pdf = PDF::loadView('member.member_pdf', $data);
         return $pdf->download('member_pdf.pdf');
     }
     public function member_pdf_row($id) {
-        $getRecord = MemberModel::find($id);
-        $data = ['getRecord' => $getRecord, 'id' => $id];
-        $pdf = PDF::loadView('member.member_pdf_row', $data);
-        return $pdf->download('member_pdf_row_' . $id . '.pdf');
+        $getRecord = MemberModel::find($id); // Encontrar o membro pelo ID
+        $data = ['getRecord' => $getRecord, 'id' => $id]; // Passar os dados para a view
+        $pdf = PDF::loadView('member.member_pdf_row', $data); // Gerar o PDF com os dados do membro
+        return $pdf->download('member_pdf_row_' . $id . '.pdf'); // Fazer o download do PDF
     }
+    
+
     
 }

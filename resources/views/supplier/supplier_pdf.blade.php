@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Solution Code | Member PDF</title>
+    <title>Error Solution Code | Supplier PDF</title>
     <style type="text/css">
         body {
             font-family: Arial, sans-serif;
@@ -50,15 +50,14 @@
 </head>
 <body>
     <div class="table-container">
-        <h2>Member List</h2>
+        <h2>Supplier List</h2>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Code Member</th>
-                    <th>Name Member</th>
-                    <th>Address</th>
-                    <th>Telefone</th>
+                    <th>Supplier Name</th>
+                    <th>Supplier Telefone</th>
+                    <th>Supplier Address</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                 </tr>
@@ -67,10 +66,9 @@
             @foreach($getRecord as $value)
                 <tr>
                     <td>{{$value->id}}</td>
-                    <td>{{$value->code_member}}</td>
-                    <td>{{$value->name_member}}</td>
-                    <td>{{$value->address}}</td>
-                    <td>{{$value->telefone}}</td>
+                    <td>{{$value->supplier_name}}</td>
+                    <td>{{$value->supplier_telefone}}</td>
+                    <td>{{$value->supplier_address}}</td>
                     <td>{{date('d-m-Y H:i A', strtotime($value->created_at))}}</td>
                     <td>{{date('d-m-Y H:i A', strtotime($value->updated_at))}}</td>
                 </tr>

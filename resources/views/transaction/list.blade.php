@@ -79,7 +79,7 @@
                             <h3 class="card-title">Transaction List</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
-                                   
+                                   <a href="" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?');" id="getDeleteURL">Delete</a>
                                 </ul>
                             </div>
                         </div>
@@ -87,17 +87,20 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>Delete</th>
                                         <th>ID</th>
                                         <th>Username</th>
                                         <th>Amount</th>
                                         <th>Payment Status</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($getRecord as $value)
                                 <tr>
+                                <td><input class="delete-all-option" value="{{$value->id}}" type="checkbox"></td>
                                 <td>{{$value->id}}</td>
                                 <td>{{$value->name}}</td>
                                 <td>{{$value->amount}}</td>
@@ -109,7 +112,7 @@
                                 </td>
                                 <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                                 <td>{{ date('d-m-Y H:i A', strtotime($value->updated_at)) }}</td>
-                                
+                                <td><a href="{{ url('admin/transaction/description/' . $value->id) }}" class="btn btn-sm btn-success">Description</a></td>
                                 </tr>
 
                                 @endforeach
@@ -149,6 +152,22 @@
         }
        });
     });
+  </script>
+
+  <script type="text/javascript">
+    $('.delete-all-option').click(function(){
+   var total = '';
+   $('.delete-all-option').each(function(){
+      if ($(this).prop("checked")) {  // Correção aqui
+         var id = $(this).val();
+         total += id + ',';
+      }
+   });
+
+   var url = "{{url('admin/transaction/delete_transaction_multi?id=')}}" + total;
+   $('#getDeleteURL').attr('href', url);
+});
+
   </script>
 
 @endsection
