@@ -5,11 +5,19 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\TransactionsModel;
 use Auth;
+use PDF;
 use Carbon\Carbon;
 
 
 class NewTransactionController extends Controller
 {
+
+  public function pdf_wallets($id)
+  {
+    $data['getRecord'] = User::find($id);
+    $pdf = PDF::loadView('new_transaction.pdf_wallets', $data);
+    return $pdf->download('pdf_wallets.pdf');
+  }
  public function new_transaction()
  {
     $use_id =Auth::user()->id;
@@ -43,6 +51,10 @@ class NewTransactionController extends Controller
    if(!empty($request->amount))
    {
     $getRecord = $getRecord->where('transactions.amount', 'like', '%'.$request->amount.'%');
+   }
+   if(!empty($request->description))
+   {
+    $getRecord = $getRecord->where('transactions.description', 'like', '%'.$request->description.'%');
    }
    if(!empty($request->created_at))
    {

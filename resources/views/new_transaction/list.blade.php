@@ -62,9 +62,9 @@
                                 <td>{{date('d-m-Y H:i:s', strtotime($getRecord->updated_at))}}</td>
                                 <td>
                                 <a href="{{url('user/new_transaction/add_wallets/'.$getRecord->id)}}" class="btn btn-sm btn-warning">Wallets</a>
+                                <a href ="{{url('user/new_transaction_pdf_wallets/'.$getRecord->id)}}" class="btn btn-sm btn-primary">PDF</a>
                                 </td>
                                 </tr>
-                                    
                                 </tbody>
                             </table>
                             <div style="padding: 10px; float: right;">

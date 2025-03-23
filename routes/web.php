@@ -101,6 +101,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 // Rotas protegidas para usuários comuns
 Route::middleware(['auth', 'user'])->group(function () {
+    Route::get('user/new_transaction_pdf_wallets/{id}', [NewTransactionController::class, 'pdf_wallets']);
     Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
     Route::get('user/new_transaction', [NewTransactionController::class, 'new_transaction']);
     Route::get('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets']);

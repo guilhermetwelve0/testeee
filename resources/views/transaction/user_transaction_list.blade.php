@@ -47,6 +47,7 @@
                                             <input type="number" value="{{Request()->amount}}" name="amount" id="amount" placeholder="Enter Amount" class="form-control">
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
@@ -62,6 +63,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                 <div class="row mb-3">
+                                        <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <input type="text" value="{{Request()->description}}" name="description" id="description" placeholder="Enter Description" class="form-control">
+                                        </div>
+                                    </div>
+                                 </div>
                                 <div class="col-12" style="margin-top: 15px;">
                                     <button class="btn btn-primary" type="submit">Search</button>
                                     <a href="{{url('user/transaction_list')}}" class="btn btn-success">Reset</a>
@@ -93,6 +102,7 @@
                                         <th>Payment Type</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        <th>Description</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,6 +119,7 @@
                                 </td>
                                 <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                                 <td>{{ date('d-m-Y H:i A', strtotime($value->updated_at)) }}</td>
+                                <td>{{$value->description}}</td>
                                 
                                 </tr>
                                @empty
