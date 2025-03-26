@@ -114,9 +114,9 @@
                     </a>
                     <ul class="collapse nav flex-column ms-1" id="submenuReport" data-bs-parent=".sidebar-menu">
                         <li class="w-100">
-                            <a href="{{ url('admin/income') }}" class="nav-link @if(Request::segment(2) == 'income') active @endif">
-                                <i class="fa fa-asterisk"></i>
-                                <p>Income</p>
+                            <a href="{{ url('admin/smtp') }}" class="nav-link @if(Request::segment(2) == 'smtp') active @endif">
+                                <i class="fa fa-envelope"></i>
+                                <p>SMTP</p>
                             </a>
                         </li>
                     </ul>

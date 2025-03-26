@@ -10,6 +10,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\SMTPController;
 use App\Http\Controllers\NewTransactionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PurchaseController;
@@ -27,6 +28,8 @@ Route::post('login_post', [AuthController::class, 'login_post']);
 // Rotas protegidas para admin
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('admin/smtp', [SMTPController::class, 'smtp']);
+    Route::post('admin/smtp/update', [SMTPController::class, 'smtp_update']);
     Route::get('admin/category', [CategoryController::class, 'index']);
     Route::get('admin/category/data', [CategoryController::class, 'getCategories']);
     Route::post('admin/category/store', [CategoryController::class, 'store']);
