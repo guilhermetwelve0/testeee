@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Hash;
+use Str;
 
 
 class AuthController extends Controller
@@ -38,5 +39,24 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function forgot(Request $request)
+    {
+        return view('auth.forgot');
+    }
+
+    public function forgot_post(Request $request)
+    {
+       $count = User::where('email', '=', $request->email)->count();
+       if($count > 0)
+       {
+        $user =User::where('email', '=', $request->email)->first();
+        $user->remember_token = Str::random(50);
+        $user->save();
+            return redirect()->back()->with('success', 'Please has been reset.');
+       }else{
+            return redirect()->back()->withInput()->with('error', 'Email not found in the system.');
+       }
     }
 }
