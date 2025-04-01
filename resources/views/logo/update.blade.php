@@ -38,19 +38,25 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Logo <span style="color: red;">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="file" class="form-control" name="logo" required>
+                                        <input type="file" class="form-control" name="logo">
+                                        @if(file_exists('upload/logo/'.$getRecord->logo))
+                                        <img src="{{url('upload/logo/'.$getRecord->logo)}}" style="height: 100px; width: 100px;">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Favicon <span style="color: red;">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="file" class="form-control" name="favicon" required>
+                                        <input type="file" class="form-control" name="favicon">
+                                         @if(file_exists('upload/logo/'.$getRecord->favicon))
+                                        <img src="{{url('upload/logo/'.$getRecord->favicon)}}" style="height: 100px; width: 100px;">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Website name <span style="color: red;">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="website_name" required placeholder="Enter Website Name">
+                                        <input type="text" class="form-control" name="website_name" placeholder="Enter Website Name" value="{{$getRecord->website_name}}">
                                     </div>
                                 </div>
                             </div>
