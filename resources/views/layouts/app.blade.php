@@ -2,15 +2,16 @@
 <html lang="en">
   <!--begin::Head-->
   <head>
+  @php
+    $Geticon = App\Models\LogoWebsiteModel::getSingleFirst();
+@endphp
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>POS | Dashboard</title>
+    <title>{{$Geticon->website_name}} | Dashboard</title>
     <!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE v4 | Dashboard" />
     <meta name="author" content="ColorlibHQ" />
-@php
-    $Geticon = App\Models\LogoWebsiteModel::getSingleFirst();
-@endphp
+
 
     <link rel="icon" type="image/x-icon" href="{{ url('upload/logo/'.$Geticon->favicon) }}" />
 
