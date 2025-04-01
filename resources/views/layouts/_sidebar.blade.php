@@ -97,9 +97,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('admin/active-transaction') }}" class="nav-link @if(Request::segment(2) == 'active-transaction') active @endif">
+                            <a href="{{ url('admin/logo') }}" class="nav-link @if(Request::segment(2) == 'logo') active @endif">
                                 <i class="fa fa-bullhorn"></i>
-                                <p>Active Transaction</p>
+                                <p>Logo</p>
                             </a>
                         </li>
                     </ul>

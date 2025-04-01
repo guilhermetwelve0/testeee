@@ -10,6 +10,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\LogoController;
 use App\Http\Controllers\SMTPController;
 use App\Http\Controllers\NewTransactionController;
 use App\Http\Controllers\TransactionController;
@@ -25,6 +26,10 @@ Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('login_post', [AuthController::class, 'login_post']);
 Route::get('forgot', [AuthController::class, 'forgot']);
 Route::post('forgot_post', [AuthController::class, 'forgot_post']);
+Route::get('reset/{token}', [AuthController::class, 'getReset']);
+Route::post('reset/{token}', [AuthController::class, 'getResetPost']);
+Route::get('registration', [AuthController::class, 'registration']);
+Route::post('registration_post', [AuthController::class, 'registration_post']);
 
 
 // Rotas protegidas para admin
@@ -43,8 +48,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/product/fetch', [ProductController::class, 'fetchProducts'])->name('product.fetch');
     Route::get('admin/product/edit/{id}', [ProductController::class, 'edit']);
     Route::post('admin/product/update/{id}', [ProductController::class, 'update']);
+    Route::get('admin/transaction/pdf_transaction/{id}', [TransactionController::class, 'pdf_transaction']);
     Route::delete('admin/product/delete/{id}', [ProductController::class, 'destroy']);
     Route::get('admin/member', [MemberController::class, 'index']);
+    Route::get('admin/logo', [LogoController::class, 'logo_index']);
+    Route::post('admin/logo/update', [LogoController::class, 'logo_update']);
     Route::get('admin/member/add', [MemberController::class, 'add']);
     Route::post('admin/member/add', [MemberController::class, 'store']);
     Route::get('admin/member/member_pdf', [MemberController::class, 'member_pdf'])->name('member.pdf');

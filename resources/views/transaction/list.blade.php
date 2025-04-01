@@ -112,7 +112,11 @@
                                 </td>
                                 <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
                                 <td>{{ date('d-m-Y H:i A', strtotime($value->updated_at)) }}</td>
-                                <td><a href="{{ url('admin/transaction/description/' . $value->id) }}" class="btn btn-sm btn-success">Description</a></td>
+
+                                <td>
+                                <a href="{{ url('admin/transaction/pdf_transaction/' . $value->id) }}" class="btn btn-sm btn-primary">PDF</a>
+                                <a href="{{ url('admin/transaction/description/' . $value->id) }}" class="btn btn-sm btn-success">Description</a>
+                                </td>
                                 </tr>
 
                                 @endforeach

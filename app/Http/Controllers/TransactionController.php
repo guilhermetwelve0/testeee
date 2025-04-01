@@ -5,8 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\TransactionsModel;
+use PDF;
 class TransactionController extends Controller
 {
+   public function pdf_transaction($id)
+   {
+      // $data['getRecord'] = TransactionsModel::find($id);
+      $getRecord = TransactionsModel::select('transactions.*', 'users.name')
+      ->join('users', 'users.id', '=', 'transactions.user_id');
+      $getRecord = $getRecord->find($id);
+      $data['getRecord'] = $getRecord;
+      $pdf = PDF::loadView('transaction.pdf_transaction', $data);
+      return $pdf->download('pdf_transaction.pdf');
+   }
    public function transaction_description($id)
    {
       $data['getRecord'] = TransactionsModel::find($id);

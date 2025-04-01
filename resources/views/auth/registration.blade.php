@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>POS | Login Page</title>
+    <title>POS | Reguistration Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE 4 | Login Page" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
@@ -33,15 +33,20 @@
       </div>
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Sign in to start your session</p>
+          <p class="login-box-msg">Registration</p>
           @include('_message')
-          <form action="{{url('login_post')}}" method="post">
+          <form action="{{url('registration_post')}}" method="post">
             @csrf
             {{csrf_field()}}
+            <div class="input-group mb-3">
+              <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Username" required />
+              <div class="input-group-text"><span class="bi bi-person"></span></div>
+            </div>
             <div class="input-group mb-3">
               <input type="email" name="email" value="{{old('email')}}" class="form-control" placeholder="Email" required />
               <div class="input-group-text"><span class="bi bi-envelope"></span></div>
             </div>
+            <span style="color: red;">{{$errors->first('email')}}</span>
             <div class="input-group mb-3">
               <input type="password" name="password" class="form-control" placeholder="Password" required />
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
@@ -55,14 +60,14 @@
               </div>
               <div class="col-4">
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary">Sign In</button>
+                  <button type="submit" class="btn btn-primary">Sign Up</button>
                 </div>
               </div>
             </div>
           </form>
-          <p class="mb-1"><a href="{{url('registration')}}">New Registration</a></p>
+          <p class="mb-1"><a href="{{url('/')}}">Login</a></p>
           <br>
-          <p class="mb-1"><a href="{{url('forgot')}}">I forgot my password</a></p>
+         
         </div>
       </div>
     </div>
