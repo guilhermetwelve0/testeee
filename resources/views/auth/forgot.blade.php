@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>POS | Forgot Page</title>
+    <title>POS | Página de Esqueceu a Senha</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="AdminLTE 4 | Login Page" />
+    <meta name="title" content="AdminLTE 4 | Página de Login" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="ColorlibHQ" />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css')}}">
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
     <style>
       #particles-js {
         position: fixed;
@@ -29,11 +29,11 @@
     <div id="particles-js"></div>
     <div class="login-box">
       <div class="login-logo">
-        <a href=""><b>POS </b>System</a>
+        <a href=""><b>POS </b>Sistema</a>
       </div>
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Forgot Password</p>
+          <p class="login-box-msg">Esqueceu a Senha</p>
           @include('_message')
           <form action="{{url('forgot_post')}}" method="post">
             @csrf
@@ -46,13 +46,12 @@
             <div class="row">
               <div class="col-8">
                 <div class="form-check">
-                  
                   <label class="form-check-label" for="flexCheckDefault"> </label>
                 </div>
               </div>
               <div class="col-4">
                 <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary">Forgot</button>
+                  <button type="submit" class="btn btn-primary">Esqueceu</button>
                 </div>
               </div>
             </div>

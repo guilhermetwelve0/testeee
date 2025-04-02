@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password | POS</title>
+    <title>Redefinir Senha | POS</title>
     <style type="text/css">
         body {
             display: flex;
@@ -80,28 +80,28 @@
 <body>
 <div class="wrapper">
     <section class="form login">
-        <header>Reset Password</header>
+        <header>Redefinir Senha</header>
         <form action="{{ url('reset/'.$token) }}" method="post">
             {{ csrf_field() }}
 
             <div class="field input">
                 <label></label>
-                <input type="password" name="password" placeholder="Enter New Password" required>
+                <input type="password" name="password" placeholder="Digite a Nova Senha" required>
                 <span style="color: red;">{{ $errors->first('password') }}</span>
             </div>
 
             <div class="field input">
                 <label></label>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder="Enter Confirm Password" required>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Digite a Confirmação da Senha" required>
                 <span style="color: red;">{{ $errors->first('confirm_password') }}</span>
             </div>
 
             <div class="field button">
-                <input type="submit" value="Reset Password">
+                <input type="submit" value="Redefinir Senha">
             </div>
         </form>
 
-        <div class="link">Not yet signed up? <a href="{{ url('/') }}" style="color: white;">Login</a></div>
+        <div class="link">Ainda não se inscreveu? <a href="{{ url('/') }}" style="color: white;">Login</a></div>
     </section>
 </div>
 </body>

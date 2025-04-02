@@ -40,10 +40,12 @@ class MemberController extends Controller
 
         return view('member.list', $data);
     }
+
     public function add()
     {
         return view('member.add');
     }
+
     public function store(Request $request)
     {
        $save = MemberModel::latest()->first() ?? new MemberModel();
@@ -57,7 +59,7 @@ class MemberController extends Controller
        $save->updated_at = Carbon::now('America/Sao_Paulo');
        $save->save();
 
-       return redirect('admin/member')->with('success', 'Member successfully create');
+       return redirect('admin/member')->with('success', 'Membro criado com sucesso');
     }
 
     public function edit($id, Request $request)
@@ -65,6 +67,7 @@ class MemberController extends Controller
         $data['getRecord'] = MemberModel::find($id);
         return view('member.edit', $data);
     }
+
     public function update($id, Request $request)
     {
         $save= MemberModel::find($id);
@@ -73,29 +76,28 @@ class MemberController extends Controller
         $save->telefone = trim($request->telefone);
         $save->updated_at = Carbon::now('America/Sao_Paulo');
         $save->save();
-        return redirect('admin/member')->with('success', 'Member successfully update');
+        return redirect('admin/member')->with('success', 'Membro atualizado com sucesso');
     }
+
     public function delete($id)
     {
         $delete = MemberModel::find($id);
         $delete->delete();
-        return redirect('admin/member')->with('error', 'Record successfully Delete');
+        return redirect('admin/member')->with('error', 'Registro deletado com sucesso');
     }
+
     public function member_pdf()
     {
-        
         // return view('member.member_pdf');
         $data['getRecord'] = MemberModel::get();
         $pdf = PDF::loadView('member.member_pdf', $data);
         return $pdf->download('member_pdf.pdf');
     }
+
     public function member_pdf_row($id) {
         $getRecord = MemberModel::find($id); // Encontrar o membro pelo ID
         $data = ['getRecord' => $getRecord, 'id' => $id]; // Passar os dados para a view
         $pdf = PDF::loadView('member.member_pdf_row', $data); // Gerar o PDF com os dados do membro
         return $pdf->download('member_pdf_row_' . $id . '.pdf'); // Fazer o download do PDF
     }
-    
-
-    
 }

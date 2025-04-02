@@ -12,11 +12,12 @@ class UsersController extends Controller
         $data['getRecord'] = User::getRecord();
         return view('users.list', $data);
     }
+
     public function users_delete($id)
     {
         $delete = User::find($id);
-        $delete->is_delete = 1;
+        $delete->is_delete = 1; // Marcando como excluído (soft delete)
         $delete->save();
-        return redirect()->back()->with('success', "Record successfully soft delete");
+        return redirect()->back()->with('success', "Registro excluído com sucesso");
     }
 }

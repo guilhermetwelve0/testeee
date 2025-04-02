@@ -14,10 +14,12 @@ class LogoController extends Controller
         $data['getRecord'] = LogoWebsiteModel::getSingleFirst();
         return view('logo.update', $data);
     }
+
     public function logo_update(Request $request)
     {
         $user = LogoWebsiteModel::getSingleFirst();
         $user->website_name = trim($request->website_name);
+        
         if(!empty($request->file('logo'))){
             if(!empty($user->logo) && file_exists('upload/logo/'.$user->logo)){
                 unlink('upload/logo/'.$user->logo);
@@ -28,6 +30,7 @@ class LogoController extends Controller
             $file->move('upload/logo/',$filename);
             $user->logo = $filename;
         }
+        
         if(!empty($request->file('favicon'))){
             if(!empty($user->favicon) && file_exists('upload/logo/'.$user->favicon)){
                 unlink('upload/logo/'.$user->favicon);
@@ -38,7 +41,8 @@ class LogoController extends Controller
             $file->move('upload/logo',$filename);
             $user->favicon = $filename;
         }
+        
         $user->save();
-        return redirect()->back()->with('success', "Logo successfully save");
+        return redirect()->back()->with('success', "Logo salvo com sucesso");
     }
 }

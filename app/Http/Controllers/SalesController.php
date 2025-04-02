@@ -16,16 +16,15 @@ class SalesController extends Controller
     public function all_delete()
     {
         DB::table('sales')->truncate();
-        return redirect()->back()->with('success', 'All Record Successfully Delete');
+        return redirect()->back()->with('success', 'Todos os registros foram deletados com sucesso');
     }
-
-
 
     public function sales_index(Request $request)
     {
-        $getRecord = SalesModel::select('sales.*','member.name_member', 'users.name')
+        $getRecord = SalesModel::select('sales.*', 'member.name_member', 'users.name')
         ->join('member', 'member.id', '=', 'sales.member_id')
         ->join('users', 'users.id', '=', 'sales.user_id');
+        
         if($request->id)
         {
             $getRecord = $getRecord->where('sales.id', '=', $request->id);
@@ -64,11 +63,12 @@ class SalesController extends Controller
          $save->discount = trim($request->discount);
          $save->accepted = trim($request->accepted);
          $save->user_id = trim($request->user_id);
-         $save-> created_at = Carbon::now('America/Sao_Paulo');
-         $save-> updated_at = Carbon::now('America/Sao_Paulo');
+         $save->created_at = Carbon::now('America/Sao_Paulo');
+         $save->updated_at = Carbon::now('America/Sao_Paulo');
          $save->save();
-        return redirect('admin/sales')->with('success', 'Record successfully create');
+        return redirect('admin/sales')->with('success', 'Registro criado com sucesso');
     }
+
     public function sales_edit ($id)
     {
         $data['getMember'] = MemberModel::get();
@@ -76,6 +76,7 @@ class SalesController extends Controller
         $data['getEdit'] = SalesModel::find($id);
         return view('sales.edit', $data);
     }
+
     public function sales_edit_update($id, Request $request)
     {
         $save = SalesModel::find($id);
@@ -87,24 +88,22 @@ class SalesController extends Controller
         $save->user_id = trim($request->user_id);
         $save->updated_at = Carbon::now('America/Sao_Paulo');
         $save->save();
-        return redirect('admin/sales')->with('success', 'Record successfully updated');
+        return redirect('admin/sales')->with('success', 'Registro atualizado com sucesso');
     }
 
     public function sales_delete($id)
     {
         SalesModel::find($id)->delete();
         SalesDetailsModel::where('sales_details.sales_id', '=', $id)->delete();
-        return redirect('admin/sales')->with('success', 'Record successfully deleted');
+        return redirect('admin/sales')->with('success', 'Registro deletado com sucesso');
     }
+
     public function sales_details_list($id, Request $request)
     {
-        // $data['getRecord'] = SalesDetailsModel::select('sales_details.*', 'product.name_product')
-        // ->join('product', 'product.id', '=', 'sales_details.product_id')
-        // ->where('sales_details.sales_id', '=', $id)->paginate(5);
-
         $data['sales_id'] = $id;
         $getRecord = SalesDetailsModel::select('sales_details.*', 'product.name_product');
         $getRecord = $getRecord->join('product', 'product.id', '=', 'sales_details.product_id');
+        
         if($request->product_id){
             $getRecord = $getRecord->where('product.name_product', 'like', '%'.$request->product_id.'%');
         }
@@ -132,11 +131,11 @@ class SalesController extends Controller
 
     public function sales_details_add_store(Request $request)
     {
-        $request-> validate([
+        $request->validate([
             'product_id' => 'required',
         ]);
         SalesDetailsModel::recordInsert($request);
-        return redirect('admin/sales/sales_details_list/'.$request->sales_id)->with('success', 'Record successfully created');
+        return redirect('admin/sales/sales_details_list/'.$request->sales_id)->with('success', 'Registro criado com sucesso');
     }
 
     public function sales_details_edit($id)
@@ -148,7 +147,7 @@ class SalesController extends Controller
 
     public function sales_details_update($id, Request $request)
     {
-        $save = SalesDetailsModel::findorFail($id);
+        $save = SalesDetailsModel::findOrFail($id);
         $save->product_id = trim($request->product_id);
         $save->selling_price = trim($request->selling_price);
         $save->amount = trim($request->amount);
@@ -156,14 +155,12 @@ class SalesController extends Controller
         $save->subtotal = trim($request->subtotal);
         $save->updated_at = Carbon::now('America/Sao_Paulo');
         $save->save();
-        return redirect('admin/sales/sales_details_list/'.$request->sales_id)->with('success', 'Record successfully update');
+        return redirect('admin/sales/sales_details_list/'.$request->sales_id)->with('success', 'Registro atualizado com sucesso');
     }
 
     public function sales_details_delete($id)
     {
         SalesDetailsModel::find($id)->delete();
-        return redirect()->back()->with('success', 'Record successfully delete');
+        return redirect()->back()->with('success', 'Registro deletado com sucesso');
     }
-    
-
 }

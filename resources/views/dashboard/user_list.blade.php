@@ -8,11 +8,11 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Painel de Controle</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                  <li class="breadcrumb-item"><a href="#">Início</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Painel de Controle</li>
                 </ol>
               </div>
             </div>
@@ -33,7 +33,7 @@
                 <div class="small-box text-bg-primary">
                   <div class="inner">
                     <h3>{{$getWallets->wallets}}</h3>
-                    <p>Wallets</p>
+                    <p>Carteiras</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -50,7 +50,7 @@
                     href="{{url('user/new_transaction')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 1-->
@@ -61,7 +61,7 @@
                 <div class="small-box text-bg-warning">
                   <div class="inner">
                     <h3>{{$TotalPending}}</h3>
-                    <p>Pending</p>
+                    <p>Pendentes</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -78,7 +78,7 @@
                     href="{{url('user/transaction_list')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 2-->
@@ -89,7 +89,7 @@
                 <div class="small-box text-bg-success">
                   <div class="inner">
                     <h3>{{$TotalCompleted}}</h3>
-                    <p>Completed</p>
+                    <p>Concluídas</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -106,7 +106,7 @@
                     href="{{url('user/transaction_list')}}"
                     class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 3-->
@@ -117,7 +117,7 @@
                 <div class="small-box text-bg-danger">
                   <div class="inner">
                     <h3>65</h3>
-                    <p>Unique Visitors</p>
+                    <p>Visitantes Únicos</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -141,7 +141,7 @@
                     href="#"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 4-->

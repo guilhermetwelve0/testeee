@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CategoryModel;
-
 use Auth;
 
 class CategoryController extends Controller
 { 
     public function index(Request $request)
     {
-
           return view('category.list');
     }
 
@@ -30,13 +28,15 @@ class CategoryController extends Controller
         $category->category_name = $request->category_name;
         $category->save();
 
-        return response()->json(['message' => 'Category added successfully!']);
+        return response()->json(['message' => 'Categoria adicionada com sucesso!']);
     }
+
     public function edit($id)
     {
         $category = CategoryModel::find($id);
         return response()->json($category);
     }
+
     public function update($id, Request $request)
     {
         $request->validate([
@@ -46,12 +46,13 @@ class CategoryController extends Controller
         $category->category_name = $request->category_name;
         $category->save();
 
-        return response()->json(['message' => 'Category updated successfully!']);
+        return response()->json(['message' => 'Categoria atualizada com sucesso!']);
     }
+
     public function destroy($id)
     {
         $category = CategoryModel::findOrFail($id);
         $category->delete();
-        return response()->json(['message' => 'Category deleted successfully.']);
+        return response()->json(['message' => 'Categoria deletada com sucesso.']);
     }
 }

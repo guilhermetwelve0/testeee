@@ -12,6 +12,7 @@ class ProductController extends Controller
         $category = CategoryModel::all()->pluck('category_name', 'id');
         return view('product.list', compact('category'));
     }
+
     public function store(Request $request)
     {
        $validated = $request->validate([
@@ -25,18 +26,21 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
        ]);
        ProductModel::create($validated);
-       return response()->json(['message' => 'Product added successfully!']);
+       return response()->json(['message' => 'Produto adicionado com sucesso!']);
     }
+
     public function fetchProducts()
     {
         $products = ProductModel::with('category')->get();
         return response()->json($products);
     }
+
     public function edit($id)
     {
         $product = ProductModel::findOrFail($id);
         return response()->json($product);
     }
+
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -51,13 +55,13 @@ class ProductController extends Controller
         ]);
         $product = ProductModel::findOrFail($id);
         $product->update($validated);
-        return response()->json(['message' => 'Product updated successfully!']);
+        return response()->json(['message' => 'Produto atualizado com sucesso!']);
     }
 
     public function destroy($id)
     {
         $product = ProductModel::findOrFail($id);
         $product->delete();
-        return response()->json(['message' => 'Product deleted sucessfully!']);
+        return response()->json(['message' => 'Produto excluído com sucesso!']);
     }
 }

@@ -33,10 +33,12 @@ class ExpenseController extends Controller
 
         return view('expense.list', $data);
     }
+
     public function add()
     {
         return view('expense.add');
     }
+
     public function store(Request $request)
     {
         $save = new ExpenseModel;
@@ -45,13 +47,15 @@ class ExpenseController extends Controller
         $save-> created_at = Carbon::now('America/Sao_Paulo');
         $save-> updated_at = Carbon::now('America/Sao_Paulo');
         $save->save();
-        return redirect('admin/expense')->with('success', "Record successfully save");
+        return redirect('admin/expense')->with('success', "Registro salvo com sucesso");
     }
+
     public function edit($id)
     {
         $data['getRecord'] = ExpenseModel::find($id);
         return view('expense.edit', $data);
     }
+
     public function update($id, Request $request)
     {
         $save = ExpenseModel::find($id);
@@ -60,12 +64,13 @@ class ExpenseController extends Controller
         $save-> created_at = Carbon::now('America/Sao_Paulo');
         $save-> updated_at = Carbon::now('America/Sao_Paulo');
         $save->save();
-        return redirect('admin/expense')->with('success', "Record successfully update");
+        return redirect('admin/expense')->with('success', "Registro atualizado com sucesso");
     }
+
     public function delete($id)
     {
         $save = ExpenseModel::find($id);
         $save->delete();
-        return redirect('admin/expense')->with('success', "Record successfully delete");
+        return redirect('admin/expense')->with('success', "Registro deletado com sucesso");
     }
 }

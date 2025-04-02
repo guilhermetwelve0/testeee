@@ -7,7 +7,6 @@ use App\Models\User;
 use Str;
 use Hash;
 
-
 class MyAccountController extends Controller
 {
 
@@ -16,6 +15,7 @@ class MyAccountController extends Controller
         $data['getRecord'] = User::find(Auth::user()->id);
         return view('user_account.my_account', $data);
     }
+
     public function my_account_update(Request $request)
     {
         $user = request()->validate([
@@ -24,6 +24,7 @@ class MyAccountController extends Controller
         $user = User::find(Auth::user()->id);
         $user->name = trim($request->name);
         $user->email = trim($request->email);
+        
         if(!empty($request->file('profile_image'))){
             if(!empty($user->profile_image) && file_exists('upload/'.$user->profile_image)){
                 unlink('upload/'.$user->profile_image);
@@ -36,12 +37,14 @@ class MyAccountController extends Controller
         }
 
         $user->save();
-        return redirect()->back()->with('success', "Account Successfully update");
+        return redirect()->back()->with('success', "Conta atualizada com sucesso");
     }
+
     public function change_password()
     {
         return view('change_password.user_update');
     }
+
     public function change_password_update(Request $request)
     {
         $user = User::find(Auth::user()->id);
@@ -51,42 +54,46 @@ class MyAccountController extends Controller
             {
                 $user->password = Hash::make($request->new_password);
                 $user->save();
-                return redirect()->back()->with('success', "Password successfully change.");
+                return redirect()->back()->with('success', "Senha alterada com sucesso.");
             }else{
-                return redirect()->back()->with('error', "Old password does not match.");
+                return redirect()->back()->with('error', "A senha antiga não corresponde.");
             }
         }else{
-            return redirect()->back()->with('error', "Confirm password does not updated.");
+            return redirect()->back()->with('error', "A confirmação da senha não foi realizada.");
         }
     }
-        public function admin_my_account()
-        {
-            $data['getRecord'] = User::find(Auth::user()->id);
-           return view('user_account.admin_my_account', $data);
+
+    public function admin_my_account()
+    {
+        $data['getRecord'] = User::find(Auth::user()->id);
+        return view('user_account.admin_my_account', $data);
+    }
+
+    public function admin_my_account_update(Request $request)
+    {
+        $use = request()->validate([
+            'email' => 'required|unique:users,email,'.Auth::user()->id
+        ]);
+        $user = User::find(Auth::user()->id);
+        $user->name = trim($request->name);
+        $user->email = trim($request->email);
+        
+        if(!empty($request->password)){
+            $user->password = Hash::make($request->password);
         }
-        public function admin_my_account_update(Request $request)
-        {
-           $use = request()->validate([
-               'email' => 'required|unique:users,email,'.Auth::user()->id
-           ]);
-              $user = User::find(Auth::user()->id);
-              $user->name = trim($request->name);
-              $user->email = trim($request->email);
-              if(!empty($request->password)){
-                    $user->password = Hash::make($request->password);
-              }
-              if(!empty($request->file('profile_image'))){
-                  if(!empty($user->profile_image) && file_exists('upload/'.$user->profile_image)){
-                      unlink('upload/'.$user->profile_image);
-                  }
-                  $file = $request->file('profile_image');
-                  $randomStr = Str::random(30);
-                  $filename = $randomStr .'.'.$file->getClientOriginalExtension();
-                  $file->move('upload/',$filename);
-                  $user->profile_image = $filename;
-              }
-              $user->save();
-                return redirect()->back()->with('success', "Record successfully Update");
+
+        if(!empty($request->file('profile_image'))){
+            if(!empty($user->profile_image) && file_exists('upload/'.$user->profile_image)){
+                unlink('upload/'.$user->profile_image);
+            }
+            $file = $request->file('profile_image');
+            $randomStr = Str::random(30);
+            $filename = $randomStr .'.'.$file->getClientOriginalExtension();
+            $file->move('upload/',$filename);
+            $user->profile_image = $filename;
         }
-    
+        
+        $user->save();
+        return redirect()->back()->with('success', "Registro atualizado com sucesso");
+    }
 }

@@ -10,11 +10,11 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Dashboard</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Painel de Controle</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                  <li class="breadcrumb-item"><a href="#">Início</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Painel de Controle</li>
                 </ol>
               </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="small-box text-bg-primary">
                   <div class="inner">
                     <h3>{{ !empty($TotalProduct) ? $TotalProduct : '0' }}</h3>
-                    <p>Total Product</p>
+                    <p>Total de Produtos</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -52,7 +52,7 @@
                     href="{{url('admin/product')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 1-->
@@ -63,7 +63,7 @@
                 <div class="small-box text-bg-success">
                   <div class="inner">
                     <h3>{{ !empty($TotalSales) ? $TotalSales : '0' }}</h3>
-                    <p>Total Sales</p>
+                    <p>Total de Vendas</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -80,7 +80,7 @@
                     href="{{url('admin/sales')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 2-->
@@ -91,7 +91,7 @@
                 <div class="small-box text-bg-warning">
                   <div class="inner">
                     <h3>{{ !empty($TotalPurchase) ? $TotalPurchase : '0' }}</h3>
-                    <p>Total Purchase</p>
+                    <p>Total de Compras</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -108,7 +108,7 @@
                     href="{{url('admin/purchase')}}"
                     class="small-box-footer link-dark link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 3-->
@@ -119,7 +119,7 @@
                 <div class="small-box text-bg-danger">
                   <div class="inner">
                     <h3>{{ !empty($TotalSupplier) ? $TotalSupplier : '0' }}</h3>
-                    <p>Total Supplier</p>
+                    <p>Total de Fornecedores</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -143,7 +143,7 @@
                     href="{{url('admin/supplier')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 4-->
@@ -153,7 +153,7 @@
                 <div class="small-box text-bg-danger">
                   <div class="inner">
                     <h3>{{ !empty($TotalWallets) ? $TotalWallets : '0' }}</h3>
-                    <p>Total Wallets</p>
+                    <p>Total de Carteiras</p>
                   </div>
                   <svg
                     class="small-box-icon"
@@ -177,7 +177,7 @@
                     href="{{url('admin/users')}}"
                     class="small-box-footer link-light link-underline-opacity-0 link-underline-opacity-50-hover"
                   >
-                    More info <i class="bi bi-link-45deg"></i>
+                    Mais informações <i class="bi bi-link-45deg"></i>
                   </a>
                 </div>
                 <!--end::Small Box Widget 4-->
@@ -190,14 +190,14 @@
               <!-- Start col -->
               <div class="col-lg-7 connectedSortable">
                 <div class="card mb-4">
-                  <div class="card-header"><h3 class="card-title">Product Selling Value</h3></div>
+                  <div class="card-header"><h3 class="card-title">Valor de Venda de Produtos</h3></div>
                   <div class="card-body"><div id="revenue-chart"></div></div>
                 </div>
                 <!-- /.card -->
                 <!-- DIRECT CHAT -->
                 <div class="card direct-chat direct-chat-primary mb-4">
                   <div class="card-header">
-                    <h3 class="card-title">Direct Chat</h3>
+                    <h3 class="card-title">Chat Direto</h3>
                     <div class="card-tools">
                       <span title="3 New Messages" class="badge text-bg-primary"> 3 </span>
                       <button type="button" class="btn btn-tool" data-lte-toggle="card-collapse">
@@ -235,7 +235,7 @@
                         />
                         <!-- /.direct-chat-img -->
                         <div class="direct-chat-text">
-                          Is this template really for free? That's unbelievable!
+                          Este modelo é realmente gratuito? Isso é inacreditável!
                         </div>
                         <!-- /.direct-chat-text -->
                       </div>
@@ -253,7 +253,7 @@
                           alt="message user image"
                         />
                         <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">You better believe it!</div>
+                        <div class="direct-chat-text">Melhor acreditar!</div>
                         <!-- /.direct-chat-text -->
                       </div>
                       <!-- /.direct-chat-msg -->
@@ -271,7 +271,7 @@
                         />
                         <!-- /.direct-chat-img -->
                         <div class="direct-chat-text">
-                          Working with AdminLTE on a great new app! Wanna join?
+                          Trabalhando com AdminLTE em um novo aplicativo incrível! Quer participar?
                         </div>
                         <!-- /.direct-chat-text -->
                       </div>
@@ -289,7 +289,7 @@
                           alt="message user image"
                         />
                         <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">I would love to.</div>
+                        <div class="direct-chat-text">Eu adoraria.</div>
                         <!-- /.direct-chat-text -->
                       </div>
                       <!-- /.direct-chat-msg -->
@@ -307,10 +307,10 @@
                             />
                             <div class="contacts-list-info">
                               <span class="contacts-list-name">
-                                Count Dracula
-                                <small class="contacts-list-date float-end"> 2/28/2023 </small>
+                                Conde Drácula
+                                <small class="contacts-list-date float-end"> 28/02/2023 </small>
                               </span>
-                              <span class="contacts-list-msg"> How have you been? I was... </span>
+                              <span class="contacts-list-msg"> Como você tem estado? Eu estava... </span>
                             </div>
                             <!-- /.contacts-list-info -->
                           </a>
@@ -326,9 +326,9 @@
                             <div class="contacts-list-info">
                               <span class="contacts-list-name">
                                 Sarah Doe
-                                <small class="contacts-list-date float-end"> 2/23/2023 </small>
+                                <small class="contacts-list-date float-end"> 23/02/2023 </small>
                               </span>
-                              <span class="contacts-list-msg"> I will be waiting for... </span>
+                              <span class="contacts-list-msg"> Eu estarei esperando por... </span>
                             </div>
                             <!-- /.contacts-list-info -->
                           </a>
@@ -344,9 +344,9 @@
                             <div class="contacts-list-info">
                               <span class="contacts-list-name">
                                 Nadia Jolie
-                                <small class="contacts-list-date float-end"> 2/20/2023 </small>
+                                <small class="contacts-list-date float-end"> 20/02/2023 </small>
                               </span>
-                              <span class="contacts-list-msg"> I'll call you back at... </span>
+                              <span class="contacts-list-msg"> Eu te ligo de volta às... </span>
                             </div>
                             <!-- /.contacts-list-info -->
                           </a>
@@ -362,9 +362,9 @@
                             <div class="contacts-list-info">
                               <span class="contacts-list-name">
                                 Nora S. Vans
-                                <small class="contacts-list-date float-end"> 2/10/2023 </small>
+                                <small class="contacts-list-date float-end"> 10/02/2023 </small>
                               </span>
-                              <span class="contacts-list-msg"> Where is your new... </span>
+                              <span class="contacts-list-msg"> Onde está seu novo... </span>
                             </div>
                             <!-- /.contacts-list-info -->
                           </a>
@@ -380,9 +380,9 @@
                             <div class="contacts-list-info">
                               <span class="contacts-list-name">
                                 John K.
-                                <small class="contacts-list-date float-end"> 1/27/2023 </small>
+                                <small class="contacts-list-date float-end"> 27/01/2023 </small>
                               </span>
-                              <span class="contacts-list-msg"> Can I take a look at... </span>
+                              <span class="contacts-list-msg"> Posso dar uma olhada no... </span>
                             </div>
                             <!-- /.contacts-list-info -->
                           </a>
@@ -398,9 +398,9 @@
                             <div class="contacts-list-info">
                               <span class="contacts-list-name">
                                 Kenneth M.
-                                <small class="contacts-list-date float-end"> 1/4/2023 </small>
+                                <small class="contacts-list-date float-end"> 04/01/2023 </small>
                               </span>
-                              <span class="contacts-list-msg"> Never mind I found... </span>
+                              <span class="contacts-list-msg"> Não importa, eu encontrei... </span>
                             </div>
                             <!-- /.contacts-list-info -->
                           </a>
@@ -418,11 +418,11 @@
                         <input
                           type="text"
                           name="message"
-                          placeholder="Type Message ..."
+                          placeholder="Digite a mensagem ..."
                           class="form-control"
                         />
                         <span class="input-group-append">
-                          <button type="button" class="btn btn-primary">Send</button>
+                          <button type="button" class="btn btn-primary">Enviar</button>
                         </span>
                       </div>
                     </form>
@@ -436,7 +436,7 @@
               <div class="col-lg-5 connectedSortable">
                 <div class="card text-white bg-primary bg-gradient border-primary mb-4">
                   <div class="card-header border-0">
-                    <h3 class="card-title">Sales Value</h3>
+                    <h3 class="card-title">Valor de Vendas</h3>
                     <div class="card-tools">
                       <button
                         type="button"
@@ -455,7 +455,7 @@
                     <div class="row">
                       <div class="col-4 text-center">
                         <div id="sparkline-1" class="text-dark"></div>
-                        <div class="text-white">Visitors</div>
+                        <div class="text-white">Visitantes</div>
                       </div>
                       <div class="col-4 text-center">
                         <div id="sparkline-2" class="text-dark"></div>
@@ -463,7 +463,7 @@
                       </div>
                       <div class="col-4 text-center">
                         <div id="sparkline-3" class="text-dark"></div>
-                        <div class="text-white">Sales</div>
+                        <div class="text-white">Vendas</div>
                       </div>
                     </div>
                     <!--end::Row-->
@@ -508,7 +508,7 @@
       const sales_chart_options = {
         series: [
           {
-            name: 'Selling prices',
+            name: 'Preços de venda',
             data: chartData.data,
           },
         ],
@@ -553,10 +553,7 @@
     salesData.forEach(item => {
       visitorsData[item.code_member] = item.total_sales;
     });
-
-
-
-      // World map by jsVectorMap
+          // Mapa mundial por jsVectorMap
       const map = new jsVectorMap({
         selector: '#world-map',
         map: 'world',

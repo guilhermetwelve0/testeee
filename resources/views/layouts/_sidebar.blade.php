@@ -8,7 +8,7 @@
         <!--begin::Brand Link-->
         <a href="" class="brand-link">
             <!--begin::Brand Image-->
-            <img src="{{url('upload/logo/'.$Geticon->logo)}}" alt="AdminLTE Logo"
+            <img src="{{url('upload/logo/'.$Geticon->logo)}}"
                 class="brand-image opacity-75 shadow" />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->

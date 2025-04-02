@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\SMTPModel;
 use Carbon\Carbon;
 
-
 class SMTPController extends Controller
 { 
     public function smtp(Request $request)
@@ -31,6 +30,6 @@ class SMTPController extends Controller
        $save->updated_at = Carbon::now('America/Sao_Paulo');
        
        $save->save();
-       return redirect('admin/smtp', )->with('success', 'SMTP Successfully Update..');
+       return redirect('admin/smtp')->with('success', 'SMTP atualizado com sucesso..');
     }
 }
