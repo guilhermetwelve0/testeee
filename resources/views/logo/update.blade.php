@@ -15,8 +15,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Update Logo</li>
+                        <li class="breadcrumb-item"><a href="#">Início</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Atualizar Logo</li>
                     </ol>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     @include('_message')
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Update Logo</div>
+                            <div class="card-title">Atualizar Logo</div>
                         </div>
                         <form method="post" action="{{ url('admin/logo/update') }}" enctype="multipart/form-data">
                             @csrf
@@ -54,15 +54,15 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Website name <span style="color: red;">*</span></label>
+                                    <label class="col-sm-2 col-form-label">Nome do Site <span style="color: red;">*</span></label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="website_name" placeholder="Enter Website Name" value="{{$getRecord->website_name}}">
+                                        <input type="text" class="form-control" name="website_name" placeholder="Digite o nome do site" value="{{$getRecord->website_name}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Update</button>
-                                <a href="{{ url('admin/logo') }}" class="btn btn-success float-end">Reset</a>
+                                <button type="submit" class="btn btn-warning">Atualizar</button>
+                                <a href="{{ url('admin/logo') }}" class="btn btn-success float-end">Redefinir</a>
                             </div>
                         </form>
                     </div>

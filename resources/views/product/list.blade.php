@@ -10,12 +10,12 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Product</h3>
+                    <h3 class="mb-0">Produtos</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Product</li>
+                        <li class="breadcrumb-item"><a href="#">Início</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Produtos</li>
                     </ol>
                 </div>
             </div>
@@ -35,12 +35,12 @@
                         <!--begin::Card header-->
                         <div class="card-header">
                             <!--begin::Card title-->
-                            <h3 class="card-title">Product List</h3>
+                            <h3 class="card-title">Lista de Produtos</h3>
                             <div class="">
                                 <ul class="pagination pagination-sm float-end">
                                     <!-- Correção aqui -->
                                     <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#addProductModal">Add Product</a>
+                                        data-bs-target="#addProductModal">Adicionar Produto</a>
                                 </ul>
                             </div>
                         </div>
@@ -51,17 +51,17 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Category Name</th>
-                                            <th>Product Code</th>
-                                            <th>Name Product</th>
-                                            <th>Brand</th>
-                                            <th>Purchase Price</th>
-                                            <th>Selling Price</th>
-                                            <th>Discount</th>
-                                            <th>Stock</th>
-                                            <th>Created At</th>
-                                            <th>Updated At</th>
-                                            <th>Action</th>
+                                            <th>Categoria</th>
+                                            <th>Código</th>
+                                            <th>Nome do Produto</th>
+                                            <th>Marca</th>
+                                            <th>Preço de Compra</th>
+                                            <th>Preço de Venda</th>
+                                            <th>Desconto</th>
+                                            <th>Estoque</th>
+                                            <th>Criado em</th>
+                                            <th>Atualizado em</th>
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,55 +83,55 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="addProductModalLabel">Adicionar Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
                 <form id="productForm">
                     @csrf
                     <div class="mb-3">
-                        <label for="category_name" class="form-label">Category Name</label>
+                        <label for="category_name" class="form-label">Categoria</label>
                         <select class="form-control" name="category_id" id="category_id" required>
-                            <option value="">Select Category Name</option>
+                            <option value="">Selecione uma Categoria</option>
                             @foreach($category as $key => $item)
                             <option value="{{$key}}">{{$item}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="product_code" class="form-label">Product Code</label>
+                        <label for="product_code" class="form-label">Código do Produto</label>
                         <input type="text" class="form-control" id="product_code" name="product_code"
-                            placeholder="product_code" required>
+                            placeholder="Código do produto" required>
                     </div>
                     <div class="mb-3">
-                        <label for="name_product" class="form-label">Name Product</label>
+                        <label for="name_product" class="form-label">Nome do Produto</label>
                         <input type="text" class="form-control" id="name_product" name="name_product"
-                            placeholder="name_product" required>
+                            placeholder="Nome do produto" required>
                     </div>
                     <div class="mb-3">
-                        <label for="brand" class="form-label">Brand</label>
-                        <input type="text" class="form-control" id="brand" name="brand" placeholder="brand" required>
+                        <label for="brand" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Marca" required>
                     </div>
                     <div class="mb-3">
-                        <label for="purchase_price" class="form-label">Purchase Price</label>
+                        <label for="purchase_price" class="form-label">Preço de Compra</label>
                         <input type="number" class="form-control" id="purchase_price" name="purchase_price"
-                            placeholder="purchase_price" required>
+                            placeholder="Preço de compra" required>
                     </div>
                     <div class="mb-3">
-                        <label for="selling_price" class="form-label">Selling Price</label>
+                        <label for="selling_price" class="form-label">Preço de Venda</label>
                         <input type="number" class="form-control" id="selling_price" name="selling_price"
-                            placeholder="selling_price" required>
+                            placeholder="Preço de venda" required>
                     </div>
                     <div class="mb-3">
-                        <label for="discount" class="form-label">Discount</label>
-                        <input type="number" class="form-control" id="discount" name="discount" placeholder="discount"
+                        <label for="discount" class="form-label">Desconto</label>
+                        <input type="number" class="form-control" id="discount" name="discount" placeholder="Desconto"
                             required>
                     </div>
                     <div class="mb-3">
-                        <label for="stock" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="stock" name="stock" placeholder="stock" required>
+                        <label for="stock" class="form-label">Estoque</label>
+                        <input type="number" class="form-control" id="stock" name="stock" placeholder="Estoque" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
             </div>
         </div>
@@ -206,8 +206,8 @@ function fetchProducts() {
                     <td>${dayjs(product.created_at).format('YYYY-MM-DD')}</td>
                     <td>${dayjs(product.updated_at).format('YYYY-MM-DD')}</td>
                     <td class="d-flex justify-content-between">
-                    <button class="btn btn-sm btn-warning edit-btn" data-id="${product.id}">Edit</button>
-                    <button class="btn btn-sm btn-danger delete-btn" data-id="${product.id}">Delete</button>
+                    <button class="btn btn-sm btn-warning edit-btn" data-id="${product.id}">Editar</button>
+                    <button class="btn btn-sm btn-danger delete-btn" data-id="${product.id}">Excluir</button>
                     </td>
 
                 </tr>
@@ -217,7 +217,7 @@ function fetchProducts() {
             });
         },
         error: function() {
-            alert('Failed to fetch products.');
+            alert('Falha ao carregar produtos.');
         },
 
     });
@@ -254,13 +254,13 @@ function  handleEdit()
                         fetchProducts();
                     },
                     error: function(xhr){
-                        alert('Failed to update category.');
+                        alert('Falha ao atualizar produto.');
                     }
                 });
             });
         },
         error: function(){
-            alert('Failed to fetch product data.');
+            alert('Falha ao carregar dados do produto.');
         }
 
     });
@@ -268,7 +268,7 @@ function  handleEdit()
 
 $(document).on('click', '.delete-btn', function() {
     const id = $(this).data('id');
-    if(confirm('Are you sure you want to delete this product?')) {
+    if(confirm('Tem certeza que deseja excluir este produto?')) {
         $.ajax({
             url: `{{url('admin/product/delete')}}/${id}`,
             method: "DELETE",
@@ -280,7 +280,7 @@ $(document).on('click', '.delete-btn', function() {
                 fetchProducts();
             },
             error: function() {
-                alert('Failed to delete product.');
+                alert('Falha ao excluir produto.');
             }
         });
     }
@@ -291,7 +291,5 @@ $(document).ready(function() {
     fetchProducts();
 });
 </script>
-
-
 
 @endsection

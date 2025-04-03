@@ -1,20 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <!--begin::Head-->
   <head>
   @php
     $Geticon = App\Models\LogoWebsiteModel::getSingleFirst();
 @endphp
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{$Geticon->website_name}} | Dashboard</title>
-    <!--begin::Primary Meta Tags-->
+    <title>{{$Geticon->website_name}} | Painel</title>
+    <!--begin::Meta Tags Primários-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="AdminLTE v4 | Dashboard" />
+    <meta name="title" content="AdminLTE v4 | Painel" />
     <meta name="author" content="ColorlibHQ" />
 
-
     <link rel="icon" type="image/x-icon" href="{{ url('upload/logo/'.$Geticon->favicon) }}" />
-
 
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta
@@ -27,34 +25,34 @@
     />
     <meta name="csrf-token" content="{{csrf_token()}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
-    <!--end::Primary Meta Tags-->
-    <!--begin::Fonts-->
+    <!--end::Meta Tags Primários-->
+    <!--begin::Fontes-->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
       integrity="sha256-tXJfXfp6Ewt1ilPzLDtQnJV4hclT9XuaZUKyUvmyr+Q="
       crossorigin="anonymous"
     />
-    <!--end::Fonts-->
-    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <!--end::Fontes-->
+    <!--begin::Plugin de Terceiros(OverlayScrollbars)-->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
       integrity="sha256-tZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg="
       crossorigin="anonymous"
     />
-    <!--end::Third Party Plugin(OverlayScrollbars)-->
-    <!--begin::Third Party Plugin(Bootstrap Icons)-->
+    <!--end::Plugin de Terceiros(OverlayScrollbars)-->
+    <!--begin::Plugin de Terceiros(Bootstrap Icons)-->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
       integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
       crossorigin="anonymous"
     />
-    <!--end::Third Party Plugin(Bootstrap Icons)-->
-    <!--begin::Required Plugin(AdminLTE)-->
+    <!--end::Plugin de Terceiros(Bootstrap Icons)-->
+    <!--begin::Plugin Necessário(AdminLTE)-->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css')}}">
-    <!--end::Required Plugin(AdminLTE)-->
+    <!--end::Plugin Necessário(AdminLTE)-->
     <!-- apexcharts -->
     <link
       rel="stylesheet"
@@ -85,7 +83,7 @@
   <!--begin::Body-->
   <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 
-      <!--begin::App Wrapper-->
+      <!--begin::Wrapper do App-->
       <div class="app-wrapper">
 
       @include('layouts._header')
@@ -93,39 +91,39 @@
       @yield('content')
       @include('layouts._footer')
 
-      <!--begin::Header-->
+      <!--begin::Cabeçalho-->
 
-      <!--end::Header-->
-      <!--begin::Sidebar-->
+      <!--end::Cabeçalho-->
+      <!--begin::Barra Lateral-->
 
-      <!--end::Sidebar-->
-      <!--begin::App Main-->
+      <!--end::Barra Lateral-->
+      <!--begin::Conteúdo Principal-->
 
-        <!--end::Footer-->
+        <!--end::Rodapé-->
     </div>
-    <!--end::App Wrapper-->
-    <!--begin::Script-->
-    <!--begin::Third Party Plugin(OverlayScrollbars)-->
+    <!--end::Wrapper do App-->
+    <!--begin::Scripts-->
+    <!--begin::Plugin de Terceiros(OverlayScrollbars)-->
     <script
       src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
       integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
       crossorigin="anonymous"
     ></script>
-    <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+    <!--end::Plugin de Terceiros(OverlayScrollbars)--><!--begin::Plugin Necessário(popperjs para Bootstrap 5)-->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
       crossorigin="anonymous"
     ></script>
-    <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
+    <!--end::Plugin Necessário(popperjs para Bootstrap 5)--><!--begin::Plugin Necessário(Bootstrap 5)-->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
       integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
       crossorigin="anonymous"
     ></script>
-    <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
+    <!--end::Plugin Necessário(Bootstrap 5)--><!--begin::Plugin Necessário(AdminLTE)-->
     <script src="{{asset('/dist/js/adminlte.js')}}"></script>
-    <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
+    <!--end::Plugin Necessário(AdminLTE)--><!--begin::Configuração do OverlayScrollbars-->
     <script>
       const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
       const Default = {
@@ -146,8 +144,8 @@
         }
       });
     </script>
-    <!--end::OverlayScrollbars Configure-->
-    <!-- OPTIONAL SCRIPTS -->
+    <!--end::Configuração do OverlayScrollbars-->
+    <!-- SCRIPTS OPCIONAIS -->
     <!-- sortablejs -->
     <script
       src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"
@@ -175,9 +173,7 @@
     
     <!-- jsvectormap -->
     <script>
-      
-
-      // Sparkline charts
+      // Gráficos Sparkline
       const option_sparkline1 = {
         series: [
           {
@@ -263,7 +259,7 @@
       sparkline3.render();
     </script>
     
-    <!--end::Script-->
+    <!--end::Scripts-->
   </body>
   <!--end::Body-->
 </html>

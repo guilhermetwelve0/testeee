@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Solution Code | Member PDF</title>
+    <title>Error Solution Code | Relatório de Membros</title>
     <style type="text/css">
         body {
             font-family: Arial, sans-serif;
@@ -50,17 +50,17 @@
 </head>
 <body>
     <div class="table-container">
-        <h2>Member List</h2>
+        <h2>Lista de Membros</h2>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Code Member</th>
-                    <th>Name Member</th>
-                    <th>Address</th>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Endereço</th>
                     <th>Telefone</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
+                    <th>Data de Criação</th>
+                    <th>Última Atualização</th>
                 </tr>
             </thead>
             <tbody>

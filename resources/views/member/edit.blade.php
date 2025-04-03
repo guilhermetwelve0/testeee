@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Member</h3>
+                    <h3 class="mb-0">Membro</h3>
                 </div>
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit Member</li>
+                    <li class="breadcrumb-item"><a href="#">Início</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Editar Membro</li>
                 </ol>
                 </div>
             </div>
@@ -24,32 +24,32 @@
                 <div class="col-md-12">
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Edit Member</div>
+                            <div class="card-title">Editar Membro</div>
                         </div>
-                        <form method="post"action="{{url('admin/member/edit/'.$getRecord->id)}}">
+                        <form method="post" action="{{url('admin/member/edit/'.$getRecord->id)}}">
                             {{csrf_field()}}
                             <div class="card-body">
-                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Name Member
+                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Nome do Membro
                                     </label>
                                     <div class="col-sm-10"><input type="text" class="form-control" name="name_member" 
-                                    value="{{$getRecord->name_member}}" placeholder="Enter Name Member" required></div>
+                                    value="{{$getRecord->name_member}}" placeholder="Digite o nome do membro" required></div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Address</label>
+                                    <label class="col-sm-2 col-form-label">Endereço</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" name="address" placeholder="Enter Address" required>{{$getRecord->address}}</textarea>
+                                        <textarea class="form-control" name="address" placeholder="Digite o endereço" required>{{$getRecord->address}}</textarea>
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Telefone
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="telefone"
-                                            placeholder="Enter Telefone" required value="{{$getRecord->telefone}}">
+                                            placeholder="Digite o telefone" required value="{{$getRecord->telefone}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Update</button>
-                                <a href="{{url('admin/member')}}" class="btn btn-danger float-end">Cancel</a>
+                                <button type="submit" class="btn btn-warning">Atualizar</button>
+                                <a href="{{url('admin/member')}}" class="btn btn-danger float-end">Cancelar</a>
                             </div>
                         </form>
                     </div>

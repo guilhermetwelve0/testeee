@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Sales</h3>
+                    <h3 class="mb-0">Vendas</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Wallets</li>
+                        <li class="breadcrumb-item"><a href="#">Início</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Adicionar Carteiras</li>
                     </ol>
                 </div>
             </div>
@@ -28,21 +28,21 @@
                 <div class="col-md-12">
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add Wallets</div>
+                            <div class="card-title">Adicionar Carteiras</div>
                         </div>
                         <form method="post" action="">
                             @csrf
                             <div class="card-body">
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Wallets</label>
+                                    <label class="col-sm-2 col-form-label">Carteiras</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="wallets" class="form-control" value="{{$getRecord->wallets}}" placeholder="Enter Amount" required>
+                                        <input type="text" name="wallets" class="form-control" value="{{$getRecord->wallets}}" placeholder="Digite o valor" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Submit</button>
-                                <a href="{{ url('user/new_transaction') }}" class="btn btn-danger float-end">Cancel</a>
+                                <button type="submit" class="btn btn-warning">Enviar</button>
+                                <a href="{{ url('user/new_transaction') }}" class="btn btn-danger float-end">Cancelar</a>
                             </div>
                         </form>
                     </div>

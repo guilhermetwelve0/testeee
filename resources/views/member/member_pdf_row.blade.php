@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Download</title>
+    <title>Baixar PDF</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,7 +79,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 class="section-title">Member PDF</h1>
+        <h1 class="section-title">Relatório de Membro</h1>
     </div>
     <div class="list-container">
         <div class="list-item">
@@ -89,17 +89,17 @@
             </div>
             <hr>
             <div class="line">
-                <h2>Code Member</h2>
+                <h2>Código do Membro</h2>
                 <p>{{$getRecord->code_member}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Name Member</h2>
+                <h2>Nome do Membro</h2>
                 <p>{{$getRecord->name_member}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Address</h2>
+                <h2>Endereço</h2>
                 <p>{{$getRecord->address}}</p>
             </div>
             <hr>
@@ -109,12 +109,12 @@
             </div>
             <hr>
             <div class="line">
-                <h2>Created At</h2>
+                <h2>Data de Criação</h2>
                <p>{{date('d-m-Y H:i A', strtotime($getRecord->created_at))}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Updated At</h2>
+                <h2>Última Atualização</h2>
                <p>{{date('d-m-Y H:i A', strtotime($getRecord->updated_at))}}</p>
             </div>
         </div>
