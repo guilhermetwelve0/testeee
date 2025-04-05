@@ -141,10 +141,9 @@ $(document).ready(function() {
         url: `{{ url('admin/category/edit') }}/${id}`,
         type: 'GET',
         success: function(category) {
-            $('#category_name').val(category.category_name); // use .val() em vez de .value()
+            $('#category_name').val(category.category_name);
             $('#addCategoryModal').modal('show');
 
-            // Atualizar Registro
             $('#categoryForm').off('submit').on('submit', function(e) {
                 e.preventDefault();
                 const formData = $(this).serialize();
@@ -154,91 +153,148 @@ $(document).ready(function() {
                     type: "POST",
                     data: formData,
                     success: function(response) {
-                        $('#addCategoryModal').modal('hide');
-                        fetchCategories();
-                    $('.flashMessage')
-                    .text(response.message)
-                    .fadeIn()
-                    .delay(3000)
-                    .fadeOut();
-                setTimeout(function() {
-                    location.reload();
-                }, 2000);
+                        if (response.success === false) {
+                            showError(response.error);
+                        } else {
+                            $('#addCategoryModal').modal('hide');
+                            fetchCategories();
+                            $('.flashMessage')
+                                .removeClass('alert-danger')
+                                .addClass('alert-success')
+                                .text(response.message)
+                                .fadeIn()
+                                .delay(3000)
+                                .fadeOut();
+                        }
                     },
                     error: function(xhr) {
-                        alert('Falha ao atualizar categoria');
+                        if (xhr.status === 403) {
+                            showError(xhr.responseJSON.error);
+                        } else {
+                            let errors = xhr.responseJSON.errors;
+                            let errorMessage = '';
+                            $.each(errors, function(key, value) {
+                                errorMessage += value[0] + '\n';
+                            });
+                            showError(errorMessage);
+                        }
                     }
                 });
             });
         },
         error: function(xhr) {
-            alert('Falha ao buscar detalhes da categoria.');
+            if (xhr.status === 403) {
+                showError(xhr.responseJSON.error);
+            } else {
+                showError('Falha ao buscar detalhes da categoria.');
+            }
         }
     });
 }
+
+function showError(message) {
+    $('.flashMessage')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .text(message)
+        .fadeIn()
+        .delay(3000)
+        .fadeOut();
+}
     //Excluir
 function handleDelete() {
-    const id = $(this).data('id'); // Obtém o ID do elemento clicado
+    const id = $(this).data('id');
     if (confirm('Tem certeza de que deseja excluir esta categoria?')) {
         $.ajax({
             url: `{{url('admin/category/delete')}}/${id}`,
             type: "DELETE",
             data: {
-                _token: "{{csrf_token()}}" // Token CSRF necessário para segurança
+                _token: "{{csrf_token()}}"
             },
             success: function(response) {
-                fetchCategories(); // Atualiza a lista de categorias
-                $('.flashMessage')
-                    .text(response.message) // Exibe a mensagem de sucesso
-                    .fadeIn()
-                    .delay(3000)
-                    .fadeOut();
-                setTimeout(function() {
-                    location.reload(); // Recarrega a página após 2 segundos
-                }, 2000);
+                if (response.success === false) {
+                    showError(response.error);
+                } else {
+                    fetchCategories();
+                    $('.flashMessage')
+                        .removeClass('alert-danger')
+                        .addClass('alert-success')
+                        .text(response.message)
+                        .fadeIn()
+                        .delay(3000)
+                        .fadeOut();
+                }
             },
             error: function(xhr) {
-                alert('Falha ao excluir categoria.'); // Exibe alerta em caso de erro
+                if (xhr.status === 403) {
+                    showError(xhr.responseJSON.error);
+                } else {
+                    showError('Falha ao excluir categoria.');
+                }
             }
         });
     }
-} // A chave aqui fecha a função handleDelete corretamente.
+}
 
 
 });
 </script>
 
 <script>
+// Defina as funções de mensagem primeiro
+function showError(message) {
+    $('.flashMessage')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .text(message)
+        .fadeIn()
+        .delay(3000)
+        .fadeOut();
+}
+
+function showSuccess(message) {
+    $('.flashMessage')
+        .removeClass('alert-danger')
+        .addClass('alert-success')
+        .text(message)
+        .fadeIn()
+        .delay(3000)
+        .fadeOut();
+}
+
 $(document).ready(function() {
     $('#categoryForm').submit(function(e) {
         e.preventDefault();
         let formData = $(this).serialize();
+        
         $.ajax({
             url: "{{ url('admin/category/store') }}",
             type: 'POST',
             data: formData,
             success: function(response) {
-                $('#addCategoryModal').modal('hide');
-                $('#categoryForm')[0].reset();
-                $('.flashMessage')
-                    .text(response.message)
-                    .fadeIn()
-                    .delay(3000)
-                    .fadeOut();
-                setTimeout(function() {
-                    location.reload();
-                }, 2000);
+                if (response.success === false) {
+                    showError(response.message);
+                } else {
+                    $('#addCategoryModal').modal('hide');
+                    $('#categoryForm')[0].reset();
+                    showSuccess(response.message);
+                    fetchCategories();
+                }
             },
             error: function(xhr) {
-                let errors = xhr.responseJSON.errors;
-                let errorMessage = '';
-                $.each(errors, function(key, value) {
-                    errorMessage += value[0] + '\n';
-                });
-                alert(errorMessage);
+                if (xhr.status === 403) {
+                    showError(xhr.responseJSON.message);
+                } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    let errorMessage = Object.values(xhr.responseJSON.errors).join('\n');
+                    showError(errorMessage);
+                } else {
+                    showError('Ocorreu um erro inesperado.');
+                }
             }
         });
     });
+
+    // ... (restante do seu código JavaScript)
 });
 </script>
 

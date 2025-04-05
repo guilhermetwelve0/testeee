@@ -22,7 +22,10 @@ Route::get('/refresh-csrf', function () {
     return response()->json(['token' => csrf_token()]);
 })->name('csrf.refresh');
 // Rotas públicas
-Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/tela_login', [AuthController::class, 'login'])->name('login');
+Route::get('/', function () {
+    return view('paginainicial');
+});
 Route::post('login_post', [AuthController::class, 'login_post']);
 Route::get('forgot', [AuthController::class, 'forgot']);
 Route::post('forgot_post', [AuthController::class, 'forgot_post']);

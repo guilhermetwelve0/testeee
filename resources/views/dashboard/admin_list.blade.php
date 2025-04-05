@@ -567,5 +567,13 @@
         }
       });
     </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          window.location.href = '/';
+        }, 10000); // 10000 milissegundos = 10 segundos
+      });
+    </script>
     
     @endsection
