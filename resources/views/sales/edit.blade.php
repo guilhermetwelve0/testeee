@@ -11,13 +11,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Sales</h3>
+                    <h3 class="mb-0">Vendas</h3>
                 </div>
                 <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit Sales</li>
-                </ol>
+                    <ol class="breadcrumb float-sm-end">
+                        <li class="breadcrumb-item"><a href="#">Início</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Editar Venda</li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -28,76 +28,71 @@
                 <div class="col-md-12">
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Edi Sales</div>
+                            <div class="card-title">Editar Venda</div>
                         </div>
                         <form method="post" action="">
                             {{csrf_field()}}
                             <div class="card-body">
                                 <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Member Name</label>
+                                    <label class="col-sm-2 col-form-label">Nome do Membro</label>
                                     <div class="col-sm-10">
-                                            <select class="form-control" name="member_id" id="memberSelect" required>
-                                                <option value="">Select Member Name</option>
-                                                @foreach($getMember as $value)
-                                                    <option {{($getEdit->member_id == $value->id) ? 'selected' : ''}} value="{{$value->id}}">{{$value->name_member}}</option>
-                                                @endforeach
-                                            </select>
-                                    </div>
-                                </div>
-                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Total Item
-                                    </label>
-                                    <div class="col-sm-10"><input type="number" class="form-control" name="total_item"
-                                            placeholder="Enter Total Item" value="{{$getEdit->total_item}}" required>
-                                    </div>
-                                </div>
-                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Total Price
-                                    </label>
-                                    <div class="col-sm-10"><input type="number" class="form-control" name="total_price"
-                                            placeholder="Enter Total Price" value="{{$getEdit->total_price}}" required>
-                                    </div>
-                                </div>
-                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Discount
-                                    </label>
-                                    <div class="col-sm-10"><input type="number" class="form-control" name="discount"
-                                            placeholder="Enter Discount" value="{{$getEdit->discount}}" required>
-                                    </div>
-                                </div>
-                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Accepted
-                                    </label>
-                                    <div class="col-sm-10">
-                                    <select class="form-control" name="accepted" required>
-                                    <option {{$getEdit->accepted == 'Yes' ? 'selected' : ''}} value="Yes">
-                                    Yes
-                                    </option>
-                                    <option {{$getEdit->accepted == 'No' ? 'selected' : ''}} value="No">
-                                    No
-                                    </option>
-                                   
-                                    </select>
-                                    </div>
-                                </div>
-                                    
-                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Username
-                                    </label>
-                                    <div class="col-sm-10">
-                                    <select class="form-control" name="user_id" required>
-                                    <option value="">
-                                    Select Username
-                                    </option>
-                                   @foreach($getUser as $value)
-                                      <option {{($getEdit->user_id == $value->id) ? 'selected': ''}} value="{{$value->id}}">
-                                          {{$value->name}}
-                                          </option>
-                                          @endforeach
+                                        <select class="form-control" name="member_id" id="memberSelect" required>
+                                            <option value="">Selecione o nome do membro</option>
+                                            @foreach($getMember as $value)
+                                                <option {{($getEdit->member_id == $value->id) ? 'selected' : ''}} value="{{$value->id}}">
+                                                    {{$value->name_member}}
+                                                </option>
+                                            @endforeach
                                         </select>
-                                        </div>
-                                    </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Total de Itens</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="total_item"
+                                            placeholder="Informe o total de itens" value="{{$getEdit->total_item}}" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Preço Total</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="total_price"
+                                            placeholder="Informe o preço total" value="{{$getEdit->total_price}}" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Desconto</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="discount"
+                                            placeholder="Informe o desconto" value="{{$getEdit->discount}}" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Aceito</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="accepted" required>
+                                            <option {{$getEdit->accepted == 'Yes' ? 'selected' : ''}} value="Yes">Sim</option>
+                                            <option {{$getEdit->accepted == 'No' ? 'selected' : ''}} value="No">Não</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Nome de Usuário</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="user_id" required>
+                                            <option value="">Selecione o nome de usuário</option>
+                                            @foreach($getUser as $value)
+                                                <option {{($getEdit->user_id == $value->id) ? 'selected': ''}} value="{{$value->id}}">
+                                                    {{$value->name}}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Update</button>
-                                <a href="{{url('admin/sales')}}" class="btn btn-danger float-end">Cancel</a>
+                                <button type="submit" class="btn btn-warning">Atualizar</button>
+                                <a href="{{url('admin/sales')}}" class="btn btn-danger float-end">Cancelar</a>
                             </div>
                         </form>
                     </div>
@@ -113,10 +108,8 @@ $(document).ready(function() {
         placeholder: "Digite para buscar ou selecione",
         allowClear: true,
         width: '100%',
-        
-
     });
 });
 </script>
 
-@endsection 
+@endsection

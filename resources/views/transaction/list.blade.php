@@ -3,25 +3,25 @@
 @section('content')
 
 <main class="app-main">
-    <!--begin::App Content Header-->
+    <!-- Início::Cabeçalho do Conteúdo -->
     <div class="app-content-header">
-        <!--begin::Container-->
+        <!-- Início::Container -->
         <div class="container-fluid">
-            <!--begin::Row-->
+            <!-- Início::Linha -->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Transaction</h3>
+                    <h3 class="mb-0">Transações</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Transaction</li>
+                        <li class="breadcrumb-item"><a href="#">Início</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Transações</li>
                     </ol>
                 </div>
             </div>
-            <!--end::Row-->
+            <!-- Fim::Linha -->
         </div>
-        <!--end::Container-->
+        <!-- Fim::Container -->
     </div>
 
     <div class="app-content">
@@ -31,7 +31,7 @@
 
                  <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Search Transaction</h3>
+                            <h3 class="card-title">Pesquisar Transação</h3>
                         </div>
                         <form method="get">
                             <div class="card-body">
@@ -39,34 +39,34 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="id">ID</label>
-                                            <input type="text" name="id" value="{{Request()->id}}" id="id" placeholder="Enter ID" class="form-control">
+                                            <input type="text" name="id" value="{{Request()->id}}" id="id" placeholder="Digite o ID" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="name">Username</label>
-                                            <input type="text" value="{{Request()->name}}" name="name" id="name" placeholder="Enter Name" class="form-control">
+                                            <label for="name">Nome de Usuário</label>
+                                            <input type="text" value="{{Request()->name}}" name="name" id="name" placeholder="Digite o nome" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="amount">Amount</label>
-                                            <input type="number" value="{{Request()->amount}}" name="amount" id="amount" placeholder="Enter Amount" class="form-control">
+                                            <label for="amount">Valor</label>
+                                            <input type="number" value="{{Request()->amount}}" name="amount" id="amount" placeholder="Digite o valor" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="created_at">Created At</label>
+                                            <label for="created_at">Criado em</label>
                                             <input type="date" value="{{Request()->created_at}}" name="created_at" id="created_at" class="form-control">
                                         </div>
                                     </div>
                                 </div>
                                 <div style="clear:both;"></div>
                                 <div class="col-md-12" style="margin-top: 15px;">
-                                    <button class="btn btn-primary" type="submit">Search</button>
-                                    <a href="{{url('admin/transaction')}}" class="btn btn-success">Reset</a>
+                                    <button class="btn btn-primary" type="submit">Pesquisar</button>
+                                    <a href="{{url('admin/transaction')}}" class="btn btn-success">Limpar</a>
                                 </div>
                             </div>
                         </form>
@@ -76,10 +76,10 @@
                     @include('_message')
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h3 class="card-title">Transaction List</h3>
+                            <h3 class="card-title">Lista de Transações</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
-                                   <a href="" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?');" id="getDeleteURL">Delete</a>
+                                   <a href="" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?');" id="getDeleteURL">Excluir</a>
                                 </ul>
                             </div>
                         </div>
@@ -87,14 +87,14 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Delete</th>
+                                        <th>Excluir</th>
                                         <th>ID</th>
-                                        <th>Username</th>
-                                        <th>Amount</th>
-                                        <th>Payment Status</th>
-                                        <th>Created At</th>
-                                        <th>Updated At</th>
-                                        <th>Action</th>
+                                        <th>Nome de Usuário</th>
+                                        <th>Valor</th>
+                                        <th>Status do Pagamento</th>
+                                        <th>Criado em</th>
+                                        <th>Atualizado em</th>
+                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -106,8 +106,8 @@
                                 <td>{{$value->amount}}</td>
                                 <td>
                                 <select class="form-control changeStatus" style="width: 170px;" id="{{$value->id}}">
-                                <option {{($value->payment_type == '0') ? 'selected': ''}} value="0">Pending</option>
-                                <option {{($value->payment_type == '1') ? 'selected': ''}} value="1">Completed</option>
+                                <option {{($value->payment_type == '0') ? 'selected': ''}} value="0">Pendente</option>
+                                <option {{($value->payment_type == '1') ? 'selected': ''}} value="1">Concluído</option>
                                 </select>
                                 </td>
                                 <td>{{ date('d-m-Y H:i A', strtotime($value->created_at)) }}</td>
@@ -115,7 +115,7 @@
 
                                 <td>
                                 <a href="{{ url('admin/transaction/pdf_transaction/' . $value->id) }}" class="btn btn-sm btn-primary">PDF</a>
-                                <a href="{{ url('admin/transaction/description/' . $value->id) }}" class="btn btn-sm btn-success">Description</a>
+                                <a href="{{ url('admin/transaction/description/' . $value->id) }}" class="btn btn-sm btn-success">Descrição</a>
                                 </td>
                                 </tr>
 
@@ -135,13 +135,12 @@
     </div>
 </main>
 
-
 @endsection
 
 @section('script')
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
-    </script>
-    <script type="text/javascript">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+ <script type="text/javascript">
     $('.changeStatus').change(function(){
        var status_id = $(this).val();
        var order_id = $(this).attr('id');
@@ -151,7 +150,7 @@
         data: {status_id: status_id, order_id: order_id},
         dataType: 'JSON',
         success:function(data){
-            alert('Status successfully Changed');
+            alert('Status alterado com sucesso');
             window.location.href = "";
         }
        });
@@ -160,18 +159,17 @@
 
   <script type="text/javascript">
     $('.delete-all-option').click(function(){
-   var total = '';
-   $('.delete-all-option').each(function(){
-      if ($(this).prop("checked")) {  // Correção aqui
-         var id = $(this).val();
-         total += id + ',';
-      }
-   });
+        var total = '';
+        $('.delete-all-option').each(function(){
+            if ($(this).prop("checked")) {
+                var id = $(this).val();
+                total += id + ',';
+            }
+        });
 
-   var url = "{{url('admin/transaction/delete_transaction_multi?id=')}}" + total;
-   $('#getDeleteURL').attr('href', url);
-});
-
+        var url = "{{url('admin/transaction/delete_transaction_multi?id=')}}" + total;
+        $('#getDeleteURL').attr('href', url);
+    });
   </script>
 
 @endsection

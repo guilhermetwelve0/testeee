@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Transaction</title>
+    <title>Transação PDF</title>
     <style type="text/css">
         body {
             font-family: Arial, sans-serif;
@@ -79,7 +79,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 class="section-title">PDF Transaction</h1>
+        <h1 class="section-title">Transação PDF</h1>
     </div>
     <div class="list-container">
         <div class="list-item">
@@ -89,32 +89,32 @@
             </div>
             <hr>
             <div class="line">
-                <h2>Username</h2>
+                <h2>Usuário</h2>
                 <p>{{$getRecord->name}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Amount</h2>
+                <h2>Valor</h2>
                 <p>{{$getRecord->amount}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Payment Type</h2>
-                <p>@if($getRecord->payment_type == 1) Completed @else Pending @endif</p>
+                <h2>Status do Pagamento</h2>
+                <p>@if($getRecord->payment_type == 1) Concluído @else Pendente @endif</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Description</h2>
+                <h2>Descrição</h2>
                 <p>{{$getRecord->description}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Created At</h2>
+                <h2>Criado em</h2>
                 <p>{{date('d-m-Y H:i A', strtotime($getRecord->created_at))}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Updated At</h2>
+                <h2>Atualizado em</h2>
                 <p>{{date('d-m-Y H:i A', strtotime($getRecord->updated_at))}}</p>
             </div>
         </div>

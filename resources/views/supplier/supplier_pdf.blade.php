@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error Solution Code | Supplier PDF</title>
+    <title>Código de Solução de Erro | PDF do Fornecedor</title>
     <style type="text/css">
         body {
             font-family: Arial, sans-serif;
@@ -50,16 +50,16 @@
 </head>
 <body>
     <div class="table-container">
-        <h2>Supplier List</h2>
+        <h2>Lista de Fornecedores</h2>
         <table>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Supplier Name</th>
-                    <th>Supplier Telefone</th>
-                    <th>Supplier Address</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
+                    <th>Nome do Fornecedor</th>
+                    <th>Telefone do Fornecedor</th>
+                    <th>Endereço do Fornecedor</th>
+                    <th>Criado em</th>
+                    <th>Atualizado em</th>
                 </tr>
             </thead>
             <tbody>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Download</title>
+    <title>Download do PDF</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -79,7 +79,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 class="section-title">Supplier PDF</h1>
+        <h1 class="section-title">PDF do Fornecedor</h1>
     </div>
     <div class="list-container">
         <div class="list-item">
@@ -89,28 +89,28 @@
             </div>
             <hr>
             <div class="line">
-                <h2>Supplier Name</h2>
+                <h2>Nome do Fornecedor</h2>
                 <p>{{$getRecord->supplier_name}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Supplier Telefone</h2>
+                <h2>Telefone do Fornecedor</h2>
                 <p>{{$getRecord->supplier_telephone}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Supplier Address</h2>
+                <h2>Endereço do Fornecedor</h2>
                 <p>{{$getRecord->supplier_address}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Created At</h2>
-               <p>{{date('d-m-Y H:i A', strtotime($getRecord->created_at))}}</p>
+                <h2>Criado em</h2>
+                <p>{{date('d-m-Y H:i A', strtotime($getRecord->created_at))}}</p>
             </div>
             <hr>
             <div class="line">
-                <h2>Updated At</h2>
-               <p>{{date('d-m-Y H:i A', strtotime($getRecord->updated_at))}}</p>
+                <h2>Atualizado em</h2>
+                <p>{{date('d-m-Y H:i A', strtotime($getRecord->updated_at))}}</p>
             </div>
         </div>
     </div>

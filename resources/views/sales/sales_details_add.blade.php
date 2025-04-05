@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Sales Details</h3>
+                    <h3 class="mb-0">Detalhes da Venda</h3>
                 </div>
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Sales Details</li>
+                    <li class="breadcrumb-item"><a href="#">Início</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Adicionar Detalhes da Venda</li>
                 </ol>
                 </div>
             </div>
@@ -24,54 +24,53 @@
                 <div class="col-md-12">
                     <div class="card card-warning card-outline mb-4">
                         <div class="card-header">
-                            <div class="card-title">Add Sales Details</div>
+                            <div class="card-title">Adicionar Detalhes da Venda</div>
                         </div>
                         <form method="post" action="">
                             {{csrf_field()}}
                             <div class="card-body">
                             <input type="hidden" name="sales_id" value="{{$sales_id}}">
                                 
-                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Product Name
+                                <div class="row mb-3"><label class="col-sm-2 col-form-label">Nome do Produto
                                     </label>
                                     <div class="col-sm-10">
                                     <select class="form-control" name="product_id" required>
-                                        <option value="">Select Product</option>
+                                        <option value="">Selecione o Produto</option>
                                         @foreach($getProduct as $value)
                                         <option value="{{$value->id}}">{{$value->name_product}}</option>
                                         @endforeach
-                                        
                                     </select>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Selling Price</label>
+                                <label class="col-sm-2 col-form-label">Preço de Venda</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="selling_price" class="form-control" placeholder="Enter Selling Price" required>
+                                    <input type="text" name="selling_price" class="form-control" placeholder="Digite o Preço de Venda" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Amount</label>
+                                <label class="col-sm-2 col-form-label">Quantidade</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="amount" class="form-control" placeholder="Enter Amount" required>
+                                    <input type="text" name="amount" class="form-control" placeholder="Digite a Quantidade" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Discount</label>
+                                <label class="col-sm-2 col-form-label">Desconto</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="discount" class="form-control" placeholder="Enter Discount" required>
+                                    <input type="text" name="discount" class="form-control" placeholder="Digite o Desconto" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Subtotal</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="subtotal" class="form-control" placeholder="Enter Subtotal" required>
+                                    <input type="text" name="subtotal" class="form-control" placeholder="Digite o Subtotal" required>
                                     </div>
                                 </div>
                                 
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">Submit</button>
-                                <a href="{{url('admin/sales')}}" class="btn btn-danger float-end">Cancel</a>
+                                <button type="submit" class="btn btn-warning">Enviar</button>
+                                <a href="{{url('admin/sales')}}" class="btn btn-danger float-end">Cancelar</a>
                             </div>
                         </form>
                     </div>
