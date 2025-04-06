@@ -115,16 +115,16 @@
                     <div class="mb-3">
                         <label for="purchase_price" class="form-label">Preço de Compra</label>
                         <input type="number" class="form-control" id="purchase_price" name="purchase_price"
-                            placeholder="Preço de compra" required>
+                            placeholder="Preço de compra" step="any" required>
                     </div>
                     <div class="mb-3">
                         <label for="selling_price" class="form-label">Preço de Venda</label>
                         <input type="number" class="form-control" id="selling_price" name="selling_price"
-                            placeholder="Preço de venda" required>
+                            placeholder="Preço de venda" step="any" required>
                     </div>
                     <div class="mb-3">
                         <label for="discount" class="form-label">Desconto</label>
-                        <input type="number" class="form-control" id="discount" name="discount" placeholder="Desconto"
+                        <input type="number" class="form-control" step="any" id="discount" name="discount" placeholder="Desconto"
                             required>
                     </div>
                     <div class="mb-3">

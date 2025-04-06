@@ -35,14 +35,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="supplier_id">Nome do Produto</label>
-                                            <input type="text" value="{{Request()->product_id}}" name="product_id" id="product_id"
+                                            <input type="text"  value="{{Request()->product_id}}" name="product_id" id="product_id"
                                                 placeholder="Digite o nome do produto" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="total_item">Preço de Compra</label>
-                                            <input type="number" value="{{Request()->purchase_price}}" name="purchase_price" id="purchase_price"
+                                            <input type="number" step="any" value="{{Request()->purchase_price}}" name="purchase_price" id="purchase_price"
                                                 placeholder="Digite o preço de compra" class="form-control">
                                         </div>
                                     </div>
@@ -52,14 +52,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="text">Quantidade</label>
-                                            <input type="number" value="{{Request()->amount}}" name="amount" id="amount" placeholder="Digite a quantidade"
+                                            <input type="number" step="any" value="{{Request()->amount}}" name="amount" id="amount" placeholder="Digite a quantidade"
                                                 class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="text">Subtotal</label>
-                                            <input type="number" value="{{Request()->subtotal}}" name="subtotal" id="subtotal"
+                                            <input type="number" step="any" value="{{Request()->subtotal}}" name="subtotal" id="subtotal"
                                                 placeholder="Digite o subtotal" class="form-control">
                                         </div>
                                     </div>

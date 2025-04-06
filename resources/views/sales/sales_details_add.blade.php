@@ -45,25 +45,25 @@
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Preço de Venda</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="selling_price" class="form-control" placeholder="Digite o Preço de Venda" required>
+                                    <input type="text" step="any" name="selling_price" class="form-control" placeholder="Digite o Preço de Venda" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Quantidade</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="amount" class="form-control" placeholder="Digite a Quantidade" required>
+                                    <input type="text" step="any" name="amount" class="form-control" placeholder="Digite a Quantidade" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Desconto</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="discount" class="form-control" placeholder="Digite o Desconto" required>
+                                    <input type="text" step="any" name="discount" class="form-control" placeholder="Digite o Desconto" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Subtotal</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="subtotal" class="form-control" placeholder="Digite o Subtotal" required>
+                                    <input type="text" step="any" name="subtotal" class="form-control" placeholder="Digite o Subtotal" required>
                                     </div>
                                 </div>
                                 

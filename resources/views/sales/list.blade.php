@@ -53,7 +53,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="total_item">Total de Itens</label>
-                                            <input type="text" name="total_item" value="{{ Request()->total_item }}" id="total_item" placeholder="Digite o Total de Itens" class="form-control">
+                                            <input type="text" step="any" name="total_item" value="{{ Request()->total_item }}" id="total_item" placeholder="Digite o Total de Itens" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

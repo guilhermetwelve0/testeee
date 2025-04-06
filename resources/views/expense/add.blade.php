@@ -40,7 +40,7 @@
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Valor
                                     </label>
                                     <div class="col-sm-10"><input type="number" class="form-control" name="amount"
-                                            placeholder="Digite o valor" required step="any"></div>
+                                            placeholder="Digite o valor" step="any" required step="any"></div>
                                 </div>
 
                             </div>

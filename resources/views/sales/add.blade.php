@@ -49,21 +49,21 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Total de Itens</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="total_item"
+                                        <input type="number" step="any" class="form-control" name="total_item"
                                             placeholder="Informe o total de itens" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Preço Total</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="total_price"
+                                        <input type="number" step="any" class="form-control" name="total_price"
                                             placeholder="Informe o preço total" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Desconto</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="discount"
+                                        <input type="number" step="any" class="form-control" name="discount"
                                             placeholder="Informe o desconto" required>
                                     </div>
                                 </div>

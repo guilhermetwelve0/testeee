@@ -35,7 +35,7 @@
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-form-label">Valor</label>
                                         <div class="col-sm-10">
-                                            <input type="number" name="amount" class="form-control"
+                                            <input type="number" step="any" name="amount" class="form-control"
                                             placeholder="Digite o valor" required value="{{old('amount')}}">
                                         </div>
                                     </div>

@@ -52,7 +52,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="amount">Valor</label>
-                                            <input type="number" name="amount" value="{{Request()->amount}}" placeholder="Digite o valor" id="amount" class="form-control">
+                                            <input type="number" step="any" name="amount" value="{{Request()->amount}}" placeholder="Digite o valor" id="amount" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

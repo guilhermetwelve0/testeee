@@ -44,19 +44,19 @@
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Preço de Compra
                                     </label>
-                                    <div class="col-sm-10"><input type="number" class="form-control" name="purchase_price"
+                                    <div class="col-sm-10"><input type="number" step="any" class="form-control" name="purchase_price"
                                             placeholder="Digite o Preço de Compra" required value="{{$getRecord->purchase_price}}">
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Quantidade
                                     </label>
-                                    <div class="col-sm-10"><input type="number" class="form-control" name="amount"
+                                    <div class="col-sm-10"><input type="number" step="any" class="form-control" name="amount"
                                             placeholder="Digite a Quantidade" required value="{{$getRecord->amount}}">
                                     </div>
                                 </div>
                                 <div class="row mb-3"><label class="col-sm-2 col-form-label">Subtotal
                                     </label>
-                                    <div class="col-sm-10"><input type="number" class="form-control" name="subtotal"
+                                    <div class="col-sm-10"><input type="number" step="any" class="form-control" name="subtotal"
                                             placeholder="Digite o Subtotal" required value="{{$getRecord->subtotal}}">
                                     </div>
                                 </div>

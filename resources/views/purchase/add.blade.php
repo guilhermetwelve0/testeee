@@ -45,21 +45,21 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Total de Itens</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="total_item"
+                                        <input type="number" step="any" class="form-control" name="total_item"
                                             placeholder="Digite o Total de Itens" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Preço Total</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="total_price"
+                                        <input type="number" step="any" class="form-control" name="total_price"
                                             placeholder="Digite o Preço Total" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Desconto</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" name="discount"
+                                        <input type="number" step="any" class="form-control" name="discount"
                                             placeholder="Digite o Desconto" required>
                                     </div>
                                 </div>

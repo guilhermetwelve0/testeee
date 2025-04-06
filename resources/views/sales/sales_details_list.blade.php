@@ -44,7 +44,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="selling_price">Preço de Venda</label>
-                                        <input type="number" name="selling_price" value="{{ Request()->selling_price }}" id="selling_price" placeholder="Digite o preço de venda" class="form-control">
+                                        <input type="number" step="any" name="selling_price" value="{{ Request()->selling_price }}" id="selling_price" placeholder="Digite o preço de venda" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -52,13 +52,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="amount">Quantidade</label>
-                                        <input type="number" name="amount" value="{{ Request()->amount }}" id="amount" placeholder="Digite a quantidade" class="form-control">
+                                        <input type="number" step="any" name="amount" value="{{ Request()->amount }}" id="amount" placeholder="Digite a quantidade" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="discount">Desconto</label>
-                                        <input type="number" name="disount" value="{{ Request()->discount }}" id="disount" placeholder="Digite o desconto" class="form-control">
+                                        <input type="number" step="any" name="disount" value="{{ Request()->discount }}" id="disount" placeholder="Digite o desconto" class="form-control">
                                     </div>
                                 </div>
                             </div>
