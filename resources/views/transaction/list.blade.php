@@ -79,7 +79,11 @@
                             <h3 class="card-title">Lista de Transações</h3>
                             <div class="card-tools">
                                 <ul class="pagination pagination-sm float-end">
-                                   <a href="" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?');" id="getDeleteURL">Excluir</a>
+                                  <form id="deleteForm" method="GET" action="{{ url('admin/transaction/delete_transaction_multi') }}">
+    <input type="hidden" name="id" id="deleteIds" value="">
+    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</button>
+</form>
+
                                 </ul>
                             </div>
                         </div>
@@ -159,17 +163,43 @@
 
   <script type="text/javascript">
     $('.delete-all-option').click(function(){
-        var total = '';
-        $('.delete-all-option').each(function(){
-            if ($(this).prop("checked")) {
-                var id = $(this).val();
-                total += id + ',';
-            }
-        });
+    var total = '';
+    $('.delete-all-option').each(function(){
+        if ($(this).prop("checked")) {
+            var id = $(this).val();
+            total += id + ',';
+        }
+    });
+
+    // Remove a vírgula extra no final
+    total = total.replace(/,$/, '');
+
+    $('#deleteIds').val(total);
 
         var url = "{{url('admin/transaction/delete_transaction_multi?id=')}}" + total;
         $('#getDeleteURL').attr('href', url);
     });
   </script>
+  <script type="text/javascript">
+    $('#deleteForm').submit(function(e) {
+        var selected = [];
+
+        $('.delete-all-option').each(function() {
+            if ($(this).prop('checked')) {
+                selected.push($(this).val());
+            }
+        });
+
+        if (selected.length === 0) {
+            alert('Por favor, selecione pelo menos uma transação para excluir.');
+            e.preventDefault(); // impede o envio do form
+            return false;
+        }
+
+        // Se chegou aqui, é porque há itens selecionados
+        $('#deleteIds').val(selected.join(','));
+    });
+</script>
+
 
 @endsection

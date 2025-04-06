@@ -12,6 +12,9 @@ class NewTransactionController extends Controller
 {
     public function pdf_wallets($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect()->back()->with('error', 'Acesso negado para este usuário.');
+        }
         $data['getRecord'] = User::find($id);
         $pdf = PDF::loadView('new_transaction.pdf_wallets', $data);
         return $pdf->download('pdf_wallets.pdf');
@@ -32,6 +35,9 @@ class NewTransactionController extends Controller
 
     public function add_wallets_update($id, Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect()->back()->with('error', 'Acesso negado para este usuário.');
+        }
         $update = User::find($id);
         $Add = $request->wallets + $update->wallets;
         $update->wallets = trim($Add);
@@ -73,6 +79,9 @@ class NewTransactionController extends Controller
 
     public function transaction_list_add_store(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect()->back()->with('error', 'Acesso negado para este usuário.');
+        }
         $user_id = Auth::user()->id;
         $getWallet = User::where('id', '=', $user_id)->first();
         

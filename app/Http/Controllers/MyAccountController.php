@@ -18,6 +18,10 @@ class MyAccountController extends Controller
 
     public function my_account_update(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/my_account')->with('error', 'Acesso negado para este usuário.');
+        }
+        
         $user = request()->validate([
             'email' => 'required|unique:users,email,'.Auth::user()->id
         ]);
@@ -47,6 +51,9 @@ class MyAccountController extends Controller
 
     public function change_password_update(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/my_account')->with('error', 'Acesso negado para este usuário.');
+        }
         $user = User::find(Auth::user()->id);
         if(trim($request->new_password) == trim($request->confirm_password))
         {
@@ -71,6 +78,9 @@ class MyAccountController extends Controller
 
     public function admin_my_account_update(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/my_account')->with('error', 'Acesso negado para este usuário.');
+        }
         $use = request()->validate([
             'email' => 'required|unique:users,email,'.Auth::user()->id
         ]);

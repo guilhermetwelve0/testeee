@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\SupplierModel;
 use App\Models\PurchaseModel;
 use Carbon\Carbon;
+use Auth;
 use App\Models\ProductModel;
 use App\Models\PurchaseDetailModel;
 
@@ -12,6 +13,9 @@ class PurchaseController extends Controller
 {
     public function purchase_all_delete(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/purchase')->with('error', 'Acesso negado para este usuário.');
+        }
         PurchaseModel::truncate();
         PurchaseDetailModel::truncate();
         return redirect()->back()->with('success', 'Todos os registros foram apagados');
@@ -31,6 +35,9 @@ class PurchaseController extends Controller
 
     public function purchase_store(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/purchase')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = new PurchaseModel;
         $save->supplier_id = trim($request->supplier_id);
         $save->total_item = trim($request->total_item);
@@ -51,6 +58,9 @@ class PurchaseController extends Controller
 
     public function purchase_update(Request $request, $id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/purchase')->with('error', 'Acesso negado para este usuário.');
+        }
         $update = PurchaseModel::find($id);
         $update->supplier_id = trim($request->supplier_id);
         $update->total_item = trim($request->total_item);
@@ -63,6 +73,9 @@ class PurchaseController extends Controller
 
     public function purchase_delete($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/purchase')->with('error', 'Acesso negado para este usuário.');
+        }
         $delete = PurchaseModel::find($id);
         $delete->delete();
         PurchaseDetailModel::where('purchase_detail.purchase_id', '=', $id)->delete();
@@ -110,6 +123,9 @@ class PurchaseController extends Controller
 
     public function purchase_details_add_store(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/purchase')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = new PurchaseDetailModel;
         $save->purchase_id = trim($request->purchase_id);
         $save->product_id = trim($request->product_id);
@@ -132,6 +148,9 @@ class PurchaseController extends Controller
 
     public function purchase_details_edit_update($id, Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/purchase')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = PurchaseDetailModel::find($id);
         $save->product_id = trim($request->product_id);
         $save->purchase_price = trim($request->purchase_price);
@@ -147,6 +166,10 @@ class PurchaseController extends Controller
 
     public function purchase_details_delete($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/purchase')->with('error', 'Acesso negado para este usuário.');
+        }
+      
         PurchaseDetailModel::find($id)->delete();
         return redirect()->back()->with('success', 'Registro deletado com sucesso');
     }

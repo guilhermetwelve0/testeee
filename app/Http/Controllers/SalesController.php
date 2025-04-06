@@ -15,6 +15,9 @@ class SalesController extends Controller
 { 
     public function all_delete()
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/sales')->with('error', 'Acesso negado para este usuário.');
+        }
         DB::table('sales')->truncate();
         return redirect()->back()->with('success', 'Todos os registros foram deletados com sucesso');
     }
@@ -56,6 +59,9 @@ class SalesController extends Controller
 
     public function sales_post(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/sales')->with('error', 'Acesso negado para este usuário.');
+        }
        $save = new SalesModel;
          $save->member_id = trim($request->member_id);
          $save->total_item = trim($request->total_item);
@@ -79,6 +85,9 @@ class SalesController extends Controller
 
     public function sales_edit_update($id, Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/sales')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = SalesModel::find($id);
         $save->member_id = trim($request->member_id);
         $save->total_item = trim($request->total_item);
@@ -93,6 +102,9 @@ class SalesController extends Controller
 
     public function sales_delete($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/sales')->with('error', 'Acesso negado para este usuário.');
+        }
         SalesModel::find($id)->delete();
         SalesDetailsModel::where('sales_details.sales_id', '=', $id)->delete();
         return redirect('admin/sales')->with('success', 'Registro deletado com sucesso');
@@ -131,6 +143,9 @@ class SalesController extends Controller
 
     public function sales_details_add_store(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/sales')->with('error', 'Acesso negado para este usuário.');
+        }
         $request->validate([
             'product_id' => 'required',
         ]);
@@ -147,6 +162,9 @@ class SalesController extends Controller
 
     public function sales_details_update($id, Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/sales')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = SalesDetailsModel::findOrFail($id);
         $save->product_id = trim($request->product_id);
         $save->selling_price = trim($request->selling_price);
@@ -160,6 +178,9 @@ class SalesController extends Controller
 
     public function sales_details_delete($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/sales')->with('error', 'Acesso negado para este usuário.');
+        }
         SalesDetailsModel::find($id)->delete();
         return redirect()->back()->with('success', 'Registro deletado com sucesso');
     }

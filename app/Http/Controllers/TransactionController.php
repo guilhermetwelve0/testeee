@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\TransactionsModel;
 use PDF;
+use Auth;
 
 class TransactionController extends Controller
 {
    public function pdf_transaction($id)
    {
+      if (auth()->user()->id == 5) {
+         return redirect('admin/transaction')->with('error', 'Acesso negado para este usuário.');
+     }
       // $data['getRecord'] = TransactionsModel::find($id);
       $getRecord = TransactionsModel::select('transactions.*', 'users.name')
       ->join('users', 'users.id', '=', 'transactions.user_id');
@@ -28,6 +32,9 @@ class TransactionController extends Controller
 
    public function transaction_description_update($id, Request $request)
    {
+      if (auth()->user()->id == 5) {
+         return redirect('admin/transaction')->with('error', 'Acesso negado para este usuário.');
+     }
       $update = TransactionsModel::find($id);
       $update->description = trim($request->description);
       $update->updated_at = Carbon::now('America/Sao_Paulo');
@@ -37,21 +44,25 @@ class TransactionController extends Controller
    }
 
    public function delete_transaction_multi(Request $request)
-   {
-      if (!empty($request->id)) {
-         $option = explode(',', $request->id);
-         foreach ($option as $id) {
-               if (!empty($id)) {
-                  $getrecord = TransactionsModel::find($id);
-                  if ($getrecord) {
-                     $getrecord->delete();
-                  }
-               }
-         }
-      }
-      
-      return redirect('admin/transaction')->with('success', 'Registros deletados com sucesso');
-   }
+{
+   if (!auth()->check() || auth()->user()->id == 5) {
+      return redirect('admin/transaction')->with('error', 'Acesso negado para este usuário.');
+  }
+    
+    if (!empty($request->id)) {
+        $option = explode(',', $request->id);
+        foreach ($option as $id) {
+            if (!empty($id)) {
+                $getrecord = TransactionsModel::find($id);
+                if ($getrecord) {
+                    $getrecord->delete();
+                }
+            }
+        }
+    }
+    
+    return redirect('admin/transaction')->with('success', 'Registros deletados com sucesso');
+}
 
    public function admin_transaction(Request $request)
    {
@@ -76,6 +87,9 @@ class TransactionController extends Controller
 
    public function transaction_status_update(Request $request)
    {
+      if (auth()->user()->id == 5) {
+         return redirect('admin/transaction')->with('error', 'Acesso negado para este usuário.');
+     }
       $order = TransactionsModel::find($request->order_id);
       $order->payment_type = $request->status_id;
       $order->updated_at = Carbon::now('America/Sao_Paulo');

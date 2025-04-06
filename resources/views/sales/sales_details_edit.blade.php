@@ -26,7 +26,7 @@
                         <div class="card-header">
                             <div class="card-title">Editar Detalhes da Venda</div>
                         </div>
-                        <form method="post" action="">
+                        <form method="post" action="{{ route('sales.details.update', $getRecord->id) }}">
                             {{csrf_field()}}
                             <div class="card-body">
                             <input type="hidden" name="sales_id" value="{{$getRecord->sales_id}}">

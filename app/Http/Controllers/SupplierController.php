@@ -11,6 +11,9 @@ class SupplierController extends Controller
 {
     public function supplier_pdf()
     {
+        if (auth()->user()->id == 5) {
+            return redirect()->back()->with('error', 'Acesso negado para este usuário.');
+        }
         $data['getRecord'] = SupplierModel::get();
         $pdf = PDF::loadView('supplier.supplier_pdf', $data);
         return $pdf->download('supplier_pdf.pdf');
@@ -18,6 +21,9 @@ class SupplierController extends Controller
 
     public function supplier_pdf_row($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect()->back()->with('error', 'Acesso negado para este usuário.');
+        }
         $data['getRecord'] = SupplierModel::find($id);
         $pdf = PDF::loadView('supplier.supplier_pdf_row', $data);
         return $pdf->download('supplier_pdf_row.pdf');
@@ -32,6 +38,9 @@ class SupplierController extends Controller
     
     public function delete($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/supplier')->with('error', 'Acesso negado para este usuário.');
+        }
         $delete = SupplierModel::getSingle($id);
         $delete->delete();
         PurchaseModel::where('purchase.supplier_id', '=', $id)->delete();
@@ -45,6 +54,9 @@ class SupplierController extends Controller
     
     public function store(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/supplier')->with('error', 'Acesso negado para este usuário.');
+        }
         SupplierModel::recordInsert($request);
         return redirect('admin/supplier')->with('success', "Registro salvo com sucesso");
     }
@@ -57,6 +69,10 @@ class SupplierController extends Controller
     
     public function update($id, Request $request)
     {
+        
+        if (auth()->user()->id == 5) {
+            return redirect('admin/supplier')->with('error', 'Acesso negado para este usuário.');
+        }
         SupplierModel::recordUpdate($request, $id);
         return redirect('admin/supplier')->with('success', "Registro atualizado com sucesso");
     }

@@ -6,6 +6,7 @@ use App\Models\LogoWebsiteModel;
 use App\Models\ExpenseModel;
 use Str;
 use Carbon\Carbon;
+use Auth;
 
 class LogoController extends Controller
 {
@@ -17,6 +18,9 @@ class LogoController extends Controller
 
     public function logo_update(Request $request)
     {
+        if (auth()->check() && auth()->user()->id == 5) {
+            return redirect('admin/logo')->with('error', 'Acesso negado para este usuário.');
+        }
         $user = LogoWebsiteModel::getSingleFirst();
         $user->website_name = trim($request->website_name);
         

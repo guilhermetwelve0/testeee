@@ -105,6 +105,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/sales/sales_details_edit/{id}', [SalesController::class, 'sales_details_edit']);
     Route::get('admin/sales/sales_details_delete/{id}', [SalesController::class, 'sales_details_delete']);
     Route::get('admin/users', [UsersController::class, 'users_list']);
+    Route::post('admin/sales/sales_details_update/{id}', [SalesController::class, 'sales_details_update'])
+    ->name('sales.details.update');
     Route::get('admin/users/delete/{id}', [UsersController::class, 'users_delete']);
     Route::get('admin/transaction', [TransactionController::class, 'admin_transaction']);
     Route::get('admin/transaction_status_update', [TransactionController::class, 'transaction_status_update']);

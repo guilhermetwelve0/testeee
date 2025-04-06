@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\MemberModel;
 use Carbon\Carbon;
 use PDF;
+use Auth;
 
 class MemberController extends Controller
 {
@@ -48,29 +49,39 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-       $save = MemberModel::latest()->first() ?? new MemberModel();
-       $code_member = (int) $save->code_member + 1;
-       $save= new MemberModel();
-       $save->code_member = $code_member;
-       $save->name_member = trim($request->name_member);
-       $save->address = trim($request->address);
-       $save->telefone = trim($request->telefone);
-       $save->created_at = Carbon::now('America/Sao_Paulo');
-       $save->updated_at = Carbon::now('America/Sao_Paulo');
-       $save->save();
+        if (auth()->check() && auth()->user()->id == 5) {
+            return redirect('admin/member')->with('error', 'Acesso negado para este usuário.');
+        }
 
-       return redirect('admin/member')->with('success', 'Membro criado com sucesso');
+        $save = MemberModel::latest()->first() ?? new MemberModel();
+        $code_member = (int) $save->code_member + 1;
+        $save = new MemberModel();
+        $save->code_member = $code_member;
+        $save->name_member = trim($request->name_member);
+        $save->address = trim($request->address);
+        $save->telefone = trim($request->telefone);
+        $save->created_at = Carbon::now('America/Sao_Paulo');
+        $save->updated_at = Carbon::now('America/Sao_Paulo');
+        $save->save();
+
+        return redirect('admin/member')->with('success', 'Membro criado com sucesso');
     }
 
     public function edit($id, Request $request)
     {
+          
+
         $data['getRecord'] = MemberModel::find($id);
         return view('member.edit', $data);
     }
 
     public function update($id, Request $request)
     {
-        $save= MemberModel::find($id);
+        if (auth()->check() && auth()->user()->id == 5) {
+            return redirect('admin/member')->with('error', 'Acesso negado para este usuário.');
+        }
+
+        $save = MemberModel::find($id);
         $save->name_member = trim($request->name_member);
         $save->address = trim($request->address);
         $save->telefone = trim($request->telefone);
@@ -81,6 +92,11 @@ class MemberController extends Controller
 
     public function delete($id)
     {
+        // Bloqueia o usuário com ID 5
+        if (auth()->user()->id == 5) {
+            return redirect('admin/member')->with('error', 'Acesso negado para este usuário.');
+        }
+
         $delete = MemberModel::find($id);
         $delete->delete();
         return redirect('admin/member')->with('error', 'Registro deletado com sucesso');
@@ -88,16 +104,26 @@ class MemberController extends Controller
 
     public function member_pdf()
     {
-        // return view('member.member_pdf');
+        // Bloqueia o usuário com ID 5
+        if (auth()->user()->id == 5) {
+            return redirect('admin/member')->with('error', 'Acesso negado para este usuário.');
+        }
+
         $data['getRecord'] = MemberModel::get();
         $pdf = PDF::loadView('member.member_pdf', $data);
         return $pdf->download('member_pdf.pdf');
     }
 
-    public function member_pdf_row($id) {
-        $getRecord = MemberModel::find($id); // Encontrar o membro pelo ID
-        $data = ['getRecord' => $getRecord, 'id' => $id]; // Passar os dados para a view
-        $pdf = PDF::loadView('member.member_pdf_row', $data); // Gerar o PDF com os dados do membro
-        return $pdf->download('member_pdf_row_' . $id . '.pdf'); // Fazer o download do PDF
+    public function member_pdf_row($id)
+    {
+        // Bloqueia o usuário com ID 5
+        if (auth()->user()->id == 5) {
+            return redirect('admin/member')->with('error', 'Acesso negado para este usuário.');
+        }
+
+        $getRecord = MemberModel::find($id);
+        $data = ['getRecord' => $getRecord, 'id' => $id];
+        $pdf = PDF::loadView('member.member_pdf_row', $data);
+        return $pdf->download('member_pdf_row_' . $id . '.pdf');
     }
 }

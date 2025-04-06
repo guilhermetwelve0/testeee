@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ExpenseModel;
 use Carbon\Carbon;
+use Auth;
 
 class ExpenseController extends Controller
 {
@@ -41,6 +42,9 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
+        if (auth()->check() && auth()->user()->id == 5) {
+            return redirect('admin/expense')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = new ExpenseModel;
         $save->description = trim($request->description);
         $save->amount = trim($request->amount);
@@ -58,6 +62,9 @@ class ExpenseController extends Controller
 
     public function update($id, Request $request)
     {
+        if (auth()->check() && auth()->user()->id == 5) {
+            return redirect('admin/expense')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = ExpenseModel::find($id);
         $save->description = trim($request->description);
         $save->amount = trim($request->amount);
@@ -69,6 +76,9 @@ class ExpenseController extends Controller
 
     public function delete($id)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/expense')->with('error', 'Acesso negado para este usuário.');
+        }
         $save = ExpenseModel::find($id);
         $save->delete();
         return redirect('admin/expense')->with('success', "Registro deletado com sucesso");

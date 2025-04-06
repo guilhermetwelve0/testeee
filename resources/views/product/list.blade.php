@@ -147,149 +147,174 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    const isBlockedUser = {{ Auth::id() }} === 5; // Verifica se é usuário bloqueado
+
+    // ===== ADICIONAR PRODUTO ===== //
     $('#productForm').on('submit', function(e) {
         e.preventDefault();
-        $('.flashMessage').hide();
-        const formData = $(this).serialize();
+        $('.flashMessage').hide().removeClass('alert-danger alert-success');
 
         $.ajax({
             url: "{{ route('product.store') }}",
             method: "POST",
-            data: formData,
+            data: $(this).serialize(),
             success: function(response) {
-                $('.flashMessage')
-                    .html(response.message)
-                    .fadeIn()
-                    .delay(2000)
-                    .fadeOut();
-                    setTimeout(function() {
-                    location.reload();
-                }, 2000);
-                $('#productForm')[0].reset();
                 $('#addProductModal').modal('hide');
+                $('#productForm')[0].reset();
+                showSuccess(response.message);
+                setTimeout(function() {
+            location.reload();
+        }, 2000);
                 fetchProducts();
             },
             error: function(xhr) {
-                const errors = xhr.responseJSON.errors;
-                let errorMessages = '';
-                for (const key in errors) {
-                    errorMessages += `<li>${errors[key]}</li>`;
+                if (xhr.status === 403) { // Bloqueio da controller
+                    showError(xhr.responseJSON.message);
+                } else if (xhr.responseJSON && xhr.responseJSON.errors) {
+                    showError(Object.values(xhr.responseJSON.errors).join('<br>'));
+                } else {
+                    showError('Erro desconhecido!');
                 }
-                $('.flashMessage')
-                    .addClass('alert-danger')
-                    .html(`<ul>${errorMessages}</ul>`)
-                    .fadeIn();
-            },
+            }
         });
     });
-});
 
-function fetchProducts() {
-    $.ajax({
-        url: "{{route('product.fetch')}}",
-        method: "GET",
-        success: function(response) {
-            const tbody = $('#product-table tbody');
-            tbody.empty();
-            response.forEach((product, index) => {
-                const row = `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${product.category ? product.category.category_name : 'N/A'}</td>
-                    <td>${product.product_code}</td>
-                    <td>${product.name_product}</td>
-                    <td>${product.brand}</td>
-                    <td>${product.purchase_price}</td>
-                    <td>${product.selling_price}</td>
-                    <td>${product.discount}</td>
-                    <td>${product.stock}</td>
-                    <td>${dayjs(product.created_at).format('YYYY-MM-DD')}</td>
-                    <td>${dayjs(product.updated_at).format('YYYY-MM-DD')}</td>
-                    <td class="d-flex justify-content-between">
-                    <button class="btn btn-sm btn-warning edit-btn" data-id="${product.id}">Editar</button>
-                    <button class="btn btn-sm btn-danger delete-btn" data-id="${product.id}">Excluir</button>
-                    </td>
-
-                </tr>
-                `;
-                tbody.append(row);
-                $('.edit-btn').on('click', handleEdit);
-            });
-        },
-        error: function() {
-            alert('Falha ao carregar produtos.');
-        },
-
-    });
-}
- 
-//edit product
-function  handleEdit()
-{
-    const id = $(this).data('id');
-    $.ajax({
-        url: `{{url('admin/product/edit')}}/${id}`,
-        method: "GET",
-        success: function(response){
-            $('#category_id').val(response.category_id);
-            $('#product_code').val(response.product_code);
-            $('#name_product').val(response.product_code);
-            $('#brand').val(response.brand);
-            $('#purchase_price').val(response.purchase_price);
-            $('#selling_price').val(response.selling_price);
-            $('#discount').val(response.discount);
-            $('#stock').val(response.stock);
-            $('#addProductModal').modal('show');
-            $('#productForm').off('submit').on('submit', function(e){
-                e.preventDefault();
-                const formData = $(this).serialize();
-                $.ajax({
-                    url: `{{url('admin/product/update')}}/${id}`,
-                    type: "POST",
-                    data: formData,
-                    success: function(response){
-                        $('.flashMessage').html(response.message).fadeIn().delay(2000).fadeOut();
-                        $('#productForm')[0].reset();
-                        $('#addProductModal').modal('hide');
-                        fetchProducts();
-                    },
-                    error: function(xhr){
-                        alert('Falha ao atualizar produto.');
-                    }
-                });
-            });
-        },
-        error: function(){
-            alert('Falha ao carregar dados do produto.');
-        }
-
-    });
-}
-
-$(document).on('click', '.delete-btn', function() {
-    const id = $(this).data('id');
-    if(confirm('Tem certeza que deseja excluir este produto?')) {
+    // ===== EDITAR PRODUTO ===== //
+    function handleEdit() {
+        const id = $(this).data('id');
+        
         $.ajax({
-            url: `{{url('admin/product/delete')}}/${id}`,
-            method: "DELETE",
-            data: {
-                _token: $('meta[name="csrf-token"]').attr('content')
+            url: `{{url('admin/product/edit')}}/${id}`,
+            method: "GET",
+            success: function(response){
+                // Preenche o formulário
+                $('#category_id').val(response.category_id);
+                $('#product_code').val(response.product_code);
+                $('#name_product').val(response.name_product); // Corrigido: estava product_code
+                $('#brand').val(response.brand);
+                $('#purchase_price').val(response.purchase_price);
+                $('#selling_price').val(response.selling_price);
+                $('#discount').val(response.discount);
+                $('#stock').val(response.stock);
+                
+                $('#addProductModal').modal('show');
+                
+                // Atualiza o formulário para edição
+                $('#productForm').off('submit').on('submit', function(e){
+                    e.preventDefault();
+                    
+                    $.ajax({
+                        url: `{{url('admin/product/update')}}/${id}`,
+                        type: "POST",
+                        data: $(this).serialize(),
+                        success: function(response){
+                            showSuccess(response.message);
+                            $('#addProductModal').modal('hide');
+                            fetchProducts();
+                        },
+                        error: function(xhr){
+                            if (xhr.status === 403) {
+                                showError(xhr.responseJSON.error);
+                            } else if (xhr.responseJSON?.errors) {
+                                showError(Object.values(xhr.responseJSON.errors).join('<br>'));
+                            } else {
+                                showError('Falha na atualização!');
+                            }
+                        }
+                    });
+                });
             },
-            success: function(response) {
-                $('.flashMessage').html(response.message).fadeIn().delay(2000).fadeOut();
-                fetchProducts();
-            },
-            error: function() {
-                alert('Falha ao excluir produto.');
+            error: function(xhr){
+                if (xhr.status === 403) {
+                    showError(xhr.responseJSON?.error || 'Ação não permitida!');
+                } else {
+                    showError('Falha ao carregar dados!');
+                }
             }
         });
     }
-});
 
+    // ===== EXCLUIR PRODUTO ===== //
+    $(document).on('click', '.delete-btn', function() {
+        const id = $(this).data('id');
+        
+        if(confirm('Tem certeza que deseja excluir este produto?')) {
+            $.ajax({
+                url: `{{url('admin/product/delete')}}/${id}`,
+                method: "DELETE",
+                data: { _token: "{{ csrf_token() }}" },
+                success: function(response) {
+                    showSuccess(response.message);
+                    fetchProducts();
+                },
+                error: function(xhr) {
+                    if (xhr.status === 403) {
+                        showError(xhr.responseJSON.error);
+                    } else {
+                        showError('Falha na exclusão!');
+                    }
+                }
+            });
+        }
+    });
 
-$(document).ready(function() {
+    // ===== FUNÇÕES AUXILIARES ===== //
+    function fetchProducts() {
+        $.ajax({
+            url: "{{route('product.fetch')}}",
+            method: "GET",
+            success: function(response) {
+                const tbody = $('#product-table tbody');
+                tbody.empty();
+                response.forEach((product, index) => {
+                    tbody.append(`
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${product.category?.category_name || 'N/A'}</td>
+                        <td>${product.product_code}</td>
+                        <td>${product.name_product}</td>
+                        <td>${product.brand}</td>
+                        <td>${product.purchase_price}</td>
+                        <td>${product.selling_price}</td>
+                        <td>${product.discount}</td>
+                        <td>${product.stock}</td>
+                        <td>${dayjs(product.created_at).format('DD-MM-YYYY')}</td>
+                        <td>${dayjs(product.updated_at).format('DD-MM-YYYY')}</td>
+                        <td>
+                            <div class="d-flex gap-1">
+                                <button class="btn btn-sm btn-warning edit-btn" data-id="${product.id}">Editar</button>
+                                <button class="btn btn-sm btn-danger delete-btn" data-id="${product.id}">Excluir</button>
+                            </div>
+                        </td>
+                    </tr>
+                    `);
+                });
+                $('.edit-btn').on('click', handleEdit);
+            },
+            error: () => showError('Falha ao carregar produtos!')
+        });
+    }
+
+    function showError(message) {
+        $('.flashMessage')
+            .addClass('alert-danger')
+            .html(message)
+            .fadeIn()
+            .delay(3000)
+            .fadeOut();
+    }
+
+    function showSuccess(message) {
+        $('.flashMessage')
+            .addClass('alert-success')
+            .html(message)
+            .fadeIn()
+            .delay(3000)
+            .fadeOut();
+    }
+
+    // Inicialização
     fetchProducts();
 });
 </script>
-
 @endsection

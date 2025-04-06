@@ -16,6 +16,9 @@ class SMTPController extends Controller
 
     public function smtp_update(Request $request)
     {
+        if (auth()->user()->id == 5) {
+            return redirect('admin/smtp')->with('error', 'Acesso negado para este usuário.');
+        }
        $save = SMTPModel::getSingleFirst();
 
        $save->app_name = trim($request->app_name);

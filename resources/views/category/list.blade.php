@@ -278,6 +278,9 @@ $(document).ready(function() {
                     $('#addCategoryModal').modal('hide');
                     $('#categoryForm')[0].reset();
                     showSuccess(response.message);
+                    setTimeout(function() {
+            location.reload();
+        }, 2000);
                     fetchCategories();
                 }
             },
@@ -294,7 +297,6 @@ $(document).ready(function() {
         });
     });
 
-    // ... (restante do seu código JavaScript)
 });
 </script>
 
