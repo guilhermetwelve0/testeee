@@ -38,6 +38,8 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
         ]);
 
+        $validated['tenant_id'] = Auth::id();
+
         ProductModel::create($validated);
 
         return response()->json(['message' => 'Produto adicionado com sucesso!']);

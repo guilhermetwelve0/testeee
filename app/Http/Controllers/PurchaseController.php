@@ -30,6 +30,7 @@ class PurchaseController extends Controller
     public function purchase_add()
     {
         $data['getRecord'] = SupplierModel::get();
+        $data['tenant_id'] = Auth::id();
         return view('purchase.add', $data);
     }
 

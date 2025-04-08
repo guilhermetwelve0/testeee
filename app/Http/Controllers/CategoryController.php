@@ -42,6 +42,7 @@ class CategoryController extends Controller
         ]);
 
         $category = new CategoryModel();
+        $category->tenant_id = Auth::id(); 
         $category->category_name = $request->category_name;
         $category->save();
 

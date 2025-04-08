@@ -47,6 +47,7 @@ class ExpenseController extends Controller
         }
         $save = new ExpenseModel;
         $save->description = trim($request->description);
+        $save->tenant_id = Auth::id();
         $save->amount = trim($request->amount);
         $save-> created_at = Carbon::now('America/Sao_Paulo');
         $save-> updated_at = Carbon::now('America/Sao_Paulo');

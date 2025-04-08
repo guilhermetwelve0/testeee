@@ -56,6 +56,7 @@ class MemberController extends Controller
         $save = MemberModel::latest()->first() ?? new MemberModel();
         $code_member = (int) $save->code_member + 1;
         $save = new MemberModel();
+        $save->tenant_id = Auth::id();
         $save->code_member = $code_member;
         $save->name_member = trim($request->name_member);
         $save->address = trim($request->address);

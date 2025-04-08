@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use App\Services\TenantManager;
+use Auth;
 use Request;
 
 class SupplierModel extends Model
@@ -59,6 +62,7 @@ class SupplierModel extends Model
         try {
            $save = new self();
            $save-> supplier_name = trim($request->supplier_name);
+           $save->tenant_id = Auth::id();
            $save-> supplier_telephone = trim($request->supplier_telephone);
            $save-> supplier_address = trim($request->supplier_address);
            $save-> created_at = Carbon::now('America/Sao_Paulo');
@@ -83,6 +87,16 @@ class SupplierModel extends Model
             \Log::error("Error updating record: " . $e->getMessage());
             throw $e;
         }
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('tenant', function (Builder $builder) {
+            $tenantId = TenantManager::getTenantId();
+            if ($tenantId) {
+                $builder->where('tenant_id', Auth::id());
+            }
+        });
     }
     
 }
