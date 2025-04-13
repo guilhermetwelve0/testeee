@@ -42,6 +42,7 @@ class PurchaseController extends Controller
         $save = new PurchaseModel;
         $save->supplier_id = trim($request->supplier_id);
         $save->total_item = trim($request->total_item);
+        $save->tenant_id = Auth::id();
         $save->total_price = trim($request->total_price);
         $save->discount = trim($request->discount);
         $save->created_at = Carbon::now('America/Sao_Paulo');
@@ -130,6 +131,7 @@ class PurchaseController extends Controller
         $save = new PurchaseDetailModel;
         $save->purchase_id = trim($request->purchase_id);
         $save->product_id = trim($request->product_id);
+        $save->tenant_id = Auth::id();
         $save->purchase_price = trim($request->purchase_price);
         $save->amount = trim($request->amount);
         $save->subtotal = trim($request->subtotal);

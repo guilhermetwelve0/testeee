@@ -4,7 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use App\Services\TenantManager;
 use App\Models\CategoryModel;
+use Auth;
 use Request;
 
 class PurchaseModel extends Model
@@ -48,6 +51,17 @@ class PurchaseModel extends Model
         $return = $return->orderBy('id', 'asc')->paginate(5);
         return $return;
     }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('tenant', function (Builder $builder) {
+            $tenantId = TenantManager::getTenantId();
+            if ($tenantId) {
+                $builder->where('purchase.tenant_id', Auth::id());
+            }
+        });
+    }
+    
     
 
 }

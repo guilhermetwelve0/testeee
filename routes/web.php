@@ -115,6 +115,21 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/transaction/delete_transaction_multi', [TransactionController::class, 'delete_transaction_multi']);
     Route::get('admin/transaction/description/{id}', [TransactionController::class, 'transaction_description']);
     Route::post('admin/transaction/description/{id}', [TransactionController::class, 'transaction_description_update']);
+    // Rota para exibir o formulário de registro de transação pelo administrador
+    Route::get('admin/transaction/register', [TransactionController::class, 'registerTransaction'])->name('admin.transaction.register');
+
+    // Rota para salvar a transação registrada pelo administrador
+    Route::post('admin/transaction/register', [TransactionController::class, 'storeTransaction'])->name('admin.transaction.store');
+
+    // Rota para visualizar transações
+    Route::get('admin/transaction/view', [TransactionController::class, 'viewTransactions'])->name('admin.transaction.view');
+
+    // Rotas para transações
+    Route::get('admin/transaction/add', [TransactionController::class, 'create'])->name('admin.transaction.add');
+    Route::post('admin/transaction/add', [TransactionController::class, 'store'])->name('admin.transaction.store');
+    Route::get('admin/transaction/edit/{id}', [TransactionController::class, 'edit'])->name('admin.transaction.edit');
+    Route::post('admin/transaction/edit/{id}', [TransactionController::class, 'update'])->name('admin.transaction.update');
+    Route::get('admin/transaction/delete/{id}', [TransactionController::class, 'destroy'])->name('admin.transaction.delete');
 });
 
 // Rotas protegidas para usuários comuns

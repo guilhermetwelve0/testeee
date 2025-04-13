@@ -75,5 +75,7 @@ class User extends Authenticatable
         $return = $return->where('is_delete', '=', 0)->paginate(10);
         return $return; 
     }
+
+    
     
 }

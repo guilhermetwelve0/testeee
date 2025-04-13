@@ -66,6 +66,7 @@ class SalesController extends Controller
          $save->member_id = trim($request->member_id);
          $save->total_item = trim($request->total_item);
          $save->total_price = trim($request->total_price);
+         $save->tenant_id = Auth::id();
          $save->discount = trim($request->discount);
          $save->accepted = trim($request->accepted);
          $save->user_id = trim($request->user_id);

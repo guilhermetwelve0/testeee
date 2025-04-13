@@ -13,9 +13,10 @@ class LogoWebsiteModel extends Model
 
     protected $fillable = ['user_id', 'logo', 'favicon', 'website_name'];
 
-    public static function getSingleFirst()
+    public static function getSingleFirst($userId = null)
     {
-        return self::where('user_id', Auth::id())->firstOrNew(['user_id' => Auth::id()]);
+        $userId = $userId ?? Auth::id();
+        return self::where('user_id', $userId)->firstOrNew(['user_id' => $userId]);
     }
 
     public function user()

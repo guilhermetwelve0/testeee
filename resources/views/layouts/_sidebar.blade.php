@@ -3,19 +3,22 @@
 @endphp
 
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-    <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
-        <!--begin::Brand Link-->
         <a href="" class="brand-link">
-            <!--begin::Brand Image-->
-            <img src="{{url('upload/logo/'.$Geticon->logo)}}"
-                class="brand-image opacity-75 shadow" />
-            <!--end::Brand Image-->
-            <!--begin::Brand Text-->
-            <span class="brand-text fw-light">{{$Geticon->website_name}}</span>
-            <!--end::Brand Text-->
+            @if(!empty($Geticon->logo))
+                @if(file_exists(public_path('upload/logo/'.$Geticon->logo)))
+                    <img src="{{ url('upload/logo/'.$Geticon->logo) }}" class="brand-image opacity-75 shadow" />
+                @elseif(file_exists(public_path('upload/'.$Geticon->logo)))
+                    <img src="{{ url('upload/'.$Geticon->logo) }}" class="brand-image opacity-75 shadow" />
+                @else
+                    <img src="{{ url('upload/logo/default.png') }}" class="brand-image opacity-75 shadow" />
+                @endif
+                <span class="brand-text fw-light">{{ $Geticon->website_name }}</span>
+            @else
+                <img src="{{ url('upload/logo/default.png') }}" class="brand-image opacity-75 shadow" />
+                <span class="brand-text fw-light">Sistema Padrão</span>
+            @endif
         </a>
-        <!--end::Brand Link-->
     </div>
     <!--end::Sidebar Brand-->
     
@@ -106,6 +109,12 @@
                                 <p>Logo</p>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url('admin/transaction/view') }}" class="nav-link @if(Request::segment(2) == 'transaction' && Request::segment(3) == 'view') active @endif">
+                                <i class="fa fa-eye"></i>
+                                <p>Visualizar Transações</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 
@@ -134,12 +143,14 @@
                         <p>Menu do Sistema</p>
                     </a>
                     <ul class="collapse nav flex-column ms-1" id="submenuSystem" data-bs-parent=".sidebar-menu">
+                        @if(Auth::user()->id == 1)
                         <li class="w-100">
                             <a href="{{ url('admin/users') }}" class="nav-link @if(Request::segment(2) == 'users') active @endif">
                                 <i class="fa fa-users"></i>
                                 <p>Usuários</p>
                             </a>
                         </li>
+                        @endif
                         <li>
                             <a href="{{ url('admin/my_account') }}" class="nav-link @if(Request::segment(2) == 'my_account') active @endif">
                                 <i class="fa fa-cogs"></i>

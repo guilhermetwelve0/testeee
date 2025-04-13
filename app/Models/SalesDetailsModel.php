@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\CategoryModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use App\Services\TenantManager;
+use Auth;
 use Request;
 
 class SalesDetailsModel extends Model
@@ -19,6 +22,7 @@ class SalesDetailsModel extends Model
             $save = new self();
             $save->sales_id = trim($request->sales_id);
             $save->product_id = trim($request->product_id);
+            $save->tenant_id = Auth::id();
             $save->selling_price = trim($request->selling_price);
             $save->amount = trim($request->amount);
             $save->discount = trim($request->discount);
@@ -30,5 +34,15 @@ class SalesDetailsModel extends Model
            \Log::error("Error saving record: " . $e->getMessage());
             throw $e;
         }
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope('tenant', function (Builder $builder) {
+            $tenantId = TenantManager::getTenantId();
+            if ($tenantId) {
+                $builder->where('sales_details.tenant_id', Auth::id());
+            }
+        });
     }
 }

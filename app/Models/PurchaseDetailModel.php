@@ -20,7 +20,7 @@ class PurchaseDetailModel extends Model
         static::addGlobalScope('tenant', function (Builder $builder) {
             $tenantId = TenantManager::getTenantId();
             if ($tenantId) {
-                $builder->where('tenant_id', Auth::id());
+                $builder->where('purchase_detail.tenant_id', Auth::id());
             }
         });
     }

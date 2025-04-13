@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\PurchaseModel;
 use App\Models\SupplierModel;
 use App\Models\TransactionsModel;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 { 
@@ -30,8 +30,19 @@ class DashboardController extends Controller
               $data['salesData'] = SalesModel::selectRaw('member.code_member, SUM(sales.total_item) as total_sales')
               ->join('member', 'member.id', '=', 'sales.member_id')
               ->groupBy('member.code_member')->get();
-              return view('dashboard.admin_list', ['chartData' => $chartData, 'TotalProduct' => $TotalProduct, 'TotalSales' => $TotalSales, 'TotalPurchase' => $TotalPurchase,
-               'TotalSupplier' => $TotalSupplier, 'salesData' => $data['salesData'], 'TotalWallets' => $TotalWallets]);  
+              $salesWithTransactions = SalesModel::with('transaction')->get();
+              $transactions = TransactionsModel::all();
+              return view('dashboard.admin_list', [
+                  'chartData' => $chartData,
+                  'TotalProduct' => $TotalProduct,
+                  'TotalSales' => $TotalSales,
+                  'TotalPurchase' => $TotalPurchase,
+                  'TotalSupplier' => $TotalSupplier,
+                  'salesData' => $data['salesData'],
+                  'TotalWallets' => $TotalWallets,
+                  'salesWithTransactions' => $salesWithTransactions,
+                  'transactions' => $transactions
+              ]);  
             }
             else if(Auth::user()->is_role == 2)
             {

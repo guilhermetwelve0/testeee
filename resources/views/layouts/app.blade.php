@@ -4,15 +4,21 @@
   <head>
   @php
     $Geticon = App\Models\LogoWebsiteModel::getSingleFirst();
-@endphp
+  @endphp
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{{$Geticon->website_name}} | Painel</title>
+    <title>{{ $Geticon->website_name ?? 'Sistema' }} | Painel</title>
     <!--begin::Meta Tags Primários-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="AdminLTE v4 | Painel" />
     <meta name="author" content="ColorlibHQ" />
 
-    <link rel="icon" type="image/x-icon" href="{{ url('upload/logo/'.$Geticon->favicon) }}" />
+    @if(!empty($Geticon->favicon))
+        @if(file_exists(public_path('upload/logo/'.$Geticon->favicon)))
+            <link rel="icon" type="image/x-icon" href="{{ url('upload/logo/'.$Geticon->favicon) }}" />
+        @elseif(file_exists(public_path('upload/'.$Geticon->favicon)))
+            <link rel="icon" type="image/x-icon" href="{{ url('upload/'.$Geticon->favicon) }}" />
+        @endif
+    @endif
 
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta
