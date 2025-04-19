@@ -61,6 +61,22 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Valor</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="amount" class="form-control" placeholder="Digite o valor" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Tipo de Pagamento</label>
+                                    <div class="col-sm-10">
+                                        <select name="payment_type" class="form-control" required>
+                                            <option value="">Selecione o tipo de pagamento</option>
+                                            <option value="0">Pendente</option>
+                                            <option value="1">Pago</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Descrição</label>
                                     <div class="col-sm-10">
                                         <textarea name="description" class="form-control" placeholder="Digite a descrição" required></textarea>

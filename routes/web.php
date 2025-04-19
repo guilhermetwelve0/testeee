@@ -104,10 +104,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('admin/sales/sales_details_add/{id}', [SalesController::class, 'sales_details_add_store']);
     Route::get('admin/sales/sales_details_edit/{id}', [SalesController::class, 'sales_details_edit']);
     Route::get('admin/sales/sales_details_delete/{id}', [SalesController::class, 'sales_details_delete']);
-    Route::get('admin/users', [UsersController::class, 'users_list']);
     Route::post('admin/sales/sales_details_update/{id}', [SalesController::class, 'sales_details_update'])
     ->name('sales.details.update');
-    Route::get('admin/users/delete/{id}', [UsersController::class, 'users_delete']);
     Route::get('admin/transaction', [TransactionController::class, 'admin_transaction']);
     Route::get('admin/transaction_status_update', [TransactionController::class, 'transaction_status_update']);
     Route::get('admin/my_account', [MyAccountController::class, 'admin_my_account']);
@@ -128,28 +126,35 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/transaction/add', [TransactionController::class, 'create'])->name('admin.transaction.add');
     Route::post('admin/transaction/add', [TransactionController::class, 'store'])->name('admin.transaction.store');
     Route::get('admin/transaction/edit/{id}', [TransactionController::class, 'edit'])->name('admin.transaction.edit');
-    Route::post('admin/transaction/edit/{id}', [TransactionController::class, 'update'])->name('admin.transaction.update');
+    Route::put('admin/transaction/edit/{id}', [TransactionController::class, 'update'])->name('admin.transaction.update');
     Route::get('admin/transaction/delete/{id}', [TransactionController::class, 'destroy'])->name('admin.transaction.delete');
+    Route::post('admin/transaction/update_status', [TransactionController::class, 'transaction_status_update'])->name('admin.transaction.update_status');
+
+    // Nova funcionalidade para registrar um usuário
+    Route::get('admin/users/register', [UsersController::class, 'register'])
+         ->name('admin.users.register');
+    Route::post('admin/users/register', [UsersController::class, 'store'])
+         ->name('admin.users.store');
 });
 
-// Rotas protegidas para usuários comuns
-Route::middleware(['auth', 'user'])->group(function () {
-    Route::get('user/new_transaction_pdf_wallets/{id}', [NewTransactionController::class, 'pdf_wallets']);
-    Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
-    Route::get('user/new_transaction', [NewTransactionController::class, 'new_transaction']);
-    Route::get('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets']);
-    Route::post('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets_update']);
-    Route::get('user/transaction_list', [NewTransactionController::class, 'user_transaction_list']);
-    Route::get('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add']);
-    Route::post('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add_store']);
-    Route::get('user/my_account', [MyAccountController::class, 'my_account']);
-    Route::post('user/my_account_update', [MyAccountController::class, 'my_account_update']);
-    Route::get('user/change_password', [MyAccountController::class, 'change_password']);
-    Route::post('user/change_password_update', [MyAccountController::class, 'change_password_update']);
+// // Rotas protegidas para usuários comuns
+// Route::middleware(['auth', 'user'])->group(function () {
+//     Route::get('user/new_transaction_pdf_wallets/{id}', [NewTransactionController::class, 'pdf_wallets']);
+//     Route::get('user/dashboard', [DashboardController::class, 'dashboard']);
+//     Route::get('user/new_transaction', [NewTransactionController::class, 'new_transaction']);
+//     Route::get('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets']);
+//     Route::post('user/new_transaction/add_wallets/{id}', [NewTransactionController::class, 'add_wallets_update']);
+//     Route::get('user/transaction_list', [NewTransactionController::class, 'user_transaction_list']);
+//     Route::get('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add']);
+//     Route::post('user/transaction_list/add', [NewTransactionController::class, 'transaction_list_add_store']);
+//     Route::get('user/my_account', [MyAccountController::class, 'my_account']);
+//     Route::post('user/my_account_update', [MyAccountController::class, 'my_account_update']);
+//     Route::get('user/change_password', [MyAccountController::class, 'change_password']);
+//     Route::post('user/change_password_update', [MyAccountController::class, 'change_password_update']);
 
 
 
-});
+// });
 
 // Logout
 Route::get('logout', [AuthController::class, 'logout']);

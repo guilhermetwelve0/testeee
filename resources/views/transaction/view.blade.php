@@ -39,6 +39,7 @@
                                             <th>Usuário</th>
                                             <th>Produto</th>
                                             <th>Quantidade</th>
+                                            <th>Status do Pagamento</th>
                                             <th>Descrição</th>
                                             <th>Data de Criação</th>
                                             <th>Data de Atualização</th>
@@ -52,6 +53,17 @@
                                                 <td>{{ $transaction->user->name }}</td>
                                                 <td>{{ $transaction->product ? $transaction->product->name_product : 'Produto não encontrado' }}</td>
                                                 <td>{{ $transaction->quantity }}</td>
+                                                <td>
+                                                
+                                                <form method="POST" action="{{ route('admin.transaction.update_status') }}">
+                                                    @csrf
+                                                    <input type="hidden" name="transaction_id" value="{{ $transaction->id }}">
+                                                    <select name="status_id" class="form-control" style="width: 170px;" onchange="this.form.submit()">
+                                                        <option value="0" {{ $transaction->payment_type == 0 ? 'selected' : '' }}>Pendente</option>
+                                                        <option value="1" {{ $transaction->payment_type == 1 ? 'selected' : '' }}>Concluído</option>
+                                                    </select>
+                                                </form>
+                                                </td>
                                                 <td>{{ $transaction->description }}</td>
                                                 <td>{{ date('d-m-Y H:i', strtotime($transaction->created_at)) }}</td>
                                                 <td>{{ date('d-m-Y H:i', strtotime($transaction->updated_at)) }}</td>
@@ -64,7 +76,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="8">Nenhuma transação encontrada</td>
+                                                <td colspan="9">Nenhuma transação encontrada</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
@@ -77,4 +89,11 @@
         </div>
     </div>
 </main>
+
+@push('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+</script>
+@endpush
 @endsection

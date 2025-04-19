@@ -8,25 +8,25 @@
                     <i class="bi bi-list"></i>
                 </a>
             </li>
-            <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Início</a></li>
-            <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contato</a></li>
+            {{-- <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Início</a></li> --}}
+            {{-- <li class="nav-item d-none d-md-block"><a href="#" class="nav-link">Contato</a></li> --}}
         </ul>
         <!--end::Start Navbar Links-->
         <!--begin::End Navbar Links-->
         <ul class="navbar-nav ms-auto">
             <!--begin::Navbar Search-->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                     <i class="bi bi-search"></i>
                 </a>
-            </li>
+            </li> --}}
             <!--end::Navbar Search-->
             <!--begin::Messages Dropdown Menu-->
             <li class="nav-item dropdown">
-                <a class="nav-link" data-bs-toggle="dropdown" href="#">
+                {{-- <a class="nav-link" data-bs-toggle="dropdown" href="#">
                     <i class="bi bi-chat-text"></i>
                     <span class="navbar-badge badge text-bg-danger">3</span>
-                </a>
+                </a> --}}
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <a href="#" class="dropdown-item">
                         <!--begin::Message-->
@@ -112,10 +112,10 @@
             <!--end::Messages Dropdown Menu-->
             <!--begin::Notifications Dropdown Menu-->
             <li class="nav-item dropdown">
-                <a class="nav-link" data-bs-toggle="dropdown" href="#">
+                {{-- <a class="nav-link" data-bs-toggle="dropdown" href="#">
                     <i class="bi bi-bell-fill"></i>
                     <span class="navbar-badge badge text-bg-warning">15</span>
-                </a>
+                </a> --}}
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                     <span class="dropdown-item dropdown-header">15 Notificações</span>
                     <div class="dropdown-divider"></div>
@@ -174,16 +174,16 @@
                     <li class="user-body">
                         <!--begin::Row-->
                         <div class="row">
-                            <div class="col-4 text-center"><a href="#">Seguidores</a></div>
+                            {{-- <div class="col-4 text-center"><a href="#">Seguidores</a></div>
                             <div class="col-4 text-center"><a href="#">Vendas</a></div>
-                            <div class="col-4 text-center"><a href="#">Amigos</a></div>
+                            <div class="col-4 text-center"><a href="#">Amigos</a></div> --}}
                         </div>
                         <!--end::Row-->
                     </li>
                     <!--end::Menu Body-->
                     <!--begin::Menu Footer-->
                     <li class="user-footer">
-                        <a href="" class="btn btn-default btn-flat">Perfil</a>
+                        {{-- <a href="" class="btn btn-default btn-flat">Perfil</a> --}}
                         <a href="{{url('logout')}}" class="btn btn-default btn-flat float-end">Sair</a>
                     </li>
                     <!--end::Menu Footer-->

@@ -150,6 +150,13 @@
                                 <p>Usuários</p>
                             </a>
                         </li>
+                        <!-- Link para registrar novo usuário -->
+                        <li class="w-100">
+                            <a href="{{ url('admin/users/register') }}" class="nav-link @if(Request::segment(2) == 'users' && Request::segment(3) == 'register') active @endif">
+                                <i class="fa fa-user-plus"></i>
+                                <p>Registrar Usuário</p>
+                            </a>
+                        </li>
                         @endif
                         <li>
                             <a href="{{ url('admin/my_account') }}" class="nav-link @if(Request::segment(2) == 'my_account') active @endif">

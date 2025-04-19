@@ -88,18 +88,26 @@ class TransactionController extends Controller
    }
 
    public function transaction_status_update(Request $request)
-   {
-      if (auth()->user()->id == 5) {
-         return redirect('admin/transaction')->with('error', 'Acesso negado para este usuário.');
-     }
-      $order = TransactionsModel::find($request->order_id);
-      $order->payment_type = $request->status_id;
-      $order->updated_at = Carbon::now('America/Sao_Paulo');
-      $order->created_at = Carbon::now('America/Sao_Paulo');
-      $order->save();
-      $json['sucess'] = true;
-      echo json_encode($json);
-   }
+{
+    if (auth()->user()->id == 5) {
+        return redirect('admin/transaction')->with('error', 'Acesso negado para este usuário.');
+    }
+
+    $transaction = TransactionsModel::find($request->transaction_id);
+
+    if (!$transaction) {
+        return redirect()->back()->with('error', 'Transação não encontrada.');
+    }
+
+    $transaction->payment_type = $request->status_id;
+    $transaction->updated_at = Carbon::now('America/Sao_Paulo');
+    $transaction->save();
+
+    return redirect()->back()->with('success', 'Status atualizado com sucesso.');
+}
+
+
+    
 
    // Método para o administrador registrar uma nova transação
    public function registerTransaction()
@@ -116,13 +124,19 @@ class TransactionController extends Controller
          'user_id' => 'required|exists:users,id',
          'product_id' => 'required|exists:products,id',
          'quantity' => 'required|integer|min:1',
+         'amount' => 'required|string',
+         'payment_type' => 'required|integer|in:0,1',
          'description' => 'required|string|max:255',
+         'payment_method' => 'required|string|max:50', // New field validation
       ]);
 
       $transaction = new TransactionsModel();
+      $transaction->tenant_id = Auth::id(); // Define o tenant_id com base no usuário autenticado
       $transaction->user_id = $request->user_id;
       $transaction->product_id = $request->product_id;
       $transaction->quantity = $request->quantity;
+      $transaction->amount = $request->amount;
+      $transaction->payment_type = $request->payment_type;
       $transaction->description = $request->description;
       $transaction->created_at = Carbon::now('America/Sao_Paulo');
       $transaction->updated_at = Carbon::now('America/Sao_Paulo');
@@ -140,7 +154,9 @@ class TransactionController extends Controller
 
    public function edit($id)
    {
-      $transaction = TransactionsModel::find($id);
+      $transaction = TransactionsModel::where('id', $id)
+    ->where('tenant_id', Auth::id()) // Proteção explícita
+    ->firstOrFail();
       if (!$transaction) {
          return redirect()->route('admin.transaction')->with('error', 'Transação não encontrada.');
       }
@@ -151,16 +167,20 @@ class TransactionController extends Controller
 
    public function update(Request $request, $id)
    {
-      $transaction = TransactionsModel::findOrFail($id);
-
-      $transaction->user_id = $request->input('user_id');
-      $transaction->product_id = $request->input('product_id');
-      $transaction->quantity = $request->input('quantity');
-      $transaction->description = $request->input('description');
-
-      $transaction->save();
-
-      return redirect()->route('admin.transaction.view')->with('success', 'Transação atualizada com sucesso!');
+       $transaction = TransactionsModel::findOrFail($id);
+   
+       // Adicione esta linha para atualizar o payment_type
+       $transaction->payment_type = $request->input('payment_type');
+       $transaction->tenant_id = Auth::id();
+   
+       $transaction->user_id = $request->input('user_id');
+       $transaction->product_id = $request->input('product_id');
+       $transaction->quantity = $request->input('quantity');
+       $transaction->description = $request->input('description');
+   
+       $transaction->save();
+   
+       return redirect()->route('admin.transaction.view')->with('success', 'Transação atualizada com sucesso!');
    }
 
    public function destroy($id)
@@ -174,5 +194,32 @@ class TransactionController extends Controller
       $transaction->delete();
 
       return redirect()->route('admin.transaction.view')->with('success', 'Transação excluída com sucesso!');
+   }
+
+   public function store(Request $request)
+   {
+      $request->validate([
+         'user_id' => 'required|exists:users,id',
+         'product_id' => 'required|exists:product,id', // Certifique-se de que a tabela 'product' existe
+         'quantity' => 'required|integer|min:0',
+         'amount' => 'required|string',
+         'description' => 'nullable|string',
+         'payment_type' => 'required|integer|in:0,1',
+      ]);
+
+      $transaction = new TransactionsModel();
+      $transaction->tenant_id = Auth::id(); // Define o tenant_id com base no usuário autenticado
+      $transaction->user_id = $request->user_id;
+      $transaction->product_id = $request->product_id;
+      $transaction->quantity = $request->quantity;
+      $transaction->amount = $request->amount;
+      $transaction->payment_type = $request->payment_type;
+      $transaction->description = $request->description;
+      $transaction->created_at = Carbon::now('America/Sao_Paulo');
+      $transaction->updated_at = Carbon::now('America/Sao_Paulo');
+      $transaction->save();
+
+      // Redirecionar para a rota correta após salvar
+      return redirect()->route('admin.transaction.view')->with('success', 'Transação criada com sucesso!');
    }
 }
